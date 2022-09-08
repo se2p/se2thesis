@@ -559,6 +559,71 @@
 %
 % Please be aware to use \emph{either} \pkg{minted} \emph{or} \pkg{listings}!
 %
+% \subsubsection{Designing tables}
+%
+% A basically mandatory package to all users of tables is the \pkg{booktabs}
+% package.
+% Especially its documentation is a must read!
+% It provides a large variety of hints for designing tables,
+% most notably that one should never ever use vertical lines;
+% horizontal lines should be used sparsely; \pkg{booktabs} provides three macros
+% for lines that shall be used: \cmd{\toprule} for a rule on the top of a table,
+% above the column heads, \cmd{\midrule} to separate column heads and the
+% content but, and \cmd{\bottomrule} to mark the bottom of a table.
+%
+% Note that captions of tables shall be put \emph{above} the table whereas
+% captions of figures shall go \emph{below} the figure.
+% The rationale is that a figure should be more of less self explaining whereas
+% a table almost always needs some explanation.
+%
+% Unfortunately, the distances when using a \cmd{\caption} above a table are
+% wrong by default; when creating tables, consider loading the \pkg{hvfloats}
+% package and use its \cmd{\tabcaption} instead of \cmd{\caption} for tables.
+% The \pkg{hvfloats} package furthermore provides additional useful things to
+% typeset all kinds of floats.
+%
+% \subsubsection{Use \pkg{biblatex} for bibliographic references}
+%
+% The standard way of typesetting bibliographic references was using
+% \BibTeX.
+% The original \BibTeX, however, seems to be very outdated in
+% various ways: it originally supported only 7\,bit character sets and creating
+% citation styles requires the usage of an archaic language.
+% \BibLaTeX resolves many of the drawbacks of \BibTeX;
+% when combined with the |biber| engine, it supports full UTF-8 unicode,
+% therefore correct sorting of the references now works out of the box; also
+% creating citation styles can now be done using simple \LaTeX{} commands.
+%
+% \begin{function}{biblatex}
+%   \begin{syntax}
+%     |biblatex| = \meta{true,false}
+%   \end{syntax}
+% For easier usage, we provide the load-time option |biblatex| that already sets
+% all settings.
+% \end{function}
+% Set this options to \cls{se2thesis} and add your reference file using the
+% \cmd{\addbibresource} macro.  \cmd{\printbibliography} will print your
+% references.
+%
+% \subsubsection{Use \pkg{cleveref} for internal references}
+%
+% \LaTeX{} provides an easy-to-use reference mechanism using the \cmd{\label}
+% and \cmd{\ref} macros.
+% However, this requires some manual effort and the text needs to specify
+% whether a reference is to a figure, section, or table.
+% We often see things in drafts such as \enquote{we discuss our findings in 4};
+% but what is \enquote{4} here?
+% Is it a section, a table, a figure?
+% To avoid such confusion, use the \pkg{cleveref} package, which automatically
+% infers the type of the reference~(see its documentation on how this works).
+% The \pkg{cleveref} package furthermore avoids one additional mistake: between
+% the name of the element and its reference one needs to have a non-breaking
+% space, for example, \enquote{|... in Figure~\ref{...}|}, that is often
+% forgotten.
+%
+% Please note that, in contrast to most other packages, \pkg{cleveref} has to be
+% loaded \emph{after} the \pkg{hyperref} package!
+%
 % \section{The \pkg{se2colors} package}\label{sec:doc-se2colors}
 %
 % Several colours are specific to the university
@@ -866,6 +931,14 @@
 %    \end{macrocode}
 % \end{variable}
 %
+% \begin{variable}{\l_@@_biblatex_bool}
+%   The user wants to load the \pkg{biblatex} package together with our
+%   settings.
+%    \begin{macrocode}
+\bool_new:N \l_@@_biblatex_bool
+%    \end{macrocode}
+% \end{variable}
+%
 % Define internal variables to hold the values of the fields of the title
 % page.
 % \begin{variable}
@@ -983,6 +1056,9 @@
     licensemodifier .initial:n =,
     licenseversion .tl_gset:N = \l_@@_licenseversion_tl,
     licenseversion .initial:n =,
+
+    biblatex .bool_gset:N = \l_@@_biblatex_bool,
+    biblatex .initial:n = false,
 
     colormode .choices:nn = {cmyk,rgb,bw}{
       \tl_gset_eq:NN \l_@@_colormode_tl \l_keys_choice_tl
@@ -1146,6 +1222,61 @@
           }
         \msg_note:nn { seiithesis } { selnolig-not-available }
       }
+  }
+%    \end{macrocode}
+%
+% When the user requests the |biblatex| option, also load \pkg{biblatex}
+%    \begin{macrocode}
+\bool_if:NT \l_@@_biblatex_bool
+  {
+    \PassOptionsToPackage
+      {
+        backend=biber,
+        hyperref=true,
+        backref=true,
+        backrefstyle=none,
+        style=alphabetic,
+        maxnames=100,
+        minalphanames=3,
+        sorting=nyt,
+        giveninits=true,
+      }{biblatex}
+    \RequirePackage{biblatex}
+%    \end{macrocode}
+% Define strings for back-referencing.
+%    \begin{macrocode}
+    \DefineBibliographyStrings{english}{
+      backrefpage = {\lowercase{c}ited on p.},
+      backrefpages = {\lowercase{c}ited on pp.},
+    }
+    \DefineBibliographyStrings{german}{
+      backrefpage = {\lowercase{z}itiert auf S.},
+      backrefpages = {\lowercase{z}itiert auf S.},
+    }
+%    \end{macrocode}
+% Design the page-ref format.
+%    \begin{macrocode}
+    \DeclareFieldFormat{pagerefformat}{
+      {
+        \color{UPSE2-Gray}
+        \mkbibparens{\mkbibemph{#1}}
+      }
+    }
+    \renewbibmacro*{pageref}{
+      \iflistundef{pageref}{}{
+        \printtext[pagerefformat]{
+          \ifnumgreater{
+            \value{pageref}
+          }{1}
+          {\bibstring{backrefpages}\ppspace}
+          {\bibstring{backrefpage}\ppspace}
+          \printlist[pageref][-\value{listtotal}]{pageref}
+        }
+      }
+    }
+%    \end{macrocode}
+% End of the \BibLaTeX{} settings.
+%    \begin{macrocode}
   }
 %    \end{macrocode}
 %
