@@ -43,6 +43,7 @@ jobs:
           # List the required TeX Live packages in a separate file to allow
           # reuse in different workflows.
           package_file: .github/tl_packages
+        continue-on-error: true
 
       - name: Run l3build
         run: l3build ctan -q -H
