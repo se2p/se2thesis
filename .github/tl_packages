@@ -15,10 +15,9 @@ graphics
 translations
 koma-script
 xcolor
-ifthen
+base
 fontspec
 unicode-math
-fontenc
 fira
 tex-gyre
 lua-widow-control
