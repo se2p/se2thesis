@@ -1,0 +1,1760 @@
+% \iffalse meta-comment
+%
+% File: se2thesis.dtx Copyright (C) 2022 Stephan Lukasczyk
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    https://www.latex-project.org/lppl.txt
+%
+% This file is part of the "se2thesis bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+% The released version of this bundle is available from CTAN.
+%
+% ----------------------------------------------------------------------
+%
+% The development version of the bundle can be found at
+%
+%    https://github.com/se2p/se2thesis
+%
+% for those people who are interested.
+%
+% ----------------------------------------------------------------------
+%
+%<*driver>
+\documentclass{l3doc}
+% The next line is needed so that \GetFileInfo will be able to pick up
+% version data.
+\usepackage{se2colors}
+%
+% Commands for this document, taken from Joseph Wright's siunitx
+% documentation:
+\ExplSyntaxOn
+\makeatletter
+\NewDocumentCommand \acro { m }
+  {
+    \textsc
+      {
+        \exp_args:NV \tl_if_head_eq_charcode:nNTF \f@series { m }
+        { \text_lowercase:n }
+        { \use:n }
+          {#1}
+      }
+  }
+\makeatother
+\ExplSyntaxOff
+\NewDocumentCommand{\email}{m}{\href{mailto:#1}{\nolinkurl{#1}}}
+\NewDocumentCommand{\ext}{m}{\texttt.#1}
+\NewDocumentCommand{\opt}{m}{\texttt{#1}}
+% Tidy up the above in bookmarks
+\makeatletter
+\pdfstringdefDisableCommands{%
+  \let\acro\@firstofone
+  \let\ext\@firstofone
+  \let\opt\@firstofone
+}
+\makeatother
+
+\usepackage[UKenglish]{babel}
+\usepackage{fontspec}
+\usepackage{hvlogos}
+
+% Taken from xcolor.dtx
+\makeatletter
+\def\testclr#1#{\@testclr{#1}}
+\def\@testclr#1#2{{\fboxsep\z@\fbox{\colorbox#1{#2}{\phantom{XX}}}}}
+\makeatother
+
+\usepackage{hvfloat}
+\hypersetup{hidelinks}
+\usepackage[capitalise]{cleveref}
+
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \GetFileInfo{se2colors.sty}
+%
+% \title{^^A
+%   \pkg{se2thesis} -- A Thesis Class for the Chair of Software
+%   Engineering~II at the University of Passau, Germany^^A
+%   \thanks{This file describes \fileversion,
+%     last revised \filedate.}^^A
+% }
+%
+% \author{^^A
+%   Stephan Lukasczyk^^A
+%   \thanks{^^A
+%     E-mail: \href{mailto:tex@lukasczyk.me}{tex@lukasczyk.me}^^A
+%   }^^A
+% }
+%
+% \date{Released \filedate}
+%
+% \maketitle
+%
+% \begin{abstract}
+%   One can choose from a wide variety of templates to write a thesis.
+%   Many universities provide very rigorous style guides and force their
+%   students to obey to those guides, even though they might be questionable
+%   from a typographics point of view.
+%   Other universities do not provide such guides and leave it to their students
+%   to choose or come up with a template.
+%   The latter is causing very differently-looking theses.
+%
+%   To avoid such a situation in the future this bundle combines several
+%   \LaTeX{} packages and classes for the use at the Chair of Software
+%   Engineering~II at the University of Passau.
+%   We provide, among others, a document class for theses that shall be
+%   used by our students.
+%   The bundle is designed in a way that one can use the basic components as
+%   standalone packages to allow their reuse for other projects.
+% \end{abstract}
+%
+% \tableofcontents
+%
+% \begin{documentation}
+%
+% \part{User Documentation}\label{sec:doc}
+%
+% This documentation is split into two parts:
+% the first part is the documentation for the user,
+% which provides all macros, variables, and functions
+% that are provided by the \pkg{se2thesis} bundle.
+% The second part (starting on page~\pageref{sec:impl})
+% shows the implementation.
+% This might be interesting for you
+% if you are curious how certain things are defined
+% of if you need to change some of the default implementation.
+%
+% \section{Introduction}\label{sec:doc-intro}
+%
+% The University of Passau does not provide a common thesis template
+% to its students.
+% For theses, written at the Chair of Software Engineering~II,
+% many students chose between two templates that were provided by different
+% people from the chair;
+% other students chose from the large variety of templates available from the
+% internet, causing each thesis looking differently.
+%
+% The author of this package provided a template,
+% which he initially created for his bachelor and master thesis,
+% that was recommended and used by many students.
+% The implementation of that template, however, was very hacky and required
+% some changes over time.
+% This lead to the idea of creating a new template from scratch,
+% that shall be used by all our students for their various types of theses,
+% from bachelor to PhD level.
+% The result is the \pkg{se2thesis} bundle.
+%
+% The bundle itself consists of several \LaTeX{} classes and packages
+% that also allow reuse of various parts of it.
+% Its main class is the \pkg{se2thesis} document class,
+% an extension of the \KOMAScript{} |scrreprt| document class.
+% The packages \pkg{se2colors} (documented in \cref{sec:doc-se2colors}) and
+% \pkg{se2fonts} (documented in \cref{sec:doc-se2fonts}) provide necessary
+% colour and font settings for the \pkg{se2thesis} class.
+% They are available as separate packages, however, to allow their reuse for
+% other classes, packages, and projects, as well.
+%
+% They all have in common one macro, \cs{IfFormatAtLeastTF};
+% this macro is part of the latest \LaTeX{} kernel.
+% However, not all users might have upgraded their \TeX{} installation
+% to a level using a recently-enough kernel version.
+% Therefore, every class and package of this bundle will conditionally
+% define the following macro:
+%
+% \begin{function}{\IfFormatAtLeastTF}
+%   \begin{syntax}
+%     \cmd{\IfFormatAtLeastTF} \marg{version} \marg{then block} \marg{else-block}
+%   \end{syntax}
+%   Checks whether the used \LaTeX{} format is at least the one from the
+%   given date value.
+%   The date needs to be specified either in YYYY/MM/DD or in YYYY-MM-DD
+%   format.
+% \end{function}
+%
+% \section{License}\label{sec:doc-license}
+%
+% Permission is granted to copy, distribute, and/or modify this software under
+% the terms of the \LaTeX{} Project Public License~(LPPL), version~1.3c or
+% later~(\href{https://www.latex-project.org/lppl.txt}{https://www.latex-project.org/lppl.txt}).
+% The software has the status \enquote{maintained}.
+%
+% \section{The \cls{se2thesis} class}\label{sec:doc-se2thesis}
+%
+% \subsection{The title page}
+%
+% Designing a title package for a thesis can be complicated.
+% There might be some requirements that are not obvious to the user, especially
+% considering the positioning of elements.
+% The University of Passau, for example, requires the logo to be positioned on
+% the top right of a page;
+% theses—especially PhD theses that shall be published through the University's
+% library system—could be rejected from publication by the library until this is
+% fixed.
+%
+% We thus redeclare the standard \cs{maketitle} macro from \KOMAScript{} and
+% customise it to our needs.
+% \begin{variable}{\@maketitle}
+%   \begin{syntax}
+%     \cmd{\@maketitle}
+%   \end{syntax}
+%   We override the definition of the \cmd{\@maketitle} macro for our needs.
+% \end{variable}
+% In addition to the macros provided by the \KOMAScript{} classes
+% for the title-page values (e.g. \cs{author}, \cs{title},
+% we provide some further macros that can be used.
+% Setting values to these macros is optional in any case,
+% if they are not set, the corresponding value is not put to the title page.
+%
+% \begin{function}{\version}
+%   \begin{syntax}
+%     \cmd{\version} \marg{version}
+%   \end{syntax}
+%   Specify the version of the document.  This can, for example, be a |git| hash
+%   of the current version.
+% \end{function}
+%
+% \begin{function}{\degreeprogramme}
+%   \begin{syntax}
+%     \cmd{\degreeprogramme} \marg{programme-name}
+%   \end{syntax}
+%   Specify the degree programme the thesis is meant to be accepted in.
+%   Possible values are, among others, \enquote{Informatik} if you are writing
+%   your thesis in German, or \enquote{Computer Science} if you are writing the
+%   thesis in English.
+% \end{function}
+%
+% \begin{function}{\supervisor, \cosupervisor}
+%   \begin{syntax}
+%     \cmd{\supervisor} \marg{name}
+%     \cmd{\cosupervisor} \marg{name}
+%   \end{syntax}
+%   Specify the name of your supervisor and co-supervisor.
+%   Both people usually are professors.
+% \end{function}
+%
+% \begin{function}{\advisor, \coadvisor}
+%   \begin{syntax}
+%     \cmd{\advisor} \marg{name}
+%     \cmd{\coadvisor} \marg{name}
+%   \end{syntax}
+%   Specify the name of your advisor and co-advisor.
+%   Both people usually are PhD students or postdocs.
+% \end{function}
+%
+% \begin{function}{\department, \institute}
+%   \begin{syntax}
+%     \cmd{\department} \marg{name}
+%     \cmd{\institute} \oarg{short-name} \marg{name}
+%   \end{syntax}
+%   Specify the department and institute.
+%   The department is, for example, \enquote{Faculty of Computer Science and
+%   Mathematics}, the institute, for example, \enquote{Chair of Software
+%   Engineering~II}.
+%   If the \cs{department} value is not specify, we use \enquote{Faculty of
+%   Computer Science} as the default value for English theses and
+%   \enquote{Fakultät für Informatik und Mathematik} as the default value of
+%   German theses.
+% \end{function}
+%
+% \begin{function}{\external}
+%   \begin{syntax}
+%     \cmd{\external} \marg{name}
+%   \end{syntax}
+%   Specify the name of an external referee.
+% \end{function}
+%
+% To define the path to the logo graphics we require a different workflow:
+% We do not bundle logo graphics with this package due to legal restrictions.
+% They can be downloaded from the University's website; please note that the
+% website for downloading the logo graphics is only accessible from within the
+% University's campus network or a VPN connection.
+% To specify the path to the logo graphics, we provide a load-time option to the
+% \cls{se2thesis} class:
+% \begin{function}{logofile}
+%   \begin{syntax}
+%     |logofile| = \marg{path-to-logo}
+%   \end{syntax}
+%   Sets the path to the logo graphics for the title page.
+% \end{function}
+%
+% When printing the thesis in two-side mode—which we recommend—the back of the
+% title page again denotes author and title on the bottom.
+% \begin{variable}{\@lowertitleback}
+%   \begin{syntax}
+%     \cmd{\l@lowertitleback}
+%   \end{syntax}
+%   Override this internal macro of \KOMAScript{} to print this information on
+%   the back side of the title page.
+% \end{variable}
+% Additionally, we allow to add a license notice there based on the
+% \pkg{doclicense} package.
+% The following load-time options to the \cls{se2thesis} class allow adding the
+% license note.
+% \begin{function}{doclicense, licensetype, licensemodifier, licenseversion}
+%   \begin{syntax}
+%     |doclicense| = \meta{true,false}
+%     |licensetype| = \meta{choice}
+%     |licensemodifier| = \meta{choice}
+%     |licenseversion| = \meta{choice}
+%   \end{syntax}
+%   Loads the \pkg{doclicense} package if set to |true|.
+%   The default value is |false|.
+%   Note that if set to |true| you are also required to set the values of the
+%   |licensetype|, |licensemodifier|, and |licenseversion| load-time options.
+%   Otherwise, \cls{se2thesis} will stop compilation of your document with an
+%   error.
+%   See the documentation of the \pkg{doclicense} package for possible values to
+%   these options.
+%   They are called |type|, |modifier|, and |version| in \pkg{doclicense},
+%   respectively.
+% \end{function}
+%
+% Additionally, we provide some interal rewritings to standard macros from
+% \KOMAScript{} that allow to automatically split authors using the \cmd{\and}
+% command.
+% \begin{variable}{\l__slcd_author_seq, \author, \@author}
+%   \begin{syntax}
+%     \cmd{\author} \marg{author}
+%   \end{syntax}
+%   The \cmd{\l__slcd_author_seq} internal sequence is used to
+%   automatically split the names based on the \cmd{\and} macro.
+%   We rewrite the definitions of \cmd{\author} and \cmd{\@author} to do this
+%   splitting automatically.
+%   Additionally, this also adds a correctly translated version of \enquote{and}
+%   between the author names if required.
+% \end{variable}
+%
+% \section{The \pkg{se2colors} package}\label{sec:doc-se2colors}
+%
+% Several colours are specific to the university
+% and we want to have a comprehensive interface
+% to access them throughout all our packages.
+%
+% The \pkg{se2colors} package provides this exact features.
+% One can load it using |\usepackage{se2colors}| in the document preamble.
+%
+% \begin{function}{colormode}
+%   \begin{syntax}
+%     |colormode| = \meta{choice}
+%   \end{syntax}
+%   Selects the colour mode that shall be used for creating the results,
+%   a choice from the options specified in \cref{tab:coloursoptions}.
+%   The default setting is |4C|.
+% \end{function}
+%
+% \begin{table}[th]
+%   \tabcaption{\label{tab:coloursoptions}%
+%     Options provided by \pkg{se2colors}.%
+%   }
+%   \centering
+%   \begin{tabular}{@{} l l @{}} \toprule
+%     Option & Description \\ \midrule
+%     %
+%     |colormode=4C|
+%            & Define colours in CMYK colour space (\emph{default}). \\
+%     %
+%     |CMYK|, |cmyk|
+%            & Aliases for the previous. \\
+%     %
+%     |colormode=RGB|
+%            & Define colours in RGB colour space. \\
+%     %
+%     |RGB|, |rgb|
+%            & Aliases for the previous. \\
+%     %
+%     |colormode=BW|
+%            & Define colours in black-and-white colour space. \\
+%     %
+%     |colormode=1C|
+%            & Alias for the previous. \\
+%     %
+%     |gray|
+%            & Alias for the previous. \\
+%     %
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
+%
+% We define two basic colours
+% that are taken from the University's logo,
+% namely |UPSE2-Gray| \testclr{UPSE2-Gray}
+% and |UPSE2-Orange| \testclr{UPSE2-Orange}.
+%
+% Additionally,
+% we define 15 supplementary colours:
+% \begin{itemize}
+%   \item |UPSE2-DarkGreen| \testclr{UPSE2-DarkGreen},
+%   \item |UPSE2-MediumGreen| \testclr{UPSE2-MediumGreen},
+%   \item |UPSE2-LightGreen| \testclr{UPSE2-LightGreen},
+%   \item |UPSE2-DarkBlue| \testclr{UPSE2-DarkBlue},
+%   \item |UPSE2-MediumBlue| \testclr{UPSE2-MediumBlue},
+%   \item |UPSE2-LightBlue| \testclr{UPSE2-LightBlue},
+%   \item |UPSE2-DarkPurple| \testclr{UPSE2-DarkPurple},
+%   \item |UPSE2-MediumPurple| \testclr{UPSE2-MediumPurple},
+%   \item |UPSE2-LightPurple| \testclr{UPSE2-LightPurple},
+%   \item |UPSE2-DarkOcher| \testclr{UPSE2-DarkOcher},
+%   \item |UPSE2-MediumOcher| \testclr{UPSE2-MediumOcher},
+%   \item |UPSE2-LightOcher| \testclr{UPSE2-LightOcher},
+%   \item |UPSE2-DarkRed| \testclr{UPSE2-DarkRed},
+%   \item |UPSE2-MediumRed| \testclr{UPSE2-MediumRed}, and
+%   \item |UPSE2-LightRed| \testclr{UPSE2-LightRed}
+% \end{itemize}
+%
+% \section{The \pkg{se2fonts} package}\label{sec:doc-se2fonts}
+%
+% The \pkg{se2fonts} package sets the fonts for the document.
+% By default,
+% we recommend using Hermann Zapf's beautiul \emph{Palatino} font
+% as the main text font,
+% accompanied with his sans-serif font \emph{Optima}
+% and \emph{Neo Euler} as the default math font;
+% we set \emph{Meslo LGS Nerd Font Mono} as the monospaced font.
+% Palatino and Optima get shipped with any macOS system,
+% the user, however, needs to download Neo Euler themself\footnote{
+%   for example from
+%   \href{https://fontlibrary.org/en/font/euler-otf}{https://fontlibrary.org/en/font/euler-otf}.
+% }.
+% Being aware that these fonts might not be available on every user's system,
+% we recommend using \emph{\TeX{} Gyre Pagella} as an alternative to
+% Palatino, \emph{\TeX{} Gyre Heros} as an alternative to Optima,
+% and the \emph{\TeX{} Gyre Pagella Math} as the default math font;
+% \emph{Fira Code} is a nice monospaced font.
+% Although they look different in various details
+% they still provide a nice-looking alternative
+% that is bundled with a recent standard \TeX{} distribution.
+%
+% If you are using \LuaTeX{},
+% fonts are expected to be present as open-type fonts;
+% using \pdfLaTeX{} will fallback to Type-1 fonts,
+% and will use \TeX{} Gyre Pagella,
+% \TeX{} Gyre Heros,
+% Fira Code,
+% and \TeX{} Gyre Pagella Math as the default fonts.
+%
+% \emph{Note that the package does not support \XeTeX{}!}
+%
+% The following option is defined by the \pkg{se2fonts} package
+% to influence the selection of the fonts.
+%
+% \begin{function}{fontmode}
+%   \begin{syntax}
+%     |fontmode| = \meta{choice}
+%   \end{syntax}
+%   Sets the font-selection mode based on a choice:
+%   |original| selects the fonts we recommend for using,
+%   |replacement| selects fonts that are part of a standard \TeX{}
+%   distribution,
+%   in case one has no access to the |original| fonts;
+%   |auto| selects fonts automatically,
+%   preferring the |original| fonts if available.
+%   The default is |auto|.
+% \end{function}
+%
+% The following list provides examples for each of the fonts:
+% \begin{itemize}
+%   \item {\fontspec{Palatino}An example text in Palatino}
+%   \item {\fontspec{TeX Gyre Pagella}An example text in \TeX{} Gyre Pagella}
+%   \item {\fontspec{Optima}An example text in Optima}
+%   \item {\fontspec{TeX Gyre Heros}An example text in \TeX{} Gyre Heros}
+%   \item {\fontspec{MesloLGSNerd Font Mono}An example text in MesloLGS}
+%   \item {\fontspec{Fira Code}An example text in Fira Code}
+%   \item {\fontspec{Neo Euler}An example text in Neo Euler}
+%   \item {\fontspec{TeX Gyre Pagella Math}An example text in \TeX{} Gyre
+%     Pagella Math}
+% \end{itemize}
+%
+% The package provides additional helper functions
+% that are also available to the user.
+%
+% \begin{function}{\pdftexengine, \xetexengine, \luatexengine}
+%   \begin{syntax}
+%     \cmd{\pdftexengine}
+%     \cmd{\xetexengine}
+%     \cmd{luatexengine}
+%   \end{syntax}
+%   These commands alias the built-in \LaTeX3{} macros
+%   \cs{sys_if_engine_pdftex_p:},
+%   \cs{sys_if_engine_xetex_p:}, and
+%   \cs{sys_if_engine_luatex_p:}.
+%   They can be used to check which engine the user is currently running.
+% \end{function}
+%
+% \begin{function}{\ifengineTF, \ifengineT, \ifengineF}
+%   \begin{syntax}
+%     \cmd{\ifengineTF} \marg{engine} \marg{then block} \marg{else block}
+%     \cmd{\ifengineT} \marg{engine} \marg{then block}
+%     \cmd{\ifengineF} \marg{engine} \marg{then block}
+%   \end{syntax}
+%   Allows to execute code based on the running engine.
+%   The base variant \cs{ifengineTF} expects the user to specify a condition,
+%   which can be built of combinations of the \cs{pdftexengine},
+%   \cs{xetexengine},
+%   and \cs{luatexengine} macros,
+%   followed by the code that will be executed if the condition holds
+%   and the code that will be executed if the condition does not hold.
+%
+%   For convenience,
+%   we provide the variants \cs{ifengineT} and \cs{ifengineF}
+%   that allow to omit an empty then or else branch, respectivly.
+% \end{function}
+%
+%
+%
+% \end{documentation}
+%
+% \clearpage
+%
+% \begin{implementation}
+%
+% \part{Implementation}\label{sec:impl}
+%
+% \section{Global helpers}\label{sec:impl-global}
+%
+% These helpers might be useful for many exported packages and classes,
+% thus we keep them on the global level of this implementation.
+%
+%    \begin{macrocode}
+%<*init>
+%    \end{macrocode}
+%
+% Load only the essential support (\pkg{expl3}) \enquote{up-front}, and only
+% if required.
+%    \begin{macrocode}
+\@ifundefined{ExplLoaderFileDate}
+{\RequirePackage{expl3}}
+{}
+%    \end{macrocode}
+%
+% Make sure that the version of \pkg{l3kernel} in use is sufficiently new.
+% We use \cs{ExplFileDate} as \cs{@ifpackagelater} does not work for
+% pre-loaded \pkg{expl3} in the absence of the package.
+%    \begin{macrocode}
+\@ifl@t@r\ExplLoaderFileDate{2020-01-09}
+{}
+{%
+  \PackageError{se2colors}{Support package expl3 too old}
+  {%
+    You need to update your installation of the bundles 'l3kernel' and
+    'l3packages'.\MessageBreak
+    Loading~se2colors~will~abort!%
+  }%
+  \endinput
+}%
+%    \end{macrocode}
+%
+% \begin{macro}{\IfFormatAtLeastTF}
+%   This macro is not present in older kernels, thus we use the \LaTeXe{}
+%   mechanism as this is correct for this case.
+%    \begin{macrocode}
+\providecommand \IfFormatAtLeastTF { \@ifl@t@r \fmtversion }
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+%</init>
+%    \end{macrocode}
+%
+% \section{The \cls{se2thesis} implementation}\label{sec:impl-se2thesis}
+%
+% Start the \pkg{DocStrip} guards.
+%    \begin{macrocode}
+%<*class>
+%    \end{macrocode}
+%
+% Identify the internal prefix (\LaTeX3 \pkg{DocStrip} convention): only
+% internal material in this \emph{submodule} should be used directly.
+%    \begin{macrocode}
+%<@@=slcd>
+%    \end{macrocode}
+%
+% Identify the class and give the overall version number.
+%    \begin{macrocode}
+\ProvidesExplClass {se2thesis} {2022-09-06} {1.0.0}
+  {A thesis class for the Chair of Software Engineering II}
+%    \end{macrocode}
+%
+% Load required packages early.
+%    \begin{macrocode}
+\RequirePackage{graphicx}
+\RequirePackage{translations}
+\LoadDictionary{se2translations}
+\DeclareTranslationFallback{version-of-date}{%
+  Version~\l_@@_version_tl\ of~\@date
+}
+\DeclareTranslation{German}{version-of-date}{%
+  Version~\l_@@_version_tl\ vom~\@date
+}
+\DeclareTranslation{English}{version-of-date}{%
+  Version~\l_@@_version_tl\ of~\@date
+}
+%    \end{macrocode}
+%
+% \subsection{Define Variables}
+%
+% The following variables are necessary for the argument handling.
+% \begin{variable}{\l_@@_paper_int}
+%   A variable to store the key of the page size selected by the user.
+%    \begin{macrocode}
+\int_new:N \l_@@_paper_int
+%    \end{macrocode}
+% \end{variable}
+%
+% We also need properties to store class options that are not for us,
+% thus shall be handled by the underlying base class.
+% \begin{variable}
+%   {
+%     \l_@@_base_class_tl,
+%     \l_@@_clsopts_prop,
+%     \l_@@_unknown_clsopts_prop
+%   }
+%   Store the base class, the known, and the unknown class options.
+%   The latter will be forwarded to the base class later.
+%    \begin{macrocode}
+\tl_new:N \l_@@_base_class_tl
+\prop_new:N \l_@@_clsopts_prop
+\prop_new:N \l_@@_unknown_clsopts_prop
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{variable}
+%   {
+%     \l_@@_doclicense_bool,
+%     \l_@@_licensetype_tl,
+%     \l_@@_licensemodifier_tl,
+%     \l_@@_licenseversion_tl
+%   }
+%   If the user wants to load the \pkg{doclicense} package, we need several
+%   more variables to store the necessary information.
+%    \begin{macrocode}
+\bool_new:N \l_@@_doclicense_bool
+\tl_new:N \l_@@_licensetype_tl
+\tl_new:N \l_@@_licensemodifier_tl
+\tl_new:N \l_@@_licenseversion_tl
+%    \end{macrocode}
+% \end{variable}
+%
+% Define internal variables to hold the values of the fields of the title
+% page.
+% \begin{variable}
+%   {
+%     \l_@@_version_tl,
+%     \l_@@_degreeprogramme_tl,
+%     \l_@@_supervisor_tl,
+%     \l_@@_cosupervisor_tl,
+%     \l_@@_advisor_tl,
+%     \l_@@_coadvisor_tl,
+%     \l_@@_department_tl,
+%     \l_@@_institute_tl,
+%     \l_@@_external_tl,
+%     \l_@@_logofile_tl
+%   }
+%    \begin{macrocode}
+\tl_new:N \l_@@_version_tl
+\tl_new:N \l_@@_degreeprogramme_tl
+\tl_new:N \l_@@_supervisor_tl
+\tl_new:N \l_@@_cosupervisor_tl
+\tl_new:N \l_@@_advisor_tl
+\tl_new:N \l_@@_coadvisor_tl
+\tl_new:N \l_@@_department_tl
+\tl_new:N \l_@@_institute_tl
+\tl_new:N \l_@@_external_tl
+\tl_new:N \l_@@_logofile_tl
+%    \end{macrocode}
+% \end{variable}
+%
+% Define several dimensions for the \pkg{typearea} package to define the
+% package style.
+% \begin{variable}
+%   {
+%     \l_@@_marginspace_dim,
+%     \l_@@_headmarkspace_dim,
+%     \l_@@_rulespace_dim,
+%     \l_@@_pagemark_minipage_dim,
+%     \l_@@_ruleraise_dim,
+%     \l_@@_rulewidth_dim,
+%     \l_@@_rulethickness_dim
+%   }
+%    \begin{macrocode}
+\dim_new:N \l_@@_marginspace_dim
+\dim_new:N \l_@@_headmarkspace_dim
+\dim_new:N \l_@@_rulespace_dim
+\dim_new:N \l_@@_pagemark_minipage_dim
+\dim_new:N \l_@@_ruleraise_dim
+\dim_new:N \l_@@_rulewidth_dim
+\dim_new:N \l_@@_rulethickness_dim
+\dim_gset:Nn \l_@@_marginspace_dim { -1.85cm }
+\dim_gset:Nn \l_@@_headmarkspace_dim { 0.75cm }
+\dim_gset:Nn \l_@@_rulespace_dim { 10pt }
+\dim_gset:Nn \l_@@_pagemark_minipage_dim { 1.5cm }
+\dim_gset:Nn \l_@@_ruleraise_dim { -100pt }
+\dim_gset:Nn \l_@@_rulewidth_dim { 1.25pt }
+\dim_gset:Nn \l_@@_rulethickness_dim { 110pt }
+%    \end{macrocode}
+% \end{variable}
+%
+% \subsection{Load-time options}
+%
+% We define the key-value interface for the class.
+% \begin{variable}
+%   {
+%     \l_@@_base_class_tl,
+%     \l_@@_unknown_clsopts_prop,
+%     \l_@@_paper_int,
+%     \l_@@_thesis_type_tl,
+%     \l_@@_licensetype_tl,
+%     \l_@@_licensemodifier_tl,
+%     \l_@@_licenseversion_tl,
+%     \l_@@_colormode_tl,
+%     \l_@@_fontmode_tl,
+%   }
+%    \begin{macrocode}
+\keys_define:nn { seiithesis }
+  {
+    class .choice:,
+    class / report .meta:n = {class=scrreprt},
+    class / scrreprt .code:n = \tl_gset:Nn \l_@@_base_class_tl {scrreprt},
+    class / article .meta:n = {class=scrartcl},
+    class / scrartcl .code:n = \tl_gset:Nn \l_@@_base_class_tl {scrartcl},
+    class / book .meta:n = {class=scrbook},
+    class / scrbook .code:n = \tl_gset:Nn \l_@@_base_class_tl {scrbook},
+    class .initial:n = scrreprt,
+
+    paper .choices:nn = {a4,a5,b5}{
+      \int_gset_eq:NN \l_@@_paper_int \l_keys_choice_int
+    },
+    paper .initial:n = a4,
+
+    logofile .tl_gset:N = \l_@@_logofile_tl,
+    logofile .initial:n =,
+
+    thesistype .choice:,
+    thesistype / bachelor .code:n = \tl_gset:Nn \l_@@_thesis_type_tl {bachelor},
+    thesistype / bachelorproposal .code:n = {
+      \tl_gset:Nn \l_@@_thesis_type_tl {bachelorproposal}
+    },
+    thesistype / master .code:n = \tl_gset:Nn \l_@@_thesis_type_tl {master},
+    thesistype / masterproposal .code:n = {
+      \tl_gset:Nn \l_@@_thesis_type_tl {masterproposal}
+    },
+    thesistype / phd .code:n = \tl_gset:Nn \l_@@_thesis_type_tl {phd},
+    thesistype / phdproposal .code:n = {
+      \tl_gset:Nn \l_@@_thesis_type_tl {phdproposal}
+    },
+    thesistype .initial:n = master,
+
+    doclicense .bool_gset:N = \l_@@_doclicense_bool,
+    doclicense .initial:n = false,
+    licensetype .tl_gset:N = \l_@@_licensetype_tl,
+    licensetype .initial:n =,
+    licensemodifier .tl_gset:N = \l_@@_licensemodifier_tl,
+    licensemodifier .initial:n =,
+    licenseversion .tl_gset:N = \l_@@_licenseversion_tl,
+    licenseversion .initial:n =,
+
+    colormode .choices:nn = {cmyk,rgb,bw}{
+      \tl_gset_eq:NN \l_@@_colormode_tl \l_keys_choice_tl
+    },
+    colormode .initial:n = cmyk,
+
+    fontmode .choices:nn = {original,replacement,auto}{
+      \tl_gset_eq:NN \l_@@_fontmode_tl \l_keys_choice_tl
+    },
+    fontmode .initial:n = auto,
+
+    unknown .code:n = {
+      \prop_gput:NVn \l_@@_unknown_clsopts_prop \l_keys_key_tl {#1}
+    },
+  }
+%    \end{macrocode}
+% \end{variable}
+%
+% Handle the options
+%    \begin{macrocode}
+\IfFormatAtLeastTF { 2022-06-01 }
+  { \ProcessKeyOptions [ seiithesis ] }
+  {
+    \RequirePackage{ l3keys2e }
+    \ProcessKeysOptions { seiithesis }
+  }
+%    \end{macrocode}
+%
+% Handle the known options for base class
+%    \begin{macrocode}
+\prop_map_inline:Nn \l_@@_clsopts_prop
+  {
+    \tl_if_empty:nTF {#2}
+      { \PassOptionsToClass {#1} {\l_@@_base_class_tl} }
+      {
+        \clist_map_inline:nn {#2}
+          { \PassOptionsToClass {#1=##1} {\l_@@_base_class_tl} }
+      }
+  }
+%    \end{macrocode}
+%
+% Load the base class
+%    \begin{macrocode}
+\LoadClass{\l_@@_base_class_tl}
+%    \end{macrocode}
+%
+% Attempt to handle the unknown options
+%    \begin{macrocode}
+\prop_map_inline:Nn \l_@@_unknown_clsopts_prop
+  {
+    \cs_if_exist:cT {KV@KOMA.\l_@@_base_class_tl.cls@#1}
+      {
+        \tl_if_empty:nTF {#2}
+          { \KOMAoptions{#1} }
+          { \KOMAoption{#1}{#2}}
+      }
+  }
+%    \end{macrocode}
+%
+%
+% \subsection{Option checks}
+%
+% Some options require the usage of others, thus we implement some checks.
+% The first check is for the \pkg{doclicense} package: whenever the user
+% requests its loading, check whether they set the |licensetype|,
+% |licensemodifier|, and |licenseversion| variables, too.
+%    \begin{macrocode}
+\bool_if:NT \l_@@_doclicense_bool
+  {
+    \msg_set:nnnn { seiithesis } { licensetype-not-set }
+      { Argument~ licensetype~ not~ set;~ required~ when~ using~ doclicense }
+      { See~ doclicense~ manual~ for~ possible~ values }
+    \msg_set:nnnn { seiithesis } { licensemodifier-not-set }
+      {
+        Argument~ licensemodifier~ not~ set;~ required~ when~ using~
+        doclicense
+      }
+      { See~ doclicense~ manual~ for~ possible~ values }
+    \msg_set:nnnn { seiithesis } { licenseversion-not-set }
+      {
+        Argument~ licenseversion~ not~ set;~ required~ when~ using~
+        doclicense
+      }
+      { See~ doclicense~ manual~ for~ possible~ values }
+    \tl_if_empty:NT \l_@@_licensetype_tl
+      { \msg_error:nn { seiithesis } { licensetype-not-set }}
+    \tl_if_empty:NT \l_@@_licensemodifier_tl
+      { \msg_error:nn { seiithesis } { licensemodifier-not-set }}
+    \tl_if_empty:NT \l_@@_licenseversion_tl
+      { \msg_error:nn { seiithesis } { licenseversion-not-set }}
+  }
+%    \end{macrocode}
+%
+% \subsection{Package loading}
+%
+% We load some packages with options that depend on options to the
+% \cls{se2thesis} class.
+% Thus, we load them here to be able to hand them over the respective values.
+%
+% We start with the \pkg{se2colors} and \pkg{se2fonts} packages.
+%    \begin{macrocode}
+\PassOptionsToPackage{\l_@@_colormode_tl}{se2colors}
+\RequirePackage{se2colors}
+
+\PassOptionsToPackage{\l_@@_fontmode_tl}{se2fonts}
+\RequirePackage{se2fonts}
+%    \end{macrocode}
+%
+% \subsection{User macros for the title page}
+%
+% In addition to the macros provided by the \KOMAScript{} classes
+% for the title-page values (e.g. \cs{author}, \cs{title}),
+% provide these additional macros to the user.
+% \begin{macro}{\version}
+%   Specify the version of the document, e.g., a |git| hash.
+%    \begin{macrocode}
+\ProvideDocumentCommand \version { m }
+  {
+    \tl_set:Nn \l_@@_version_tl {#1}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\degreeprogramme}
+%   Specify the degree programme the thesis is meant to be accepted in.
+%    \begin{macrocode}
+\ProvideDocumentCommand \degreeprogramme { m }
+  {
+    \tl_set:Nn \l_@@_degreeprogramme_tl {#1}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\supervisor, \cosupervisor}
+%   Specify the supervisor and co-supervisor of the thesis, usually a professor.
+%    \begin{macrocode}
+\ProvideDocumentCommand \supervisor { m }
+  {
+    \tl_set:Nn \l_@@_supervisor_tl {#1}
+  }
+\ProvideDocumentCommand \cosupervisor { m }
+  {
+    \tl_set:Nn \l_@@_cosupervisor_tl {#1}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\advisor, \coadvisor}
+%   Specify the advisor and co-advisor of the thesis, usually a PhD student or
+%   postdoc.
+%    \begin{macrocode}
+\ProvideDocumentCommand \advisor { m }
+  {
+    \tl_set:Nn \l_@@_advisor_tl {#1}
+  }
+\ProvideDocumentCommand \coadvisor { m }
+  {
+    \tl_set:Nn \l_@@_coadvisor_tl {#1}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\department, \institute}
+%   Specify the university's department and institute you are writing
+%   the thesis for.
+%    \begin{macrocode}
+\ProvideDocumentCommand \department { m }
+  {
+    \tl_set:Nn \l_@@_department_tl {#1}
+  }
+\ProvideDocumentCommand \institute { o m }
+  {
+    \tl_set:Nn \l_@@_institute_tl {#2}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\external}
+%   Specify an external referee.
+%    \begin{macrocode}
+\ProvideDocumentCommand \external { m }
+  {
+    \tl_set:Nn \l_@@_external_tl {#1}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Define logo, paper size, and paper style}
+%
+% For the logo on the titlepage, we define further variables to store its height
+% and a box to store the logo itself.
+% \begin{variable}{\l_@@_logo_height_dim, \l_@@_logo_box}
+%    \begin{macrocode}
+\dim_if_exist:NF \l_@@_logo_height_dim
+  {
+    \dim_new:N \l_@@_logo_height_dim
+    \dim_gset:Nn \l_@@_logo_height_dim { 67.5pt }  % TODO
+  }
+\box_if_exist:NF \l_@@_logo_box
+  {
+    \box_new:N \l_@@_logo_box
+  }
+\tl_if_empty:NF \l_@@_logofile_tl
+  {
+    \hbox_gset:Nn \l_@@_logo_box
+      {
+        \includegraphics[%
+          height=\l_@@_logo_height_dim%
+        ]{\l_@@_logofile_tl}
+      }
+  }
+%    \end{macrocode}
+% \end{variable}
+%
+% Set the paper size depending on the selected |paper| option.
+%    \begin{macrocode}
+\int_compare:nTF { \l_@@_paper_int=1 }
+  {
+    \areaset[current]{336pt}{630pt}
+    \setlength{\marginparsep}{8.5cm}
+    \setlength{\marginparsep}{1em}
+  }{
+    \int_compare:nTF { \l_@@_paper_int=2 }
+      {
+        \areaset[current]{238pt}{445pt}
+        \setlength{\marginparsep}{6.0cm}
+        \setlength{\marginparsep}{0.71em}
+      }{
+        \areaset[current]{291pt}{545pt}
+        \setlength{\marginparsep}{7.4cm}
+        \setlength{\marginparsep}{0.87em}
+      }
+  }
+%    \end{macrocode}
+%
+% Provide the package style.
+% We start by loading the \pkg{scrlayer-scrpage} package with the appropriate
+% options and set some basic properties.
+%    \begin{macrocode}
+\PassOptionsToPackage{automark}{scrlayer-scrpage}
+\RequirePackage{scrlayer-scrpage}
+\clearpairofpagestyles
+\setkomafont{pagefoot}{\normalfont\sffamily}
+%    \end{macrocode}
+%
+% We can then define the footer for odd pages, which will appear on the right
+% side of the page's footer.
+% This definition contains first, as an optional argument, the style of a page
+% with |pagestyle| set to |empty|, i.e., a page where a new chapter starts, and
+% afterwards the style of a regular right-hand side page.
+%    \begin{macrocode}
+\rofoot[{%
+  \group_begin: \ \group_end:
+  \footnotesize%
+  \hspace*{\l_@@_headmarkspace_dim}%
+  \group_begin:
+    \color{UPSE2-DarkBlue}%
+    \rule[\l_@@_ruleraise_dim]{\l_@@_rulewidth_dim}{\l_@@_rulethickness_dim}%
+  \group_end:
+  \hspace*{\l_@@_rulespace_dim}%
+  \begin{minipage}[b]{\l_@@_pagemark_minipage_dim}%
+    \normalsize\textbf{\pagemark}%
+  \end{minipage}%
+  \hspace{\l_@@_marginspace_dim}%
+}]{%
+  \group_begin: \ \group_end:
+  \footnotesize%
+  \group_begin:
+    \color{UPSE2-DarkBlue}\headmark
+  \group_end:
+  \hspace*{\l_@@_rulespace_dim}%
+  \group_begin:
+    \color{UPSE2-DarkBlue}%
+    \rule[\l_@@_ruleraise_dim]{\l_@@_rulewidth_dim}{\l_@@_rulethickness_dim}%
+  \group_end:
+  \hspace*{\l_@@_rulespace_dim}%
+  \begin{minipage}[b]{\l_@@_pagemark_minipage_dim}%
+    \normalsize\textbf{\pagemark}%
+  \end{minipage}%
+  \hspace{\l_@@_marginspace_dim}%
+}
+%    \end{macrocode}
+%
+% Similarly, we define the footer for even pages, which will appear on the left
+% side of the page's footer.
+%    \begin{macrocode}
+\lefoot[{%
+  \null\hspace{\l_@@_marginspace_dim}%
+  \footnotesize%
+  \begin{minipage}[b]{\l_@@_pagemark_minipage_dim}%
+    \raggedleft\normalsize\textbf{\pagemark}%
+  \end{minipage}%
+  \footnotesize%
+  \hspace*{\l_@@_rulespace_dim}%
+  \group_begin:
+    \color{UPSE2-DarkBlue}%
+    \rule[\l_@@_ruleraise_dim]{\l_@@_rulewidth_dim}{\l_@@_rulethickness_dim}%
+  \group_end:
+}]{%
+  \null\hspace{\l_@@_marginspace_dim}%
+  \footnotesize%
+  \begin{minipage}[b]{\l_@@_pagemark_minipage_dim}%
+    \raggedleft\normalsize\textbf{\pagemark}%
+  \end{minipage}%
+  \footnotesize%
+  \hspace*{\l_@@_rulespace_dim}%
+  \group_begin:
+    \color{UPSE2-DarkBlue}%
+    \rule[\l_@@_ruleraise_dim]{\l_@@_rulewidth_dim}{\l_@@_rulethickness_dim}%
+  \group_end:
+  \hspace*{\l_@@_headmarkspace_dim}%
+  \group_begin:
+    \color{UPSE2-DarkBlue}\headmark
+  \group_end:
+}
+%    \end{macrocode}
+%
+% Finally, set the page style.
+%    \begin{macrocode}
+\pagestyle{scrheadings}
+%    \end{macrocode}
+%
+% \subsection{The title page}
+%
+% We start out by adjusting some \KOMAScript{} fonts.
+%    \begin{macrocode}
+\setkomafont{title}{\Huge}
+\setkomafont{subtitle}{\Large}
+\setkomafont{subject}{\normalsize}
+\setkomafont{author}{\large}
+\setkomafont{date}{\normalsize}
+\setkomafont{publishers}{\normalsize}
+%    \end{macrocode}
+%
+% \begin{variable}{\l_@@_author_seq, \author, \@author}
+%   Allow for automated splitting of author's names.
+%    \begin{macrocode}
+\seq_new:N \l_@@_author_seq
+\renewcommand*\author[1]{
+  \seq_gset_split:Nnn \l_@@_author_seq {\and} {#1}
+}
+\renewcommand*{\@author}{
+  \group_begin:
+    \hyphenpenalty=100000
+    \seq_use:Nnnn \l_@@_author_seq {~\GetTranslation{and}~} {,~} {~\&~}
+  \group_end:
+}
+%    \end{macrocode}
+% \end{variable}
+%
+% Define a new layer using the functionality from \pkg{scrlayer-scrpage} for the
+% logo image.
+%    \begin{macrocode}
+\DeclareNewLayer[
+  mode=picture,
+  foreground,
+  align=tr,
+  hoffset=\oddsidemargin+1.5in+\textwidth,
+  voffset=\coverpagetopmargin+1.5in+\ht\strutbox,
+  width=\textwidth - \box_wd:N \l_@@_logo_box,
+  height=\box_ht:N \l_@@_logo_box,
+  contents={\putUL{\box_use:N \l_@@_logo_box}},
+]{title.seii.logo}
+\DeclareNewPageStyleByLayers{title.seii}{title.seii.logo}
+\renewcommand*{\titlepagestyle}{title.seii}
+%    \end{macrocode}
+%
+% Redefine the \cs{maketitle} command.
+% The following code is an adapted version of the corresponding \KOMAScript{}
+% macro by Markus Kohm.
+%    \begin{macrocode}
+\renewcommand*{\maketitle}[1][1]{
+  \begin{titlepage}
+    \setcounter{page}{#1}
+    \def\thefootnote{\fnsymbol{footnote}}
+    \edef\titlepage@restore{%
+      \noexpand\endgroup
+      \noexpand\global\noexpand\@colht\the\@colht
+      \noexpand\global\noexpand\@colroom\the\@colroom
+      \noexpand\global\vsize\the\vsize
+      \noexpand\global\noexpand\@titlepageiscoverpagefalse
+      \noexpand\let\noexpand\titlepage@restore\noexpand\relax
+    }%
+    \begingroup
+    \topmargin=\dimexpr \coverpagetopmargin-1in\relax
+    \oddsidemargin=\dimexpr 0in\relax
+    \evensidemargin=\dimexpr 0in\relax
+    \textwidth=\dimexpr \paperwidth-2in\relax
+    \textheight=\dimexpr
+    \paperheight-\coverpagetopmargin-\coverpagebottommargin\relax
+    \headheight=0pt
+    \headsep=0pt
+    \footskip=\baselineskip
+    \@colht=\textheight
+    \@colroom=\textheight
+    \vsize=\textheight
+    \columnwidth=\textwidth
+    \hsize=\textwidth
+    \linewidth=\hsize
+    \setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
+    \thispagestyle{title.seii}
+    %
+    \@maketitle
+    %
+    \if@twoside
+      \@tempswatrue
+      \if@tempswa
+        \next@tpage
+        \begin{minipage}[t]{\textwidth}
+          \@uppertitleback
+        \end{minipage}
+        \vfill
+        \begin{minipage}[b]{\textwidth}
+          \@lowertitleback
+        \end{minipage}\par
+        \@thanks\let\@thanks\@empty
+      \fi
+    \fi
+    \ifx\titlepage@restore\relax\else\clearpage\titlepage@restore\fi
+  \end{titlepage}
+}
+%    \end{macrocode}
+%
+% \begin{variable}{\l_@@_title_box}
+%   Define a box for the title if it does not yet exist.
+%    \begin{macrocode}
+\box_if_exist:NF \l_@@_title_box
+  {
+    \box_new:N \l_@@_title_box
+  }
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{variable}{\@maketitle}
+%   Redeclare the \cs{@maketitle} macro.
+%    \begin{macrocode}
+\renewcommand*{\@maketitle}{%
+  \group_begin:
+    \setparsizes{\z@}{\z@}{\z@\@plus 1fil}\par@updaterelative
+    \thispagestyle{title.seii}
+    \hbox_gset:Nn \l_@@_title_box
+      {
+        \parbox{\textwidth}{\__@@_print_title:}
+      }
+    \null
+    \skip_vertical:n { 2.5 \box_ht:N \l_@@_logo_box }
+    \box_use:N \l_@@_title_box
+    \skip_vertical:n { .5 \box_ht:N \l_@@_logo_box }
+  \group_end:
+  \@thanks\let\@thanks\@empty
+}
+%    \end{macrocode}
+% \end{variable}
+%
+% Load the \pkg{ifthen} package.
+%    \begin{macrocode}
+\RequirePackage{ifthen}
+%    \end{macrocode}
+%
+% \begin{function}{\__@@_print_title:}
+%   Prints the title formatted appropriately.
+%   We start with printing the title, optional subtitle, and the author names.
+%    \begin{macrocode}
+\cs_new:Nn \__@@_print_title:
+  {
+    \group_begin:
+      \usekomafont{title}\centering\@title\par
+    \group_end:
+    \ifx\@subtitle\@empty\else{%
+      \medskip\usekomafont{subtitle}\centering\@subtitle\par%
+    }\fi
+    \bigskip
+    \group_begin:
+      \usekomafont{author}\centering\@author\par
+    \group_end:
+    \bigskip
+%    \end{macrocode}
+%   The next block generates the text that describes the thesis.
+%   In case of a PhD thesis, this text is predefined to match the requirements.
+%   In case of a bachelor or master thesis, or a proposal thereof, we generate
+%   a text based on the values of the |thesistype| load-time option and the
+%   values of the \cmd{\degreeprogramme}, \cmd{\department}, and
+%   \cmd{\institute} variables.
+%    \begin{macrocode}
+    \exp_args:NV
+      {
+        \begin{center}
+          \tl_if_eq:NnTF \l_@@_thesis_type_tl { phd }
+            {
+              Dissertation~ zur~ Erlangung~ des~ Doktorgrades\\
+              der~ Naturwissenschaften~ (Dr.\,rer.\,nat.)\\
+              eingereicht~ an~ der~ Fakultät~ für~ Informatik~ und~ Mathematik\\
+              der~ Universität~ Passau\\
+              \rule{\textwidth}{.1pt}\\
+              Dissertation~ submitted~ to\\
+              the~ Faculty~ of~ Computer~ Science~ and~ Mathematics\\
+              of~ the~ University~ of~ Passau\\
+              in~ partial~ fulfillment~ of~ obtaining\\
+              the~ degree~ of~ a~ Doctor~ of~ Natural~ Sciences
+            } {
+              \tl_if_eq:NnT \l_@@_thesis_type_tl { bachelor }
+                { \GetTranslation{Bachelor-thesis} }
+              \tl_if_eq:NnT \l_@@_thesis_type_tl { bachelorproposal }
+                { \GetTranslation{Bachelor-thesis-proposal} }
+              \tl_if_eq:NnT \l_@@_thesis_type_tl { master }
+                { \GetTranslation{Master-thesis} }
+              \tl_if_eq:NnT \l_@@_thesis_type_tl { masterproposal }
+                { \GetTranslation{Master-thesis-proposal} }
+              \tl_if_eq:NnT \l_@@_thesis_type_tl { phdproposal }
+                { \GetTranslation{PhD-thesis-proposal} }
+              \tl_if_empty:NF \l_@@_degreeprogramme_tl
+                {
+                  \ in~\l_@@_degreeprogramme_tl
+                }
+              \par
+              \tl_if_empty:NF \l_@@_department_tl { \l_@@_department_tl \par }
+              \tl_if_empty:NF \l_@@_institute_tl { \l_@@_institute_tl \par }
+            }
+        \end{center}\par\bigskip
+%    \end{macrocode}
+%   Finally, generate a table with information about supervisors, advisors, etc.
+%    \begin{macrocode}
+        \begin{center}
+          \begin{tabular}{@{} l @{\quad} l}
+            \tl_if_empty:NF \l_@@_supervisor_tl
+              {
+                \GetTranslation{Supervisor}    & \l_@@_supervisor_tl \\
+              }
+            \tl_if_empty:NF \l_@@_cosupervisor_tl
+              {
+                \GetTranslation{Co-supervisor} & \l_@@_cosupervisor_tl \\
+              }
+            \tl_if_empty:NF \l_@@_advisor_tl
+              {
+                \GetTranslation{Advisor}       & \l_@@_advisor_tl \\
+              }
+            \tl_if_empty:NF \l_@@_coadvisor_tl
+              {
+                \GetTranslation{Co-advisor}    & \l_@@_coadvisor_tl \\
+              }
+            \tl_if_empty:NF \l_@@_external_tl
+              {
+                \GetTranslation{External}      & \l_@@_external_tl \\
+              }
+          \end{tabular}
+        \end{center}
+        \par\medskip
+%    \end{macrocode}
+%   Last, print the date or the version.
+%    \begin{macrocode}
+        \group_begin:
+          \usekomafont{date}
+          \centering
+          \tl_if_empty:NTF \l_@@_version_tl
+            { \@date }
+            { \GetTranslation{version-of-date} }
+          \par\smallskip
+        \group_end:
+      }
+  }
+%    \end{macrocode}
+% \end{function}
+%
+% Depending on whether \cs{l_@@_doclicense_bool} is set, load the
+% \pkg{doclicense} package appropriately.
+%    \begin{macrocode}
+\bool_if:NT \l_@@_doclicense_bool
+  {
+    \PassOptionsToPackage{%
+      type={\l_@@_licensetype_tl},%
+      modifier={\l_@@_licensemodifier_tl},%
+      version={\l_@@_licenseversion_tl},%
+    }{doclicense}
+    \RequirePackage{doclicense}
+  }
+%    \end{macrocode}
+%
+% \begin{variable}{\@lowertitleback}
+%   Afterwards, override the definition of \cs{@lowertitleback}.
+%    \begin{macrocode}
+\renewcommand*{\@lowertitleback}{%
+  \group_begin:
+    \noindent\textbf{\@author}\\
+    \emph{\@title}\\
+    \bool_if:NT \l_@@_doclicense_bool
+      {
+        \group_begin:
+          \footnotesize\doclicenseThis
+        \group_end:
+      }
+  \group_end:
+}
+%    \end{macrocode}
+% \end{variable}
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%    \begin{macrocode}
+%</class>
+%    \end{macrocode}
+%
+% \section{Translations for \cls{se2thesis}}\label{sec:impl-translations}
+%
+%    \begin{macrocode}
+%<*translations>
+%    \end{macrocode}
+%
+% \subsection{English Translations}\label{sec:impl-translations-english}
+%
+%    \begin{macrocode}
+%<*english>
+%    \end{macrocode}
+%
+% We provide the following English translations.
+%
+%    \begin{macrocode}
+\ProvideDictionaryFor{English}{se2translations}[2022/09/06]
+\ProvideDictTranslation{advisor}{advisor}
+\ProvideDictTranslation{Advisor}{Advisor}
+\ProvideDictTranslation{advisors}{advisors}
+\ProvideDictTranslation{Advisors}{Advisors}
+\ProvideDictTranslation{co-advisor}{co-advisor}
+\ProvideDictTranslation{Co-advisor}{Co-advisor}
+\ProvideDictTranslation{co-advisors}{co-advisors}
+\ProvideDictTranslation{Co-advisors}{Co-advisors}
+\ProvideDictTranslation{supervisor}{supervisor}
+\ProvideDictTranslation{Supervisor}{Supervisor}
+\ProvideDictTranslation{co-supervisor}{co-supervisor}
+\ProvideDictTranslation{Co-supervisor}{Co-supervisor}
+\ProvideDictTranslation{external}{external examiner}
+\ProvideDictTranslation{External}{External Examiner}
+\ProvideDictTranslation{degreeprogramme}{programme}
+\ProvideDictTranslation{Degreeprogramme}{Programme}
+\ProvideDictTranslation{Bachelor-thesis}{Bachelor Thesis}
+\ProvideDictTranslation{Bachelor-thesis-proposal}{Bachelor Thesis Proposal}
+\ProvideDictTranslation{Master-thesis}{Master Thesis}
+\ProvideDictTranslation{Master-thesis-proposal}{Master Thesis Proposal}
+\ProvideDictTranslation{PhD-thesis}{PhD Thesis}
+\ProvideDictTranslation{PhD-thesis-proposal}{PhD Thesis Proposal}
+\ProvideDictTranslation{date}{date}
+\ProvideDictTranslation{Date}{Date}
+\ProvideDictTranslation{university-of-passau}{University of Passau}
+\ProvideDictTranslation{up}{University of Passau}
+\ProvideDictTranslation{fim}{Faculty of Computer Science and Mathematics}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</english>
+%    \end{macrocode}
+%
+% \subsection{German Translations}\label{sec:impl-translations-german}
+%
+%    \begin{macrocode}
+%<*german>
+%    \end{macrocode}
+%
+% We provide the following German translations.
+%
+%    \begin{macrocode}
+\ProvideDictionaryFor{German}{se2translations}[2022/09/06]
+\ProvideDictTranslation{advisor}{Betreuer}
+\ProvideDictTranslation{Advisor}{Betreuer}
+\ProvideDictTranslation{advisors}{Betreuer}
+\ProvideDictTranslation{Advisors}{Betreuer}
+\ProvideDictTranslation{co-advisor}{Mitbetreuer}
+\ProvideDictTranslation{Co-advisor}{Mitbetreuer}
+\ProvideDictTranslation{co-advisors}{Mitbetreuer}
+\ProvideDictTranslation{Co-advisors}{Mitbetreuer}
+\ProvideDictTranslation{supervisor}{Prüfer}
+\ProvideDictTranslation{Supervisor}{Prüfer}
+\ProvideDictTranslation{co-supervisor}{Zweitprüfer}
+\ProvideDictTranslation{Co-supervisor}{Zweitprüfer}
+\ProvideDictTranslation{external}{Externer Gutachter}
+\ProvideDictTranslation{External}{Externer Gutachter}
+\ProvideDictTranslation{degreeprogramme}{Studiengang}
+\ProvideDictTranslation{Degreeprogramme}{Studiengang}
+\ProvideDictTranslation{Bachelor-thesis}{Bachelorarbeit}
+\ProvideDictTranslation{Bachelor-thesis-proposal}{Bachelorarbeitsproposal}
+\ProvideDictTranslation{Master-thesis}{Masterarbeit}
+\ProvideDictTranslation{Master-thesis-proposal}{Masterarbeitsproposal}
+\ProvideDictTranslation{PhD-thesis}{Dissertation}
+\ProvideDictTranslation{PhD-thesis-proposal}{Dissertationsproposal}
+\ProvideDictTranslation{date}{Datum}
+\ProvideDictTranslation{Date}{Datum}
+\ProvideDictTranslation{university-of-passau}{Universität Passau}
+\ProvideDictTranslation{up}{Universität Passau}
+\ProvideDictTranslation{fim}{Fakultät für Informatik und Mathematik}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</german>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</translations>
+%    \end{macrocode}
+%
+% \section{The \pkg{se2colors} implementation}\label{sec:impl-se2colors}
+%
+% Start the \pkg{DocStrip} guards.
+%    \begin{macrocode}
+%<*colors>
+%    \end{macrocode}
+%
+% Identify the internal prefix (\LaTeX3 \pkg{DocStrip} convention): only
+% internal material in this \emph{submodule} should be used directly.
+%    \begin{macrocode}
+%<@@=slcd_colors>
+%    \end{macrocode}
+%
+% Identify the package and give the overall version information.
+%    \begin{macrocode}
+\ProvidesExplPackage {se2colors} {2022-09-06} {1.0.0}
+  {A colour support package for the se2thesis bundle}
+%    \end{macrocode}
+%
+%
+% \subsection{Load-time options}
+%
+% \begin{variable}{\l_@@_colormode_tl}
+%   Holds the colour mode selected by the user as a package load-time option.
+%    \begin{macrocode}
+\keys_define:nn { seiicolors }
+  {
+    colormode .choice:,
+    colormode / 4C .code:n = {
+      \PassOptionsToPackage{cmyk}{xcolor}
+      \tl_gset:Nn \l_@@_colormode_tl {4C}
+    },
+    colormode / RGB .code:n = {
+      \PassOptionsToPackage{rgb}{xcolor}
+      \tl_gset:Nn \l_@@_colormode_tl {RGB}
+    },
+    colormode / BW .code:n = {
+      \PassOptionsToPackage{gray}{xcolor}
+      \tl_gset:Nn \l_@@_colormode_tl {BW}
+    },
+    colormode / CMYK .meta:n = {colormode=4C},
+    colormode / cmyk .meta:n = {colormode=4C},
+    colormode / rgb .meta:n = {colormode=RGB},
+    colormode / gray .meta:n = {colormode=BW},
+    RGB .meta:n = {colormode=RGB},
+    rgb .meta:n = {colormode=rgb},
+    CMYK .meta:n = {colormode=4C},
+    cmyk .meta:n = {colormode=4C},
+    gray .meta:n = {colormode=BW},
+  }
+\keys_set:nn { seiicolors } { colormode = 4C }
+%    \end{macrocode}
+% \end{variable}
+%
+% \subsection{Option handling}
+%
+%    \begin{macrocode}
+\IfFormatAtLeastTF { 2022-06-01 }
+  { \ProcessKeyOptions [ seiicolors ] }
+  {
+    \RequirePackage { l3keys2e }
+    \ProcessKeysOptions { seiicolors }
+  }
+%    \end{macrocode}
+%
+% \subsection{Colour definitions}
+%
+% Load the \pkg{xcolor} package for colour definitions.
+%    \begin{macrocode}
+\RequirePackage{xcolor}
+%    \end{macrocode}
+%
+% Define the primary colours gray and orange as given by the University of
+% Passau's style guides.
+%    \begin{macrocode}
+\definecolorset[named]{RGB/cmyk}{UPSE2-}{}{%
+  Gray,123,131,133/.08,.02,0,.48;%
+  Orange,229,137,0/0,.40,1.0,.10%
+}
+%    \end{macrocode}
+%
+% Define the additional colours.
+%    \begin{macrocode}
+\definecolorset[named]{RGB/cmyk}{UPSE2-}{}{%
+  DarkGreen,85,100,85/.6,.2,.6,.35;%
+  MediumGreen,105,150,115/.55,0,.55,.10;%
+  LightGreen,140,175,130/.4,0,.5,.05;%
+  DarkBlue,80,110,150/.70,.40,0,.15;%
+  MediumBlue,105,155,190/.55,.1,0,.1;%
+  LightBlue,135,185,200/.4,0,.10,.05;%
+  DarkPurple,100,80,120/.6,.8,.05,.15;%
+  MediumPurple,130,90,125/.35,.7,.1,.15;%
+  LightPurple,160,135,170/.3,.45,.05,0;%
+  DarkOcher,120,100,80/.35,.45,.65,.25;%
+  MediumOcher,150,130,95/.25,.3,.6,.15;%
+  LightOcher,185,145,100/.1,.25,.6,.1;%
+  DarkRed,180,20,40/.05,1,.8,.05;%
+  MediumRed,210,90,80/0,.75,.6,.1;%
+  LightRed,255,145,125/.05,.5,.45,.05%
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</colors>
+%    \end{macrocode}
+%
+% \section{The \pkg{se2fonts} implementation}\label{sec:impl-se2fonts}
+%
+% Start the \pkg{DocStrip} guards.
+%    \begin{macrocode}
+%<*fonts>
+%    \end{macrocode}
+%
+% Identify the internal prefix (\LaTeX3 \pkg{DocStrip} convention): only
+% internal material in this \emph{submodule} should be used directly.
+%    \begin{macrocode}
+%<@@=slcd_fonts>
+%    \end{macrocode}
+%
+% Identify the package and give the overall version information.
+%    \begin{macrocode}
+\ProvidesExplPackage {se2fonts} {2022-09-06} {1.0.0}
+  {A font-selection support package for the se2thesis bundle}
+%    \end{macrocode}
+%
+% \subsection{Load-time options}
+%
+% \begin{variable}{\l_@@_fontmode_tl}
+%   Holds the font-selection mode specified by the user as a package
+%   load-time option.
+%    \begin{macrocode}
+\keys_define:nn { seiifonts }
+  {
+    fontmode .choice:,
+    fontmode / original .code:n = {
+      \tl_gset:Nn \l_@@_fontmode_tl {original}
+    },
+    fontmode / replacement .code:n = {
+      \tl_gset:Nn \l_@@_fontmode_tl {replacement}
+    },
+    fontmode / auto .code:n = {
+      \tl_gset:Nn \l_@@_fontmode_tl {auto}
+    },
+    original .meta:n = {fontmode=original},
+    replacement .meta:n = {fontmode=replacement},
+    auto .meta:n = {fontmode=auto},
+  }
+\keys_set:nn { seiifonts } { fontmode = auto }
+%    \end{macrocode}
+% \end{variable}
+%
+% \subsection{Option handling}
+%
+%    \begin{macrocode}
+\IfFormatAtLeastTF { 2022-06-01 }
+  { \ProcessKeyOptions [ seiifonts ] }
+  {
+    \RequirePackage{ l3keys2e }
+    \ProcessKeysOptions { seiifonts }
+  }
+%    \end{macrocode}
+%
+% \subsection{Helper macros}
+%
+% \begin{macro}{\pdftexengine, \xetexengine, \luatexengine}
+%   We define several alias macros to identify which engine the user is
+%   running.
+%    \begin{macrocode}
+\cs_new_eq:NN \pdftexengine \sys_if_engine_pdftex_p:
+\cs_new_eq:NN \xetexengine \sys_if_engine_xetex_p:
+\cs_new_eq:NN \luatexengine \sys_if_engine_luatex_p:
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ifengineTF, \ifengineT, \ifengineF}
+%   True, if the engine used matches the given first argument.
+%    \begin{macrocode}
+\NewExpandableDocumentCommand \ifengineTF { mmm }
+  {
+    \bool_if:nTF { #1 } { #2 } { #3 }
+  }
+\NewExpandableDocumentCommand \ifengineT { mm }
+  {
+    \bool_if:nT { #1 } { #2 }
+  }
+\NewExpandableDocumentCommand \ifengineF { mm }
+  {
+    \bool_if:nF { #1 } { #2 }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% The package is not tested with \XeTeX{}, thus we provide an error to the
+% user and stop the execution, when they want to use the package with
+% \XeTeX{}.
+%    \begin{macrocode}
+\ifengineT { \xetexengine }
+  {
+    \msg_set:nnnn { seiifonts } { xetex-not-supported }
+      { XeTeX~ is~ not~ supported~ by~ the~ se2fonts~ package. }
+      { Switch~ to~ pdfTeX~ or~ (preferably)~ LuaTeX. }
+    \msg_error:nn { seiifonts } { xetex-not-supported }
+  }
+%    \end{macrocode}
+%
+% \subsection{Font loading}
+%
+% Depending on the engine used by the user,
+% we can use \pkg{fontspec} for loading fonts.
+%    \begin{macrocode}
+\ifengineTF { \luatexengine }
+  {
+%    \end{macrocode}
+%
+% If the user uses \LuaTeX{}, load \pkg{fontspec} and
+% \pkg{unicode-math}.
+%    \begin{macrocode}
+    \RequirePackage{fontspec}
+    \RequirePackage{unicode-math}
+%    \end{macrocode}
+%
+% The user wants to have the |original| fonts,
+% which are Palatino, Optima, MesloLGS Nerd Font Mono, and Neo Euler.
+%    \begin{macrocode}
+    \tl_if_eq:NnT \l_@@_fontmode_tl {original}
+      {
+        \setmainfont{Palatino}[Ligatures=TeX]
+        \setsansfont{Optima}[Ligatures=TeX]
+        \setmonofont{MesloLGS Nerd Font Mono}
+        \setmathfont{Neo Euler}[Ligatures=TeX]
+      }
+%    \end{macrocode}
+%
+% The user wants to have the |replacement| fonts,
+% which are \TeX{} Gyre Pagella, \TeX{} Gyre Heros, Fira Code, and \TeX{}
+% Gyre Pagella Math.
+%    \begin{macrocode}
+    \tl_if_eq:NnT \l_@@_fontmode_tl {replacement}
+      {
+        \setmainfont{TeX Gyre Pagella}[Ligatures=TeX]
+        \setsansfont{TeX Gyre Heros}[Ligatures=TeX, Scale=0.9]
+        \setmonofont{Fira Code}[Ligatures=TeX]
+        \setmathfont{TeX Gyre Pagella Math}[Ligatures=TeX]
+        \setmathfont{Latin Modern Math}[range={\mathcal,\mathbb}]
+      }
+%    \end{macrocode}
+%
+% The user set the |auto| mode,
+% which causes the package to check whether a font from the |original| fonts
+% exists on the system.
+% If such a font exists,
+% it will be used;
+% otherwise, a |replacement| font will be used.
+%    \begin{macrocode}
+    \tl_if_eq:NnT \l_@@_fontmode_tl {auto}
+      {
+        \IfFontExistsTF { Palatino }
+          { \setmainfont{Palatino}[Ligatures=TeX] }
+          { \setmainfont{TeX Gyre Pagella}[Ligatures=TeX] }
+        \IfFontExistsTF { Optima }
+          { \setsansfont{Optima}[Ligatures=TeX] }
+          { \setsansfont{TeXGyre Heros}[Ligatures=TeX] }
+        \IfFontExistsTF{ MesloLGS Nerd Font Mono }
+          { \setmonofont{MesloLGS Nerd Font Mono} }
+          { \setmonofont{Fira Code}[Scale=0.85] }
+        \IfFontExistsTF { Neo Euler }
+          { \setmathfont{Neo Euler}[Ligatures=TeX] }
+          {
+            \setmathfont{TeX Gyre Pagella Math}[Ligatures=TeX]
+            \setmathfont{Latin Modern Math}[range={\mathcal,\mathbb}]
+          }
+      }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+  } {
+%    \end{macrocode}
+%
+% The user does neither use \LuaTeX{}, fall back
+%    \begin{macrocode}
+    \PassOptionsToPackage{T1}{fontenc}
+    \RequirePackage{fontenc}
+    \RequirePackage{FiraMono}
+    \RequirePackage{tgheros}
+    \RequirePackage{tgpagella}
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</fonts>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \clearpage
+%
+% \PrintIndex

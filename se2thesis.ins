@@ -1,0 +1,100 @@
+\iffalse meta-comment
+
+File: se2thesis.ins Copyright (C) 2022 Stephan Lukasczyk
+
+It may be distributed and/or modified under the conditions of the
+LaTeX Project Public License (LPPL), either version 1.3c of this
+license or (at your option) any later version.  The latest version
+of this license is in the file
+
+   https://www.latex-project.org/lppl.txt
+
+This file is part of the "se2thesis bundle" (The Work in LPPL)
+and all files in that bundle must be distributed together.
+
+The released version of this bundle is available from CTAN.
+
+------------------------------------------------------------------------
+
+The development version of the bundle can be found at
+
+   https://github.com/se2p/se2thesis
+
+for those people who are interested.
+
+------------------------------------------------------------------------
+
+\fi
+
+\input l3docstrip.tex
+\askforoverwritefalse
+
+% stop DocStrip adding rather wordy text
+\preamble
+Copyright (C) 2022 by Stephan Lukasczyk <tex@lukasczyk.me>
+
+It may be distributed and/or modified under the conditions of
+the LaTeX Project Public License (LPPL), either version 1.3c of
+this license or (at your option) any later version.  The latest
+version of this license is in the file:
+
+   https://www.latex-project.org/lppl.txt
+
+This work is "maintained" (as per LPPL maintenance status by
+  Stephan Lukasczyk.
+
+This work consists of the files se2thesis.dtx,
+                                se2thesis.ins,
+          and the derived files se2thesis.pdf,
+                                se2thesis.cls,
+                                se2translations-english.trsl,
+                                se2translations-german.trsl,
+                                se2colors.sty, and
+                                se2fonts.sty
+\endpreamble
+\nopostamble
+
+\keepsilent
+
+\generate
+  {%
+    \file{se2thesis.cls}
+      {%
+        \from{se2thesis.dtx}{init}
+        \from{se2thesis.dtx}{class}
+      }
+  }
+\generate
+  {%
+    \file{se2translations-english.trsl}
+      {%
+        \from{se2thesis.dtx}{translations,english}
+      }
+  }
+\generate
+  {%
+    \file{se2translations-german.trsl}
+      {%
+        \from{se2thesis.dtx}{translations,german}
+      }
+  }
+\generate
+  {%
+    \file{se2colors.sty}
+      {%
+        \from{se2thesis.dtx}{init}
+        \from{se2thesis.dtx}{colors}
+      }
+  }
+\generate
+  {%
+    \file{se2fonts.sty}
+      {%
+        \from{se2thesis.dtx}{init}
+        \from{se2thesis.dtx}{fonts}
+      }
+  }
+
+\endbatchfile
+
+%% vim: set ft=tex :
