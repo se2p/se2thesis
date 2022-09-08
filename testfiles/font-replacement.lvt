@@ -1,0 +1,22 @@
+\input{regression-test}
+\documentclass{article}
+\usepackage{expl3}
+\usepackage[fontmode=replacement]{se2fonts}
+
+\begin{document}
+
+\START
+\ExplSyntaxOn
+
+\box_new:N \l_tmp_box
+\hbox_set:Nn \l_tmp_box
+  {
+    normal font, \textsf{sans-serif font}, \texttt{typewriter font}, $a+b=c$
+  }
+
+\ExplSyntaxOff
+\END
+
+\end{document}
+
+%% vim: set ft=tex :
