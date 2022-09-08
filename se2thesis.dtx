@@ -58,6 +58,87 @@
 }
 \makeatother
 
+% For creating code demonstration, taken from Joseph Wright's siunitx
+% documentation:
+\usepackage{listings}
+\makeatletter
+\lst@RequireAspects{writefile}
+\newsavebox\LaTeXdemo@box
+\lstnewenvironment{LaTeXdemo}[1][code and example]
+  {%
+    \global\let\lst@intname\@empty
+    \edef\LaTeXdemo@end{%
+      \expandafter\noexpand\csname LaTeXdemo@@#1@end\endcsname
+    }%
+    \@nameuse{LaTeXdemo@@#1}%
+  }
+  {\LaTeXdemo@end}
+\newcommand\LaTeXdemo@new[3]{%
+  \@namedef{LaTeXdemo@@#1}{#2}
+  \@namedef{LaTeXdemo@@#1@end}{#3}%
+}
+\newcommand*\LaTeXdemo@common{%
+  \setkeys{lst}
+    {%
+      basicstyle       = \small\ttfamily,
+      breaklines       = true,
+      basewidth        = 0.51em,
+      captionpos       = t,
+      extendedchars    = true,
+      frame            = single,
+      gobble           = 2,
+      keywordstyle     = \color{blue}\bfseries,
+      language         = [LaTeX]{TeX},
+      showspaces       = false,
+      showstringspaces = false,
+      showtabs         = false,
+      tabsize          = 2,
+    }%
+}
+\newcount\LaTeXdemo@count
+\newcommand*\LaTeXdemo@input{%
+  \catcode`\^^M = 10\relax
+  \input{\jobname-\number\LaTeXdemo@count.tmp}%
+}
+\LaTeXdemo@new{code and example}{%
+  \setbox\LaTeXdemo@box=\hbox\bgroup
+    \global\advance\LaTeXdemo@count by 1 %
+    \lst@BeginAlsoWriteFile{\jobname-\number\LaTeXdemo@count.tmp}%
+    \LaTeXdemo@common
+}{%
+    \lst@EndWriteFile
+  \egroup
+  \begin{center}
+    \ifdim\wd\LaTeXdemo@box > 0.48\linewidth
+      \begin{minipage}{\linewidth}
+        \usebox\LaTeXdemo@box
+      \end{minipage}%
+      \par
+      \begin{minipage}{\linewidth}
+        \LaTeXdemo@input
+      \end{minipage}
+    \else
+      \begin{minipage}{0.48\linewidth}
+        \LaTeXdemo@input
+      \end{minipage}%
+      \hspace{\fill}%
+      \begin{minipage}{0.48\linewidth}
+        \usebox\LaTeXdemo@box
+      \end{minipage}%
+    \fi
+  \end{center}
+}
+\LaTeXdemo@new{code and float}{%
+  \global\advance\LaTeXdemo@count by 1 %
+  \lst@BeginAlsoWriteFile{\jobname-\number\LaTeXdemo@count.tmp}%
+  \LaTeXdemo@common
+}{%
+  \lst@EndWriteFile
+  \LaTeXdemo@input
+}
+\LaTeXdemo@new{code only}{\LaTeXdemo@common}{}
+\makeatother
+
 \usepackage[UKenglish]{babel}
 \usepackage{fontspec}
 \usepackage{hvlogos}
@@ -69,7 +150,12 @@
 \makeatother
 
 \usepackage{hvfloat}
-\hypersetup{hidelinks}
+\hypersetup{%
+  allcolors=UPSE2-DarkBlue,%
+  pdftitle={se2thesis -- A Thesis Class for the Chair of Software Engineering II
+  at the University of Passau, Germany},%
+  pdfauthor={Stephan Lukasczyk},
+}
 \usepackage[capitalise]{cleveref}
 
 \begin{document}
@@ -188,7 +274,32 @@
 %
 % \section{The \cls{se2thesis} class}\label{sec:doc-se2thesis}
 %
-% \subsection{The title page}
+% The \cls{se2thesis} class is the central component of this bundle.
+% It provides a wide variety of settings, mostly regarding the title page~(see
+% \cref{sec:doc-se2thesis-title}) and the type area~(see
+% \cref{sec:doc-se2thesis-typearea}).
+%
+% We aim to keep the \cls{se2thesis} class relatively small, especially
+% considering packages that we load.
+% Currently, the class itself loads the \pkg{se2colors}~(see
+% \cref{sec:doc-se2colors}) and \pkg{se2fonts}~(see \cref{sec:doc-se2fonts})
+% packages.
+% The following packages and classes are loaded:
+% \pkg{expl3}, \pkg{l3keys2e} in case one uses a \LaTeX{} kernel from before
+% 2022--06--01, \pkg{graphicx}, \pkg{translations}, \KOMAScript, \pkg{xcolor},
+% \pkg{ifthen}, as well as \pkg{fontspec} and \pkg{unicode-math} if one uses
+% \LuaTeX{};
+% for \pdfLaTeX{} we load \pkg{fontenc}, \pkg{FiraMono}, \pkg{tgheros},
+% \pkg{tgpagella} instead of the latter two.
+% Furthermore, we load \pkg{microtype};
+% when using \LuaTeX{}, we also load \pkg{lua-widow-control} and \pkg{selnolig}.
+%
+% However, we recommend to use a couple of further packages, together with some
+% further options to those package.  We describe these settings in
+% \cref{sec:doc-se2thesis-pkgs}.
+% Please consider looking at this section when starting to write your document.
+%
+% \subsection{The title page}\label{sec:doc-se2thesis-title}
 %
 % Designing a title package for a thesis can be complicated.
 % There might be some requirements that are not obvious to the user, especially
@@ -331,6 +442,122 @@
 %   Additionally, this also adds a correctly translated version of \enquote{and}
 %   between the author names if required.
 % \end{variable}
+%
+% \subsection{Type-area settings}\label{sec:doc-se2thesis-typearea}
+%
+% The \cls{se2thesis} class manipulates the type area compared to the default
+% settings of the \KOMAScript{} classes.
+% Our settings are inspired by the \pkg{classicthesis} package, which itself is
+% inspired by the style used by famous statistician Edward Tufte.
+% We provide predefined settings for DIN-A4, DIN-A5, and DIN-B5 papers.
+% If you need settings for other paper sizes, please open an issue on this
+% package's GitHub repository
+% (\href{https://github.com/se2p/se2thesis}{https://github.com/se2p/se2thesis})
+% and we will happily include those settings in a future release of this bundle.
+%
+% Additionally, we are setting the page footer in a way that it contains the
+% page numbers in the outer margin and the headmarks split from the page numbers
+% by a vertical bar.
+%
+% \subsection{Recommended additional packages}\label{sec:doc-se2thesis-pkgs}
+%
+% Several packages can be useful for writing a thesis.
+% We list them in this section; for the recommended option settings, please have
+% a look at our examples.
+% Please note that you might not need all these packages, however, having a look
+% at them (especially their documentation) might give you an insight, whether to
+% use a package.
+% Our general recommendation is to use as few packages as you can; some might
+% have conflicts, others basically do the same or are outdated.
+% Please consider reading the documentation of each package you are using to
+% figure out whether they have any conflicts with other packages~(for example,
+% one cannot use the recommended \pkg{siunitx} package together with
+% \pkg{SIunits}) or they might require to be loaded at special places in your
+% preamble~(for example, \pkg{hyperref} is usually meant to be loaded as the
+% last package, except you are also using \pkg{cleveref}, which needs to be
+% loaded \emph{after} \pkg{hyperref}).
+%
+% \subsubsection{Quoting with \pkg{csquotes}}
+%
+% The \pkg{csquotes} package allows for intelligent quoting of text.
+% While verbose quotes are not that common on computer science, the package
+% still provides some useful macros to the user.
+%
+% \subsubsection{Number formatting with \pkg{siunitx}}
+%
+% While \pkg{siunitx}'s original purpose was to format physical quantities, it
+% provides a lot of useful features when typesetting theses~(and other
+% documents) in computer science.
+% When you skim through its documentation, especially look at the \cmd{\qty} and
+% \cmd{\num} macros, as well as the section on typesetting tabular material.
+% We also recommend reading an extensive discussion on number formatting,
+% precision of presented numbers, and many more related topics in Beyer et al.'s
+% journal paper on requirements and solutions for reliable
+% benchmarking~\cite{DBLP:journals/sttt/BeyerLW19}.
+%
+% When using the \pkg{siunitx} package, we recommend adding the following lines
+% to your document's preamble
+% \begin{LaTeXdemo}[code only]
+% \usepackage[
+%   group-minimum-digits=4,
+%   list-final-separator={, and },
+%   add-integer-zero=false,
+%   free-standing-units,
+%   round-mode=figures,
+%   round-precision=3,
+%   binary-units,
+%   detect-weight=true,
+%   detect-inline-weight=math,
+%   separate-uncertainty=true,
+%   uncertainty-mode=separate,
+% ]{siunitx}
+% \end{LaTeXdemo}
+%
+% \subsubsection{Code listings with \pkg{minted}}
+%
+% We prefer using the \pkg{minted} package for code listings.
+% However, this package requires the installation of Python and the setting of
+% the |-shell-escape| option to your \TeX{} engine.
+% Please read the package's documentation to set it up.
+% If you do not want to install Python and the dependencies, we also provide
+% settings for the alternative \pkg{listings} package in the next subsection.
+%
+% When using \pkg{minted} we recommend the following settings:
+% \begin{LaTeXdemo}[code only]
+% \usepackage[newfloat=true]{minted}
+% \setminted{
+%   autogobble,
+%   breaklines=true,
+%   fontsize=\footnotesize,
+%   linenos=false,
+%   resetmargins=true,
+%   xleftmargin=1em,
+%   xrightmargin=1em,
+%   frame=single,
+% }
+% \end{LaTeXdemo}
+%
+% \subsubsection{Code listing with \pkg{listings}}
+%
+% In case you do not want to use the aforementioned \pkg{minted} package, please
+% consider using \pkg{listings} for typesetting your code listings.
+% \begin{LaTeXdemo}[code only]
+% \usepackage{listings}
+% \lstset{
+%   frame=single,
+%   extendedchars=true,
+%   basicstyle=\footnotesize\ttfamily,
+%   keywordstyle=\color{blue}\bfseries,
+%   showstringspaces=false,
+%   showspaces=false,
+%   tabsize=2,
+%   breaklines=true,
+%   showtabs=false,
+%   captionpos=t,
+% }
+% \end{LaTeXdemo}
+%
+% Please be aware to use \emph{either} \pkg{minted} \emph{or} \pkg{listings}!
 %
 % \section{The \pkg{se2colors} package}\label{sec:doc-se2colors}
 %
@@ -505,8 +732,6 @@
 %   we provide the variants \cs{ifengineT} and \cs{ifengineF}
 %   that allow to omit an empty then or else branch, respectivly.
 % \end{function}
-%
-%
 %
 % \end{documentation}
 %
@@ -864,6 +1089,64 @@
 
 \PassOptionsToPackage{\l_@@_fontmode_tl}{se2fonts}
 \RequirePackage{se2fonts}
+%    \end{macrocode}
+%
+% Load the \pkg{microtype} package.
+% We also set some options to \pkg{microtype}, namely the penalties for widows
+% and orphans (which might also be corrected by \pkg{lua-widow-control} when
+% using \LuaTeX{}) and a thin space around the m-dash.
+% We are aware of the discussion whether to have a space around the m-dash in
+% English, however, we think it looks more beautiful.
+% We took this from \href{https://tex.stackexchange.com/a/109188/14622}{a
+% \TeX{}.StackExchange post}.
+%    \begin{macrocode}
+\RequirePackage{microtype}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\SetExtraKerning{
+  encoding = {OT1,T1,T2A,LY1,OT4,QX,T5,TS1,EU1,EU2}
+}{
+  \textemdash = {167,167},
+  — = {167,167}
+}
+%    \end{macrocode}
+%
+% When using \LuaTeX{} load the \pkg{lua-widow-control} package for a better
+% control of orphans and widows.
+%    \begin{macrocode}
+\ifengineT { \luatexengine }
+  {
+    \IfFileExists { lua-widow-control.sty }
+      { \RequirePackage{lua-widow-control} }
+      {
+        \msg:nnn { seiithesis }
+          { lua-widow-control-not-available }
+          {
+            Could~ not~ find~ lua-widow-control.sty.~ You~ might~ want~ to~
+            install~ it~ for~ better~ control~ over~ orphans~ and~ widows.
+          }
+        \msg_note:nn { seiithesis } { lua-widow-control-not-available }
+      }
+  }
+%    \end{macrocode}
+%
+% Similarly, load \pkg{ligtype} when using \LuaTeX.
+%    \begin{macrocode}
+\ifengineT { \luatexengine }
+  {
+    \IfFileExists { selnolig.sty }
+      { \RequirePackage{selnolig} }
+      {
+        \msg:nnn { seiithesis }
+          { selnolig-not-available }
+          {
+            Could~ not~ find~ selnolig.sty.~ You~ might~ want~ to~ install~ it~
+            for~ better~ ligatures~ control.
+          }
+        \msg_note:nn { seiithesis } { selnolig-not-available }
+      }
+  }
 %    \end{macrocode}
 %
 % \subsection{User macros for the title page}
@@ -1756,5 +2039,11 @@
 % \end{implementation}
 %
 % \clearpage
+%
+% \begin{thebibliography}{9}
+%   \bibitem{DBLP:journals/sttt/BeyerLW19} Dirk Beyer, Stefan Löwe, and Philipp
+%   Wendler: \emph{Reliable benchmarking: requirements and solutions}. STTT
+%   21(1): 1--29 (2019)
+% \end{thebibliography}
 %
 % \PrintIndex
