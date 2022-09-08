@@ -11,19 +11,21 @@ xetex
 metafont
 mfware
 # Dependencies of se2thesis
-graphicx
+graphics
 translations
-komascript
+koma-script
 xcolor
 ifthen
 fontspec
 unicode-math
 fontenc
-FiraMono
-tgheros
-tgpagella
+fira
+tex-gyre
 lua-widow-control
 selnolig
+doclicense
+biblatex
+microtype
 # Dependencies for tests and typesetting
 alphalph
 amsfonts
