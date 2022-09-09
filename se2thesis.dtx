@@ -600,8 +600,7 @@
 % infers the type of the reference~(see its documentation on how this works).
 % The \pkg{cleveref} package furthermore avoids one additional mistake: between
 % the name of the element and its reference one needs to have a non-breaking
-% space, for example, \enquote{|... in Figure~\ref{...}|}, that is often
-% forgotten.
+% space that often is forgotten.
 %
 % Please note that, in contrast to most other packages, \pkg{cleveref} has to be
 % loaded \emph{after} the \pkg{hyperref} package!
@@ -1706,9 +1705,8 @@
 \RequirePackage{ifthen}
 %    \end{macrocode}
 %
-% \begin{function}{\__@@_print_title:}
-%   Prints the title formatted appropriately.
-%   We start with printing the title, optional subtitle, and the author names.
+% Prints the title formatted appropriately.
+% We start with printing the title, optional subtitle, and the author names.
 %    \begin{macrocode}
 \cs_new:Nn \__@@_print_title:
   {
@@ -1808,7 +1806,6 @@
       }
   }
 %    \end{macrocode}
-% \end{function}
 %
 % \begin{variable}{\@lowertitleback}
 %   Afterwards, override the definition of \cs{@lowertitleback}.
