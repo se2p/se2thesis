@@ -16,10 +16,10 @@ sourcesfiles =
     "se2thesis.dtx",
     "se2thesis.ins",
   }
-docfiles =
+demofiles =
   {
-    "**/*.tex",
-    "**/se2thesis-master-thesis-example.pdf"
+    "examples/*.tex",
+    "examples/*.pdf"
   }
 
 installfiles = {"*.cls", "*.sty", "*.trsl"}
