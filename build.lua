@@ -16,6 +16,11 @@ sourcesfiles =
     "se2thesis.dtx",
     "se2thesis.ins",
   }
+docfiles =
+  {
+    "**/*.tex",
+    "**/se2thesis-master-thesis-example.pdf"
+  }
 
 installfiles = {"*.cls", "*.sty", "*.trsl"}
 

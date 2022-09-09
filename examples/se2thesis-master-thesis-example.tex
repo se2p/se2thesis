@@ -1,0 +1,95 @@
+\documentclass[%
+  twoside=true,%
+  logofile={logo.png},%
+  thesistype=master,%
+  biblatex=true,%
+  UKenglish,%
+]{se2thesis}
+\listfiles
+\usepackage[ngerman,main=UKenglish]{babel}
+\usepackage{blindtext}
+\usepackage{csquotes}
+\usepackage[%
+  group-minimum-digits=4,%
+  list-final-separator={, and },%
+  add-integer-zero=false,%
+  free-standing-units,%
+  round-mode=figures,%
+  round-precision=3,%
+  detect-weight=true,%
+  separate-uncertainty=true,%
+  uncertainty-mode=separate,%
+]{siunitx}
+
+\usepackage[newfloat=true]{minted}
+\setminted{%
+  autogobble,%
+  breaklines=true,%
+  fontsize=\footnotesize,%
+  linenos=false,%
+  resetmargins=true,%
+  xleftmargin=1em,%
+  xrightmargin=1em,%
+  frame=single,%
+}
+
+\usepackage{filecontents}
+
+\begin{filecontents*}{\jobname.bib}
+  @book{Knu86,
+    author = {Knuth, Donald E.},
+    year = {1986},
+    title = {The \TeX book},
+  }
+\end{filecontents*}
+\addbibresource{\jobname.bib}
+
+\usepackage{booktabs}
+
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\author{Stephan Lukasczyk}
+\title{A Master Thesis Example Document}
+\degreeprogramme{Computer Science}
+\supervisor{Prof.\,Dr.~Max Mustermann}
+\advisor{Marianne Musterfrau}
+\department{Faculty of Examples}
+\institute{Chair of Example}
+\location{Passau}
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+\authorshipDeclaration
+
+\begin{abstract}
+  An English abstract to the thesis.
+\end{abstract}
+
+\begin{abstract}[german]
+  Eine deutschsprachige Zusammenfassung der Arbeit.
+\end{abstract}
+
+\begin{acknowledgements}
+  Some acknowledgements.
+\end{acknowledgements}
+
+\tableofcontents
+
+\mainmatter
+
+\blinddocument
+
+\section{Further Examples}
+
+We could reference the \TeX{} book~\cite{Knu86}.
+
+\backmatter
+
+\printbibliography
+
+\end{document}

@@ -412,28 +412,6 @@
 %   Override this internal macro of \KOMAScript{} to print this information on
 %   the back side of the title page.
 % \end{variable}
-% Additionally, we allow to add a license notice there based on the
-% \pkg{doclicense} package.
-% The following load-time options to the \cls{se2thesis} class allow adding the
-% license note.
-% \begin{function}{doclicense, licensetype, licensemodifier, licenseversion}
-%   \begin{syntax}
-%     |doclicense| = \meta{true,false}
-%     |licensetype| = \meta{choice}
-%     |licensemodifier| = \meta{choice}
-%     |licenseversion| = \meta{choice}
-%   \end{syntax}
-%   Loads the \pkg{doclicense} package if set to |true|.
-%   The default value is |false|.
-%   Note that if set to |true| you are also required to set the values of the
-%   |licensetype|, |licensemodifier|, and |licenseversion| load-time options.
-%   Otherwise, \cls{se2thesis} will stop compilation of your document with an
-%   error.
-%   See the documentation of the \pkg{doclicense} package for possible values to
-%   these options.
-%   They are called |type|, |modifier|, and |version| in \pkg{doclicense},
-%   respectively.
-% \end{function}
 %
 % Additionally, we provide some interal rewritings to standard macros from
 % \KOMAScript{} that allow to automatically split authors using the \cmd{\and}
@@ -510,7 +488,6 @@
 %   free-standing-units,
 %   round-mode=figures,
 %   round-precision=3,
-%   binary-units,
 %   detect-weight=true,
 %   detect-inline-weight=math,
 %   separate-uncertainty=true,
@@ -1055,23 +1032,6 @@
 %    \end{macrocode}
 % \end{variable}
 %
-% \begin{variable}
-%   {
-%     \l_@@_doclicense_bool,
-%     \l_@@_licensetype_tl,
-%     \l_@@_licensemodifier_tl,
-%     \l_@@_licenseversion_tl
-%   }
-%   If the user wants to load the \pkg{doclicense} package, we need several
-%   more variables to store the necessary information.
-%    \begin{macrocode}
-\bool_new:N \l_@@_doclicense_bool
-\tl_new:N \l_@@_licensetype_tl
-\tl_new:N \l_@@_licensemodifier_tl
-\tl_new:N \l_@@_licenseversion_tl
-%    \end{macrocode}
-% \end{variable}
-%
 % \begin{variable}{\l_@@_biblatex_bool}
 %   The user wants to load the \pkg{biblatex} package together with our
 %   settings.
@@ -1193,15 +1153,6 @@
     },
     thesistype .initial:n = master,
 
-    doclicense .bool_gset:N = \l_@@_doclicense_bool,
-    doclicense .initial:n = false,
-    licensetype .tl_gset:N = \l_@@_licensetype_tl,
-    licensetype .initial:n =,
-    licensemodifier .tl_gset:N = \l_@@_licensemodifier_tl,
-    licensemodifier .initial:n =,
-    licenseversion .tl_gset:N = \l_@@_licenseversion_tl,
-    licenseversion .initial:n =,
-
     biblatex .bool_gset:N = \l_@@_biblatex_bool,
     biblatex .initial:n = false,
 
@@ -1260,40 +1211,6 @@
           { \KOMAoptions{#1} }
           { \KOMAoption{#1}{#2}}
       }
-  }
-%    \end{macrocode}
-%
-%
-% \subsection{Option checks}
-%
-% Some options require the usage of others, thus we implement some checks.
-% The first check is for the \pkg{doclicense} package: whenever the user
-% requests its loading, check whether they set the |licensetype|,
-% |licensemodifier|, and |licenseversion| variables, too.
-%    \begin{macrocode}
-\bool_if:NT \l_@@_doclicense_bool
-  {
-    \msg_set:nnnn { seiithesis } { licensetype-not-set }
-      { Argument~ licensetype~ not~ set;~ required~ when~ using~ doclicense }
-      { See~ doclicense~ manual~ for~ possible~ values }
-    \msg_set:nnnn { seiithesis } { licensemodifier-not-set }
-      {
-        Argument~ licensemodifier~ not~ set;~ required~ when~ using~
-        doclicense
-      }
-      { See~ doclicense~ manual~ for~ possible~ values }
-    \msg_set:nnnn { seiithesis } { licenseversion-not-set }
-      {
-        Argument~ licenseversion~ not~ set;~ required~ when~ using~
-        doclicense
-      }
-      { See~ doclicense~ manual~ for~ possible~ values }
-    \tl_if_empty:NT \l_@@_licensetype_tl
-      { \msg_error:nn { seiithesis } { licensetype-not-set }}
-    \tl_if_empty:NT \l_@@_licensemodifier_tl
-      { \msg_error:nn { seiithesis } { licensemodifier-not-set }}
-    \tl_if_empty:NT \l_@@_licenseversion_tl
-      { \msg_error:nn { seiithesis } { licenseversion-not-set }}
   }
 %    \end{macrocode}
 %
@@ -1391,12 +1308,12 @@
 % Define strings for back-referencing.
 %    \begin{macrocode}
     \DefineBibliographyStrings{english}{
-      backrefpage = {\lowercase{c}ited on p.},
-      backrefpages = {\lowercase{c}ited on pp.},
+      backrefpage = {\lowercase{c}ited~ on~ p.},
+      backrefpages = {\lowercase{c}ited~ on~ pp.},
     }
     \DefineBibliographyStrings{german}{
-      backrefpage = {\lowercase{z}itiert auf S.},
-      backrefpages = {\lowercase{z}itiert auf S.},
+      backrefpage = {\lowercase{z}itiert~ auf~ S.},
+      backrefpages = {\lowercase{z}itiert~ auf~ S.},
     }
 %    \end{macrocode}
 % Design the page-ref format.
@@ -1893,33 +1810,20 @@
 %    \end{macrocode}
 % \end{function}
 %
-% Depending on whether \cs{l_@@_doclicense_bool} is set, load the
-% \pkg{doclicense} package appropriately.
-%    \begin{macrocode}
-\bool_if:NT \l_@@_doclicense_bool
-  {
-    \PassOptionsToPackage{%
-      type={\l_@@_licensetype_tl},%
-      modifier={\l_@@_licensemodifier_tl},%
-      version={\l_@@_licenseversion_tl},%
-    }{doclicense}
-    \RequirePackage{doclicense}
-  }
-%    \end{macrocode}
-%
 % \begin{variable}{\@lowertitleback}
 %   Afterwards, override the definition of \cs{@lowertitleback}.
 %    \begin{macrocode}
 \renewcommand*{\@lowertitleback}{%
   \group_begin:
-    \noindent\textbf{\@author}\\
+    \noindent\textbf{\@author}:\\
     \emph{\@title}\\
-    \bool_if:NT \l_@@_doclicense_bool
-      {
-        \group_begin:
-          \footnotesize\doclicenseThis
-        \group_end:
-      }
+    \tl_if_eq:NnT \l_@@_thesis_type_tl { bachelor }
+      { \GetTranslation{Bachelor-thesis},~ }
+    \tl_if_eq:NnT \l_@@_thesis_type_tl { master }
+      { \GetTranslation{Master-thesis},~ }
+    \tl_if_eq:NnT \l_@@_thesis_type_tl { phd }
+      { \GetTranslation{PhD},~ }
+    \GetTranslation{up},~\the\year.
   \group_end:
 }
 %    \end{macrocode}
