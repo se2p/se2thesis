@@ -651,6 +651,40 @@
 % \end{abstract}
 % \end{verbatim}
 %
+% \subsection{Acknowledgements}\label{sec:doc-se2thesis-acknowledgements}
+%
+% \DescribeEnv{acknowledgements}
+% We provide the \env{acknowledgements} environment to typeset acknowledgements
+% for your thesis.
+% Using this environment is optional.
+% Usually, bachelor and master thesis do not contain such an acknowledgements
+% section, however, there is no general rule to this.
+% \begin{verbatim}
+% \begin{acknowledgements}[language]
+%   Your acknowledgements.
+% \end{acknowledgements}
+% \end{verbatim}
+%
+% \subsection{Document structuring}\label{sec:doc-se2thesis-structuring}
+%
+% A larger work, such as a thesis, is usually structured in three large blocks:
+% a frontmatter that provides all the overview, such as abstract, table of
+% contents, etc.,
+% a mainmatter that contains all the actual content,
+% and a backmatter for appendices.
+% \cls{se2thesis} ensures that the following macros are defined because they are
+% not provided by all \KOMAScript{} classes.
+% \begin{function}{\frontmatter, \mainmatter, \backmatter}
+%   \begin{syntax}
+%     \cmd{\frontmatter}
+%     \cmd{\mainmatter}
+%     \cmd{\backmatter}
+%   \end{syntax}
+%   Switches between frontmatter, mainmatter, and backmatter.
+%   Most notably, the frontmatter will have roman page numbers, while the other
+%   two will have arabic page numbers.
+% \end{function}
+%
 % \section{The \pkg{se2colors} package}\label{sec:doc-se2colors}
 %
 % Several colours are specific to the university
@@ -1830,6 +1864,65 @@
   }
 %    \end{macrocode}
 % \end{environment}
+%
+% \subsection{Provide an environment for acknowledgements}
+%
+% Often, especially in a PhD thesis, one wants to acknowledge the help of
+% certain people, for example, supervisors, family, and friends.
+% \begin{environment}{acknowledgements}
+%   Use to typeset the acknowledgements for the thesis.
+%    \begin{macrocode}
+\NewDocumentEnvironment { acknowledgements } { o }
+  {
+    \group_begin:
+      \IfNoValueF {#1} { \selectlanguage{#1} }
+      \scr@ifundefinedorrelax{chapter}{
+        \Iftocfeature{toc}{leveldown}
+          {\subsection*}
+          {\section*}
+      }{
+        \Iftocfeature{toc}{leveldown}
+          {\section*}
+          {\chapter*}
+      } { \GetTranslation{Acknowledgements} }
+  } {
+    \group_end:
+  }
+%    \end{macrocode}
+% \end{environment}
+%
+% \subsection{Document structuring macros}
+%
+% Ensure that these macros are defined.
+% \begin{macro}{\frontmatter}
+%   Starts the frontmatter.
+%   Most notably, set the page numbers to roman.
+%    \begin{macrocode}
+\providecommand*{\frontmatter}
+  {
+    \if@twoside\cleardoublepage\else\clearpage\fi
+    \@mainmatterfalse
+    \pagenumbering { roman }
+  }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\mainmatter, \backmatter}
+%   Starts the mainmatter or the backmatter.
+%   Most notably, set the page numbers to arabic.
+%    \begin{macrocode}
+\providecommand*{\mainmatter}
+  {
+    \if@twoside\cleardoublepage\else\clearpage\fi
+    \@mainmattertrue
+    \pagenumbering { arabic }
+  }
+\providecommand*{\backmatter}
+  {
+    \if@twoside\cleardoublepage\else\clearpage\fi
+    \@mainmatterfalse
+  }
+%    \end{macrocode}
+% \end{macro}
 %
 %
 %
