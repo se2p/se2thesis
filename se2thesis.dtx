@@ -382,6 +382,13 @@
 %   Specify the name of an external referee.
 % \end{function}
 %
+% \begin{function}{\location}
+%   \begin{syntax}
+%     \cmd{\location} \marg{name-of-town}
+%   \end{syntax}
+%   Specify the name of your residence town for the signature field.
+% \end{function}
+%
 % To define the path to the logo graphics we require a different workflow:
 % We do not bundle logo graphics with this package due to legal restrictions.
 % They can be downloaded from the University's website; please note that the
@@ -431,12 +438,10 @@
 % Additionally, we provide some interal rewritings to standard macros from
 % \KOMAScript{} that allow to automatically split authors using the \cmd{\and}
 % command.
-% \begin{variable}{\l__slcd_author_seq, \author, \@author}
+% \begin{variable}{\author, \@author}
 %   \begin{syntax}
 %     \cmd{\author} \marg{author}
 %   \end{syntax}
-%   The \cmd{\l__slcd_author_seq} internal sequence is used to
-%   automatically split the names based on the \cmd{\and} macro.
 %   We rewrite the definitions of \cmd{\author} and \cmd{\@author} to do this
 %   splitting automatically.
 %   Additionally, this also adds a correctly translated version of \enquote{and}
@@ -683,6 +688,50 @@
 %   Switches between frontmatter, mainmatter, and backmatter.
 %   Most notably, the frontmatter will have roman page numbers, while the other
 %   two will have arabic page numbers.
+% \end{function}
+%
+% \subsection{Authorship declaration}\label{sec:doc-se2thesis-authorship}
+%
+% The University of Passau requires its students to provide an authorship
+% declaration as part of their thesis for submission.
+% They provide a template form, which would not fit the style of the
+% \cls{se2thesis} class.
+% Thus, we provide the \cmd{\authorshipDeclaration} macro to typeset such
+% a declaration.
+% It uses the original~(German) text of the declaration and fills in the values
+% that are specified by the \cmd{\author} and \cmd{\location} macros.
+% \begin{function}{\authorshipDeclaration}
+%   \begin{syntax}
+%     \cmd{\authorshipDeclaration}
+%   \end{syntax}
+%   Print the authorship declaration text.
+% \end{function}
+% \emph{Please note:} the authorship declaration will always be printed in
+% German, no matter what the language of the thesis is.
+% This happens due to legal requirements.
+% In order to make this work, you have to load the \pkg{babel} or
+% \pkg{polyglossia} package in a way that it also supports German hyphenation.
+% For example, use
+% \begin{verbatim}
+% \usepackage[ngerman,main=UKenglish]{babel}
+% \end{verbatim}
+% for a thesis with \emph{traditional English}\footnote{
+%   there is a nice, probably photoshopped, picture of a Steam setup dialogue
+%   stating that American English is a \enquote{simplified version} of British
+%   English, see
+%   \href{https://jakubmarian.com/is-american-english-simplified-and-british-english-traditional/}{https://jakubmarian.com/is-american-english-simplified-and-british-english-traditional/}.
+% } as its main language and support for German.
+%
+% \begin{function}{\signatureBox}
+%   \begin{syntax}
+%     \cmd{\signatureBox} \oarg{width} \marg{signature-name}
+%   \end{syntax}
+%   A helper macro to print the signature box for the authorship declaration.
+%   The optional argument \oarg{width} allows to specify a custom width for the
+%   signature line.
+%   The default is 5\,cm.
+%   The mandatory argument \marg{signature-name} specifies the name of the
+%   signee, which will be typeset below the signature line.
 % \end{function}
 %
 % \section{The \pkg{se2colors} package}\label{sec:doc-se2colors}
@@ -1013,7 +1062,9 @@
 %     \l_@@_department_tl,
 %     \l_@@_institute_tl,
 %     \l_@@_external_tl,
-%     \l_@@_logofile_tl
+%     \l_@@_logofile_tl,
+%     \l_@@_signature_tl,
+%     \l_@@_location_tl
 %   }
 %    \begin{macrocode}
 \tl_new:N \l_@@_version_tl
@@ -1026,6 +1077,8 @@
 \tl_new:N \l_@@_institute_tl
 \tl_new:N \l_@@_external_tl
 \tl_new:N \l_@@_logofile_tl
+\tl_new:N \l_@@_signature_tl
+\tl_new:N \l_@@_location_tl
 %    \end{macrocode}
 % \end{variable}
 %
@@ -1420,6 +1473,16 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\location}
+%   Specify the location for the signature field.
+%    \begin{macrocode}
+\ProvideDocumentCommand \location { m }
+  {
+    \tl_set:Nn \l_@@_location_tl {#1}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
 % \subsection{Define logo, paper size, and paper style}
 %
 % For the logo on the titlepage, we define further variables to store its height
@@ -1567,12 +1630,15 @@
 \setkomafont{publishers}{\normalsize}
 %    \end{macrocode}
 %
-% \begin{variable}{\l_@@_author_seq, \author, \@author}
+% \begin{variable}{\author, \@author}
 %   Allow for automated splitting of author's names.
 %    \begin{macrocode}
 \seq_new:N \l_@@_author_seq
-\renewcommand*\author[1]{
-  \seq_gset_split:Nnn \l_@@_author_seq {\and} {#1}
+\renewcommand*\author[2][]{
+  \seq_gset_split:Nnn \l_@@_author_seq {\and} {#2}
+  \tl_if_empty:nTF {#1}
+    { \tl_set:Nn \l_@@_signature_tl {#2} }
+    { \tl_set:Nn \l_@@_signature_tl {#1} }
 }
 \renewcommand*{\@author}{
   \group_begin:
@@ -1921,6 +1987,73 @@
     \if@twoside\cleardoublepage\else\clearpage\fi
     \@mainmatterfalse
   }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Declaration of authorship}
+%
+% \begin{macro}{\authorshipDeclaration}
+%   Provide a command to typeset the authorship declaration.
+%    \begin{macrocode}
+\NewDocumentCommand \authorshipDeclaration { o }
+  {
+    \par
+    \group_begin:
+      \selectlanguage{ngerman}
+      \IfNoValueF {#1}
+        { \tl_gset:Nn \l_@@_location_tl {#1} }
+
+      \tl_if_empty:NT \l_@@_location_tl
+        {
+          \msg_new:nnn { seiithesis }
+            { no-location-specified }
+            {
+              You~ need~ to~ specify~ a~ location~ for~ the~ authorship~
+              declaration.~ Either~ via~ the~ location~ macro~ or~ via~ the~
+              optional~ argument~ of~ the~ authorshipDeclaration~ macro.
+            }
+          \msg_warning:nn { seiithesis } { no-location-specified }
+        }
+
+      \scr@ifundefinedorrelax{chapter}{
+        \Iftocfeature{toc}{leveldown}
+          {\subsection*}
+          {\section*}
+      }{
+        \Iftocfeature{toc}{leveldown}
+          {\section*}
+          {\chapter*}
+      } { Eigenständigkeitserklärung }
+
+      Hiermit~ versichere~ ich,~ \l_@@_signature_tl,
+      \begin{enumerate}
+        \item dass~ ich~ die~ vorliegende~ Arbeit~ selbstständig~ und~ ohne~
+          unzulässige~ Hilfe~ verfasst~ und~ kein~ anderen~ als~ die~
+          angegebenen~ Quellen~ und~ Hilfsmittel~ benutzt,~ sowie~ die~
+          wörtlich~ und~ sinngemäß~ übernommenen~ Passagen~ aus~ anderen~
+          Werken~ kenntlich~ gemacht~ habe.
+        \item Außerdem~ erkläre~ ich,~ dass~ ich~ der~ Universität~ ein~
+          Nutzungsrecht~ zum~ Zwecke~ der~ Überprüfung~ mittels~ einer~
+          Plagiatssoftware~ in~ anonymisierter~ Form~ einräume.
+      \end{enumerate}\par
+      \bigskip
+      \noindent \l_@@_location_tl,~ \@date\hfill
+      \signatureBox{\l_@@_signature_tl}
+    \group_end:
+    \\\strut\cleardoublepage
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\signatureBox}
+%   Provide a box for the signature.
+%    \begin{macrocode}
+\newcommand*{\signatureBox}[2][5cm]{
+  \parbox[t]{#1}{
+    \centering
+    \rule{\linewidth}{.3pt}\\\makebox[0pt][c]{#2}
+  }
+}
 %    \end{macrocode}
 % \end{macro}
 %
