@@ -624,6 +624,33 @@
 % Please note that, in contrast to most other packages, \pkg{cleveref} has to be
 % loaded \emph{after} the \pkg{hyperref} package!
 %
+% \subsection{Abstract for the thesis}\label{sec:doc-se2thesis-abstract}
+%
+% Each thesis shall come with an abstract that summarises its content.
+% The abstract should be written in the language the thesis is written in.
+% Additionally, there is the requirement to provide a German abstract if the
+% thesis is written in a foreign language.
+% \begin{function}{\abstract}
+%   \begin{syntax}
+%     \cmd{\abstract}
+%   \end{syntax}
+%   We ensure that the \cmd{\abstract} command is defined for all document
+%   classes.
+% \end{function}
+%
+% \DescribeEnv{abstract}
+% To typeset an abstract, we provide an environment called \env{abstract}.
+% The environment takes an optional argument that specifies the language that is
+% used in this abstract.
+% Setting the abstract's language will cause its title to change to the
+% respective language;
+% additionally, hyphenation is also changed for that language.
+% \begin{verbatim}
+% \begin{abstract}[language]
+%   Your abstract text.
+% \end{abstract}
+% \end{verbatim}
+%
 % \section{The \pkg{se2colors} package}\label{sec:doc-se2colors}
 %
 % Several colours are specific to the university
@@ -1767,6 +1794,43 @@
 %    \end{macrocode}
 % \end{variable}
 %
+% \subsection{Provide an environment for abstracts}
+%
+% We want to allow abstracts in German and English, which is also a requirement
+% when writing a thesis in English.
+% First, ensure that the \cmd{\abstract} macro is available for all classes.
+% \begin{macro}{\abstract}
+%    \begin{macrocode}
+\providecommand{\abstract}{}
+%    \end{macrocode}
+% \end{macro}
+% Then redefine the |abstract| environment such that it provides an optional
+% argument for language selection.
+% \begin{environment}{abstract}
+%   Used to typeset an abstract for the thesis.
+%   The optional argument allows to specify a language.
+%   As a default the current document language will be used.
+%    \begin{macrocode}
+\RenewDocumentEnvironment { abstract } { o }
+  {
+    \group_begin:
+      \IfNoValueF {#1} { \selectlanguage{#1} }
+      \scr@ifundefinedorrelax{chapter}{
+        \Iftocfeature{toc}{leveldown}
+          {\subsection*}
+          {\section*}
+      }{
+        \let\clearpage\relax
+        \Iftocfeature{toc}{leveldown}
+          {\section*}
+          {\chapter*}
+      } { \GetTranslation{Abstract} }
+  } {
+    \group_end:
+  }
+%    \end{macrocode}
+% \end{environment}
+%
 %
 %
 %
@@ -1795,6 +1859,12 @@
 %
 %    \begin{macrocode}
 \ProvideDictionaryFor{English}{se2translations}[2022/09/06]
+\ProvideDictTranslation{abstract}{abstract}
+\ProvideDictTranslation{Abstract}{Abstract}
+\ProvideDictTranslation{acknowledgement}{acknowledgement}
+\ProvideDictTranslation{Acknowledgement}{Acknowledgement}
+\ProvideDictTranslation{acknowledgements}{acknowledgements}
+\ProvideDictTranslation{Acknowledgements}{Acknowledgements}
 \ProvideDictTranslation{advisor}{advisor}
 \ProvideDictTranslation{Advisor}{Advisor}
 \ProvideDictTranslation{advisors}{advisors}
@@ -1838,6 +1908,12 @@
 %
 %    \begin{macrocode}
 \ProvideDictionaryFor{German}{se2translations}[2022/09/06]
+\ProvideDictTranslation{abstract}{Zusammenfassung}
+\ProvideDictTranslation{Abstract}{Zusammenfassung}
+\ProvideDictTranslation{acknowledgement}{Danksagung}
+\ProvideDictTranslation{Acknowledgement}{Danksagung}
+\ProvideDictTranslation{acknowledgements}{Danksagungen}
+\ProvideDictTranslation{Acknowledgements}{Danksagungen}
 \ProvideDictTranslation{advisor}{Betreuer}
 \ProvideDictTranslation{Advisor}{Betreuer}
 \ProvideDictTranslation{advisors}{Betreuer}
