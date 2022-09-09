@@ -734,6 +734,37 @@
 %   signee, which will be typeset below the signature line.
 % \end{function}
 %
+% \subsection{Research Questions and findings summaries}\label{sec:doc-se2thesis-summaries}
+%
+% Most theses written at our Chair will require the student to provide some
+% empirical evaluation of their work to shed insights whether their proposed
+% ideas are actually useful.
+% For an empirical study, one needs to specify research questions and maybe also
+% hypotheses.
+% The \cls{se2thesis} class supports this by providing environments for this.
+%
+% \DescribeEnv{resq}
+% The \env{resq} environment shall be used to specify a research question.
+%
+% \DescribeEnv{hyp}
+% The \env{hyp} environment shall be used to specify a hypothesis.
+%
+% \DescribeEnv{summary}
+% After describing the results, we recommend to give an explicit summary of the
+% findings for a research question or hypothesis.
+% This summary shall be given in one or two sentences.
+% The \env{summary} environment provides a convenient way for this;
+% it will be typeset in a highlighted box that is easy to spot and also allows
+% readers of the work to quickly grasp the main findings.
+% \begin{verbatim}
+% \begin{summary}{label-reference}
+%   The summary text itself.
+% \end{summary}
+% \end{verbatim}
+% The environment expects as a parameter a label, for example, to a research
+% question;
+% however, this can also be arbitrary text.
+%
 % \section{The \pkg{se2colors} package}\label{sec:doc-se2colors}
 %
 % Several colours are specific to the university
@@ -2056,6 +2087,43 @@
 }
 %    \end{macrocode}
 % \end{macro}
+%
+% \subsection{Research questions and summary boxes}
+%
+% We utilise the \pkg{ntheorem} package for defining new theorem environments
+% that are used for defining research questions and hypotheses.
+% Therefore, start with loading this package.
+% \pkg{ntheorem}.
+%    \begin{macrocode}
+\PassOptionsToPackage{amsmath}{ntheorem}
+\RequirePackage{ntheorem}
+\theoremseparator{:}
+%    \end{macrocode}
+%
+% \begin{environment}{resq, hyp}
+%    We can then define the \env{resq} and \env{hyp} environments using the
+%    \cmd{\newtheorem} macro from \pkg{ntheorem}.
+%    \begin{macrocode}
+\newtheorem{resq}{Research Question}
+\newtheorem{hyp}{Hypothesis}
+%    \end{macrocode}
+% \end{environment}
+%
+% For the summary boxes, we utilise the \pkg{tcolorbox} package.
+% We start with loading this package.
+%    \begin{macrocode}
+\RequirePackage{tcolorbox}
+%    \end{macrocode}
+%
+% \begin{environment}{summary}
+%   The \env{summary} environment expects a label and has the summary text in
+%   its content.
+%    \begin{macrocode}
+\NewDocumentEnvironment { summary } { m }
+  { \begin{tcolorbox}[title={Summary (#1)}] }
+  { \end{tcolorbox} }
+%    \end{macrocode}
+% \end{environment}
 %
 %
 %
