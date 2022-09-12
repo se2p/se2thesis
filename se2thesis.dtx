@@ -299,6 +299,73 @@
 % \cref{sec:doc-se2thesis-pkgs}.
 % Please consider looking at this section when starting to write your document.
 %
+% \subsection{Load-time options}\label{sec:doc-se2thesis-options}
+%
+% The \pkg{se2thesis} class defines several load-time options, all of them
+% optional, on top of the options provided by the \KOMAScript{} document
+% classes.
+% \begin{function}{class}
+%   \begin{syntax}
+%     |class| = \meta{choice}
+%   \end{syntax}
+%   Set the base document class.
+%   Values are \cls{scrreprt}, \cls{scrartcl}, or \cls{scrbook}.
+%   Default is |scrreprt|.
+% \end{function}
+%
+% \begin{function}{paper}
+%   \begin{syntax}
+%     |paper| = \meta{choice}
+%   \end{syntax}
+%   Set the paper format.
+%   Possible values are |a4|, |a5|, or |b5|.
+%   Default is |a4|.
+% \end{function}
+%
+% \begin{function}{logofile}
+%   \begin{syntax}
+%     |logofile| = \marg{path-to-file}
+%   \end{syntax}
+%   Defines the path to the University's logo for the title page.
+% \end{function}
+%
+% \begin{function}{thesistype}
+%   \begin{syntax}
+%     |thesistype| = \meta{choice}
+%   \end{syntax}
+%   Defines the type of the thesis.
+%   Possible values are:
+%   |bachelor| for a bachelor thesis, |bachelorproposal| for a proposal to
+%   a bachelor thesis, |master| for a master thesis, |masterproposal| for
+%   a proposal to a master thesis, |phdproposal| for a proposal to a PhD thesis,
+%   and |phd| for a PhD thesis.
+% \end{function}
+%
+% \begin{function}{biblatex}
+%   \begin{syntax}
+%     |biblatex| = \meta{true,false}
+%   \end{syntax}
+%   Whether \cls{se2thesis} shall load the \pkg{biblatex} package together with
+%   some settings automatically.
+% \end{function}
+%
+% \begin{function}{colormode}
+%   \begin{syntax}
+%     |colormode| = \meta{choice}
+%   \end{syntax}
+%   Select the color scheme used by the automatically loaded \pkg{se2colors}
+%   package, see \cref{sec:doc-se2colors} for a description.
+% \end{function}
+%
+% \begin{function}{fontmode}
+%   \begin{syntax}
+%     |fontmode| = \meta{choice}
+%   \end{syntax}
+%   Select the font scheme used by the automatically loaded \pkg{se2fonts}
+%   package, see \cref{sec:doc-se2fonts} for a description.
+% \end{function}
+%
+%
 % \subsection{The title page}\label{sec:doc-se2thesis-title}
 %
 % Designing a title package for a thesis can be complicated.
@@ -395,13 +462,7 @@
 % website for downloading the logo graphics is only accessible from within the
 % University's campus network or a VPN connection.
 % To specify the path to the logo graphics, we provide a load-time option to the
-% \cls{se2thesis} class:
-% \begin{function}{logofile}
-%   \begin{syntax}
-%     |logofile| = \marg{path-to-logo}
-%   \end{syntax}
-%   Sets the path to the logo graphics for the title page.
-% \end{function}
+% \cls{se2thesis} class called |logofile|~(see \cref{sec:doc-se2thesis-options}).
 %
 % When printing the thesis in two-side mode—which we recommend—the back of the
 % title page again denotes author and title on the bottom.
@@ -576,13 +637,8 @@
 % therefore correct sorting of the references now works out of the box; also
 % creating citation styles can now be done using simple \LaTeX{} commands.
 %
-% \begin{function}{biblatex}
-%   \begin{syntax}
-%     |biblatex| = \meta{true,false}
-%   \end{syntax}
 % For easier usage, we provide the load-time option |biblatex| that already sets
-% all settings.
-% \end{function}
+% all settings~(see \cref{sec:doc-se2thesis-options}.
 % Set this options to \cls{se2thesis} and add your reference file using the
 % \cmd{\addbibresource} macro.  \cmd{\printbibliography} will print your
 % references.
@@ -936,8 +992,8 @@
 % if required.
 %    \begin{macrocode}
 \@ifundefined{ExplLoaderFileDate}
-{\RequirePackage{expl3}}
-{}
+  { \RequirePackage{expl3} }
+  {}
 %    \end{macrocode}
 %
 % Make sure that the version of \pkg{l3kernel} in use is sufficiently new.
@@ -945,16 +1001,16 @@
 % pre-loaded \pkg{expl3} in the absence of the package.
 %    \begin{macrocode}
 \@ifl@t@r\ExplLoaderFileDate{2020-01-09}
-{}
-{%
-  \PackageError{se2colors}{Support package expl3 too old}
+  {}
   {%
-    You need to update your installation of the bundles 'l3kernel' and
-    'l3packages'.\MessageBreak
-    Loading~se2colors~will~abort!%
+    \PackageError{se2colors}{Support package expl3 too old}
+    {%
+      You need to update your installation of the bundles 'l3kernel' and
+      'l3packages'.\MessageBreak
+      Loading~se2colors~will~abort!%
+    }%
+    \endinput
   }%
-  \endinput
-}%
 %    \end{macrocode}
 %
 % \begin{macro}{\IfFormatAtLeastTF}
