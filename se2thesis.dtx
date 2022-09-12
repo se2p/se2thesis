@@ -299,6 +299,18 @@
 % \cref{sec:doc-se2thesis-pkgs}.
 % Please consider looking at this section when starting to write your document.
 %
+% Before we start with a detailed documentation of the class, we explain one
+% helper macro that can be used to check whether a package has been loaded.
+% \begin{function}
+%   {
+%     \slcd_package_if_loaded:nTF,
+%     \slcd_package_if_loaded:nT,
+%     \slcd_package_if_loaded:nF,
+%     \slcd_package_if_loaded_p:n
+%   }
+%   Checks whether a package has been loaded and conditionally executes code.
+% \end{function}
+%
 % \subsection{Load-time options}\label{sec:doc-se2thesis-options}
 %
 % The \pkg{se2thesis} class defines several load-time options, all of them
@@ -1043,6 +1055,26 @@
 \ProvidesExplClass {se2thesis} {2022-09-09} {1.0.0}
   {A thesis class for the Chair of Software Engineering II}
 %    \end{macrocode}
+%
+% \begin{macro}
+%   {
+%     \slcd_package_if_loaded:nTF,
+%     \slcd_package_if_loaded:nT,
+%     \slcd_package_if_loaded:nF,
+%     \slcd_package_if_loaded_p:n
+%   }
+%   Defines various \LaTeX3{} variants for the internal \cmd{\@ifpackageloaded}
+%   macro to check whether a package has been loaded.
+%    \begin{macrocode}
+\prg_new_conditional:Nnn \slcd_package_if_loaded:n { p, T, F, TF }
+  {
+    \use:c { @ifpackageloaded }
+      { #1 }
+      { \prg_return_true: }
+      { \prg_return_false: }
+  }
+%    \end{macrocode}
+% \end{macro}
 %
 % Load required packages early.
 %    \begin{macrocode}
@@ -2052,7 +2084,10 @@
 % Therefore, start with loading this package.
 % \pkg{ntheorem}.
 %    \begin{macrocode}
-\PassOptionsToPackage{amsmath}{ntheorem}
+\slcd_package_if_loaded:nT { amsmath }
+  {
+    \PassOptionsToPackage{amsmath}{ntheorem}
+  }
 \RequirePackage{ntheorem}
 \theoremseparator{:}
 %    \end{macrocode}
