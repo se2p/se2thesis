@@ -301,13 +301,10 @@
 %
 % Before we start with a detailed documentation of the class, we explain one
 % helper macro that can be used to check whether a package has been loaded.
-% \begin{function}
-%   {
-%     \slcd_package_if_loaded:nTF,
-%     \slcd_package_if_loaded:nT,
-%     \slcd_package_if_loaded:nF,
-%     \slcd_package_if_loaded_p:n
-%   }
+% \begin{function}[EXP, pTF, updated = 2022-09-27]{\slcd_package_if_loaded:}
+%   \begin{syntax}
+%     |\slcd_package_if_loaded:TF| \Arg{true code} \Arg{false code}
+%   \end{syntax}
 %   Checks whether a package has been loaded and conditionally executes code.
 % \end{function}
 %
