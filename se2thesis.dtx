@@ -2469,10 +2469,10 @@
 %    \begin{macrocode}
     \tl_if_eq:NnT \l_@@_fontmode_tl {original}
       {
-        \setmainfont{Palatino}[Ligatures=TeX]
-        \setsansfont{Optima}[Ligatures=TeX]
+        \setmainfont{Palatino}
+        \setsansfont{Optima}
         \setmonofont{MesloLGS Nerd Font Mono}
-        \setmathfont{Neo Euler}[Ligatures=TeX]
+        \setmathfont{Neo Euler}
       }
 %    \end{macrocode}
 %
@@ -2482,10 +2482,10 @@
 %    \begin{macrocode}
     \tl_if_eq:NnT \l_@@_fontmode_tl {replacement}
       {
-        \setmainfont{TeX Gyre Pagella}[Ligatures=TeX]
-        \setsansfont{TeX Gyre Heros}[Ligatures=TeX, Scale=0.9]
-        \setmonofont{Fira Code}[Ligatures=TeX]
-        \setmathfont{TeX Gyre Pagella Math}[Ligatures=TeX]
+        \setmainfont{TeX Gyre Pagella}
+        \setsansfont{TeX Gyre Heros}
+        \setmonofont{Fira Code}
+        \setmathfont{TeX Gyre Pagella Math}
         \setmathfont{Latin Modern Math}[range={\mathcal,\mathbb}]
       }
 %    \end{macrocode}
@@ -2500,18 +2500,18 @@
     \tl_if_eq:NnT \l_@@_fontmode_tl {auto}
       {
         \IfFontExistsTF { Palatino }
-          { \setmainfont{Palatino}[Ligatures=TeX] }
-          { \setmainfont{TeX Gyre Pagella}[Ligatures=TeX] }
+          { \setmainfont{Palatino} }
+          { \setmainfont{TeX Gyre Pagella} }
         \IfFontExistsTF { Optima }
-          { \setsansfont{Optima}[Ligatures=TeX] }
-          { \setsansfont{TeXGyre Heros}[Ligatures=TeX] }
+          { \setsansfont{Optima} }
+          { \setsansfont{TeXGyre Heros} }
         \IfFontExistsTF{ MesloLGS Nerd Font Mono }
           { \setmonofont{MesloLGS Nerd Font Mono} }
-          { \setmonofont{Fira Code}[Scale=0.85] }
+          { \setmonofont{Fira Code} }
         \IfFontExistsTF { Neo Euler }
-          { \setmathfont{Neo Euler}[Ligatures=TeX] }
+          { \setmathfont{Neo Euler} }
           {
-            \setmathfont{TeX Gyre Pagella Math}[Ligatures=TeX]
+            \setmathfont{TeX Gyre Pagella Math}
             \setmathfont{Latin Modern Math}[range={\mathcal,\mathbb}]
           }
       }
