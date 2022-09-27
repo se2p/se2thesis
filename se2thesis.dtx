@@ -2457,6 +2457,12 @@
     \RequirePackage{fontspec}
     \RequirePackage{unicode-math}
 %    \end{macrocode}
+% To make sure the scaling of the fonts matches, we let \pkg{fontspec} do this
+% matching based on the lower-case characters.
+%    \begin{macrocode}
+    \defaultfontfeatures{ Scale = MatchLowercase }
+    \defaultfontfeatures[\rmfamily]{ Scale = 1 }
+%    \end{macrocode}
 %
 % The user wants to have the |original| fonts,
 % which are Palatino, Optima, MesloLGS Nerd Font Mono, and Neo Euler.
