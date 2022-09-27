@@ -921,7 +921,7 @@
 % The following option is defined by the \pkg{se2fonts} package
 % to influence the selection of the fonts.
 %
-% \begin{function}{fontmode}
+% \begin{function}[updated = 2022-09-27]{fontmode}
 %   \begin{syntax}
 %     |fontmode| = \meta{choice}
 %   \end{syntax}
@@ -933,6 +933,9 @@
 %   |auto| selects fonts automatically,
 %   preferring the |original| fonts if available.
 %   The default is |auto|.
+%
+%   The fonts are automatically scaled based on their lower-case characters
+%   using the mechanisms provided by \pkg{fontspec} when using \LuaTeX.
 % \end{function}
 %
 % The following list provides examples for each of the fonts:
@@ -2472,7 +2475,7 @@
         \setmainfont{Palatino}
         \setsansfont{Optima}
         \setmonofont{MesloLGS Nerd Font Mono}
-        \setmathfont{Neo Euler}
+        \setmathfont{Neo Euler}[math-style=upright]
       }
 %    \end{macrocode}
 %
@@ -2509,7 +2512,7 @@
           { \setmonofont{MesloLGS Nerd Font Mono} }
           { \setmonofont{Fira Code} }
         \IfFontExistsTF { Neo Euler }
-          { \setmathfont{Neo Euler} }
+          { \setmathfont{Neo Euler}[math-style=upright] }
           {
             \setmathfont{TeX Gyre Pagella Math}
             \setmathfont{Latin Modern Math}[range={\mathcal,\mathbb}]
