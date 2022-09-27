@@ -7,6 +7,16 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v1.1.1] - 2022-09-27
+
+### Fixed
+
+- Neo Euler needs to be loaded as a upright math font
+
+### Updated
+
+- Fonts get now scaled automatically when using LuaTeX
+
 ## [v1.1.0] - 2022-09-12
 
 ### Added
@@ -21,4 +31,5 @@ and this project adheres to
 ### Added
 - First official release
 
+[v1.1.1]: https://github.com/se2p/se2thesis/compare/1.1.0...v1.1.1
 [v1.1.0]: https://github.com/se2p/se2thesis/compare/1.0.0...v1.1.0
