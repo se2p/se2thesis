@@ -7,7 +7,7 @@ and this project adheres to
 
 ## [Unreleased]
 
-## [v1.1.1] – 2022–10–24
+## [v1.2.0] – 2022–10–24
 
 ### Added
 
