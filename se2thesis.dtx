@@ -418,6 +418,14 @@
 %   thesis in English.
 % \end{function}
 %
+% \begin{function}{\matrnumber}
+%   \begin{syntax}
+%     \cmd{\matrnumber} \marg{matriculation-number}
+%   \end{syntax}
+%   Specify the matriculation number of the student writing the thesis.
+%   This is required for Bachelor and Master theses.
+% \end{function}
+%
 % \begin{function}{\supervisor, \cosupervisor}
 %   \begin{syntax}
 %     \cmd{\supervisor} \marg{name}
@@ -1052,7 +1060,7 @@
 %
 % Identify the class and give the overall version number.
 %    \begin{macrocode}
-\ProvidesExplClass {se2thesis} {2022-09-27} {1.1.1}
+\ProvidesExplClass {se2thesis} {2022-10-24} {1.2.0}
   {A thesis class for the Chair of Software Engineering II}
 %    \end{macrocode}
 %
@@ -1133,6 +1141,7 @@
 %   {
 %     \l_@@_version_tl,
 %     \l_@@_degreeprogramme_tl,
+%     \l_@@_matrnumber_tl,
 %     \l_@@_supervisor_tl,
 %     \l_@@_cosupervisor_tl,
 %     \l_@@_advisor_tl,
@@ -1147,6 +1156,7 @@
 %    \begin{macrocode}
 \tl_new:N \l_@@_version_tl
 \tl_new:N \l_@@_degreeprogramme_tl
+\tl_new:N \l_@@_matrnumber_tl
 \tl_new:N \l_@@_supervisor_tl
 \tl_new:N \l_@@_cosupervisor_tl
 \tl_new:N \l_@@_advisor_tl
@@ -1450,6 +1460,16 @@
 \ProvideDocumentCommand \degreeprogramme { m }
   {
     \tl_set:Nn \l_@@_degreeprogramme_tl {#1}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\matrnumber}
+%   Specify the matriculation number of the student.
+%    \begin{macrocode}
+\ProvideDocumentCommand \matrnumber { m }
+  {
+    \tl_set:Nn \l_@@_matrnumber_tl {#1}
   }
 %    \end{macrocode}
 % \end{macro}
@@ -1857,6 +1877,10 @@
 %    \begin{macrocode}
         \begin{center}
           \begin{tabular}{@{} l @{\quad} l}
+            \tl_if_empty:NF \l_@@_matrnumber_tl
+              {
+                \GetTranslation{Matrnumber}    & \l_@@_matrnumber_tl \\
+              }
             \tl_if_empty:NF \l_@@_supervisor_tl
               {
                 \GetTranslation{Supervisor}    & \l_@@_supervisor_tl \\
@@ -2144,7 +2168,7 @@
 % We provide the following English translations.
 %
 %    \begin{macrocode}
-\ProvideDictionaryFor{English}{se2translations}[2022/09/27]
+\ProvideDictionaryFor{English}{se2translations}[2022/10/24]
 \ProvideDictTranslation{abstract}{abstract}
 \ProvideDictTranslation{Abstract}{Abstract}
 \ProvideDictTranslation{acknowledgement}{acknowledgement}
@@ -2159,6 +2183,8 @@
 \ProvideDictTranslation{Co-advisor}{Co-advisor}
 \ProvideDictTranslation{co-advisors}{co-advisors}
 \ProvideDictTranslation{Co-advisors}{Co-advisors}
+\ProvideDictTranslation{matrnumber}{matriculation number}
+\ProvideDictTranslation{Matrnumber}{Matriculation number}
 \ProvideDictTranslation{supervisor}{supervisor}
 \ProvideDictTranslation{Supervisor}{Supervisor}
 \ProvideDictTranslation{co-supervisor}{co-supervisor}
@@ -2193,7 +2219,7 @@
 % We provide the following German translations.
 %
 %    \begin{macrocode}
-\ProvideDictionaryFor{German}{se2translations}[2022/09/27]
+\ProvideDictionaryFor{German}{se2translations}[2022/10/24]
 \ProvideDictTranslation{abstract}{Zusammenfassung}
 \ProvideDictTranslation{Abstract}{Zusammenfassung}
 \ProvideDictTranslation{acknowledgement}{Danksagung}
@@ -2208,6 +2234,8 @@
 \ProvideDictTranslation{Co-advisor}{Mitbetreuer}
 \ProvideDictTranslation{co-advisors}{Mitbetreuer}
 \ProvideDictTranslation{Co-advisors}{Mitbetreuer}
+\ProvideDictTranslation{matrnumber}{Matrikelnummer}
+\ProvideDictTranslation{Matrnumber}{Matrikelnummer}
 \ProvideDictTranslation{supervisor}{Prüfer}
 \ProvideDictTranslation{Supervisor}{Prüfer}
 \ProvideDictTranslation{co-supervisor}{Zweitprüfer}
@@ -2252,7 +2280,7 @@
 %
 % Identify the package and give the overall version information.
 %    \begin{macrocode}
-\ProvidesExplPackage {se2colors} {2022-09-27} {1.1.1}
+\ProvidesExplPackage {se2colors} {2022-10-24} {1.2.0}
   {A colour support package for the se2thesis bundle}
 %    \end{macrocode}
 %
@@ -2358,7 +2386,7 @@
 %
 % Identify the package and give the overall version information.
 %    \begin{macrocode}
-\ProvidesExplPackage {se2fonts} {2022-09-27} {1.1.1}
+\ProvidesExplPackage {se2fonts} {2022-10-24} {1.2.0}
   {A font-selection support package for the se2thesis bundle}
 %    \end{macrocode}
 %
