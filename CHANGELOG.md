@@ -7,6 +7,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v1.1.1] – 2022–10–24
+
+### Added
+
+- A macro `\matrnumber` to specify the matriculation number of the student on
+  the title page.
+
 ## [v1.1.1] - 2022-09-27
 
 ### Fixed
@@ -31,5 +38,6 @@ and this project adheres to
 ### Added
 - First official release
 
-[v1.1.1]: https://github.com/se2p/se2thesis/compare/1.1.0...v1.1.1
+[v1.2.0]: https://github.com/se2p/se2thesis/compare/v1.2.0...v1.1.1
+[v1.1.1]: https://github.com/se2p/se2thesis/compare/v1.1.0...v1.1.1
 [v1.1.0]: https://github.com/se2p/se2thesis/compare/1.0.0...v1.1.0
