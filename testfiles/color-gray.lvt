@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage{expl3}
-\usepackage[colormode=BW]{se2colors}
+\usepackage[cmode=BW]{se2colors}
 \input{regression-test}
 
 \begin{document}
