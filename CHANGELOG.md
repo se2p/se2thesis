@@ -7,7 +7,7 @@ and this project adheres to
 
 ## [Unreleased]
 
-### Updated
+### Changed
 
 These changes might be breaking changes!
 
@@ -15,6 +15,7 @@ These changes might be breaking changes!
 - Change the available predefined colours.
 - Change the option names of `se2colors` and `se2fonts` to `cmode` and `fmode`,
   respectively.
+- Use Helvetica instead of Optima as the sans-serif default font.
 
 ## [v1.2.0] – 2022–10–24
 

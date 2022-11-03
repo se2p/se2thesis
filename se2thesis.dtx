@@ -960,17 +960,17 @@
 % By default,
 % we recommend using Hermann Zapf's beautiul \emph{Palatino} font
 % as the main text font,
-% accompanied with his sans-serif font \emph{Optima}
+% accompanied with the sans-serif font \emph{Helvetica}
 % and \emph{Neo Euler} as the default math font;
 % we set \emph{Meslo LGS Nerd Font Mono} as the monospaced font.
-% Palatino and Optima get shipped with any macOS system,
+% Palatino and Helvetica get shipped with any macOS system,
 % the user, however, needs to download Neo Euler themself\footnote{
 %   for example from
 %   \href{https://fontlibrary.org/en/font/euler-otf}{https://fontlibrary.org/en/font/euler-otf}.
 % }.
 % Being aware that these fonts might not be available on every user's system,
 % we recommend using \emph{\TeX{} Gyre Pagella} as an alternative to
-% Palatino, \emph{\TeX{} Gyre Heros} as an alternative to Optima,
+% Palatino, \emph{\TeX{} Gyre Heros} as an alternative to Helvetica,
 % and the \emph{\TeX{} Gyre Pagella Math} as the default math font;
 % \emph{Fira Code} is a nice monospaced font.
 % Although they look different in various details
@@ -1011,7 +1011,7 @@
 % \begin{itemize}
 %   \item {\fontspec{Palatino}An example text in Palatino}
 %   \item {\fontspec{TeX Gyre Pagella}An example text in \TeX{} Gyre Pagella}
-%   \item {\fontspec{Optima}An example text in Optima}
+%   \item {\fontspec{Helvetica}An example text in Helvetica}
 %   \item {\fontspec{TeX Gyre Heros}An example text in \TeX{} Gyre Heros}
 %   \item {\fontspec{MesloLGSNerd Font Mono}An example text in MesloLGS}
 %   \item {\fontspec{Fira Code}An example text in Fira Code}
@@ -2603,12 +2603,12 @@
 %    \end{macrocode}
 %
 % The user wants to have the |original| fonts,
-% which are Palatino, Optima, MesloLGS Nerd Font Mono, and Neo Euler.
+% which are Palatino, Helvetica, MesloLGS Nerd Font Mono, and Neo Euler.
 %    \begin{macrocode}
     \tl_if_eq:NnT \l_@@_fontmode_tl {original}
       {
         \setmainfont{Palatino}
-        \setsansfont{Optima}
+        \setsansfont{Helvetica}
         \setmonofont{MesloLGS Nerd Font Mono}
         \setmathfont{Neo Euler}[math-style=upright]
       }
@@ -2640,8 +2640,8 @@
         \IfFontExistsTF { Palatino }
           { \setmainfont{Palatino} }
           { \setmainfont{TeX Gyre Pagella} }
-        \IfFontExistsTF { Optima }
-          { \setsansfont{Optima} }
+        \IfFontExistsTF { Helvetica }
+          { \setsansfont{Helvetica} }
           { \setsansfont{TeXGyre Heros} }
         \IfFontExistsTF{ MesloLGS Nerd Font Mono }
           { \setmonofont{MesloLGS Nerd Font Mono} }
