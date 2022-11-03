@@ -7,6 +7,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Updated
+
+- Change the width of the text block to match a golden ratio with its height.
+
 ## [v1.2.0] – 2022–10–24
 
 ### Added
