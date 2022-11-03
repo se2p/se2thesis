@@ -151,7 +151,7 @@
 
 \usepackage{hvfloat}
 \hypersetup{%
-  allcolors=UPSE2-DarkBlue,%
+  allcolors=UPSE2-Blue,%
   pdftitle={se2thesis -- A Thesis Class for the Chair of Software Engineering II
   at the University of Passau, Germany},%
   pdfauthor={Stephan Lukasczyk},
@@ -823,9 +823,9 @@
 % The \pkg{se2colors} package provides this exact features.
 % One can load it using |\usepackage{se2colors}| in the document preamble.
 %
-% \begin{function}{colormode}
+% \begin{function}[updated = 2022-11-03]{cmode}
 %   \begin{syntax}
-%     |colormode| = \meta{choice}
+%     |cmode| = \meta{choice}
 %   \end{syntax}
 %   Selects the colour mode that shall be used for creating the results,
 %   a choice from the options specified in \cref{tab:coloursoptions}.
@@ -840,22 +840,22 @@
 %   \begin{tabular}{@{} l l @{}} \toprule
 %     Option & Description \\ \midrule
 %     %
-%     |colormode=4C|
+%     |cmode=4C|
 %            & Define colours in CMYK colour space (\emph{default}). \\
 %     %
 %     |CMYK|, |cmyk|
 %            & Aliases for the previous. \\
 %     %
-%     |colormode=RGB|
+%     |cmode=RGB|
 %            & Define colours in RGB colour space. \\
 %     %
 %     |RGB|, |rgb|
 %            & Aliases for the previous. \\
 %     %
-%     |colormode=BW|
+%     |cmode=BW|
 %            & Define colours in black-and-white colour space. \\
 %     %
-%     |colormode=1C|
+%     |cmode=1C|
 %            & Alias for the previous. \\
 %     %
 %     |gray|
@@ -871,23 +871,87 @@
 % and |UPSE2-Orange| \testclr{UPSE2-Orange}.
 %
 % Additionally,
-% we define 15 supplementary colours:
+% we define four colours for the four faculties of the University:
 % \begin{itemize}
-%   \item |UPSE2-DarkGreen| \testclr{UPSE2-DarkGreen},
-%   \item |UPSE2-MediumGreen| \testclr{UPSE2-MediumGreen},
-%   \item |UPSE2-LightGreen| \testclr{UPSE2-LightGreen},
-%   \item |UPSE2-DarkBlue| \testclr{UPSE2-DarkBlue},
-%   \item |UPSE2-MediumBlue| \testclr{UPSE2-MediumBlue},
-%   \item |UPSE2-LightBlue| \testclr{UPSE2-LightBlue},
-%   \item |UPSE2-DarkPurple| \testclr{UPSE2-DarkPurple},
-%   \item |UPSE2-MediumPurple| \testclr{UPSE2-MediumPurple},
-%   \item |UPSE2-LightPurple| \testclr{UPSE2-LightPurple},
-%   \item |UPSE2-DarkOcher| \testclr{UPSE2-DarkOcher},
-%   \item |UPSE2-MediumOcher| \testclr{UPSE2-MediumOcher},
-%   \item |UPSE2-LightOcher| \testclr{UPSE2-LightOcher},
-%   \item |UPSE2-DarkRed| \testclr{UPSE2-DarkRed},
-%   \item |UPSE2-MediumRed| \testclr{UPSE2-MediumRed}, and
+%   \item the Faculty of Law |UPSE2-JUR| \testclr{UPSE2-JUR},
+%   \item the School of Business, Economics and Information Systems |UPSE2-WIWI| \testclr{UPSE2-WIWI},
+%   \item the Faculty of Arts and Humanities |UPSE2-PHIL| \testclr{UPSE2-PHIL}, and
+%   \item the Faculty of Computer Science and Mathematics |UPSE2-FIM| \testclr{UPSE2-FIM}.
+% \end{itemize}
+%
+% Finally,
+% we define a full set of supplementary colours:
+% \begin{itemize}
+%   \item |UPSE2-DarkGray| \testclr{UPSE2-DarkGray}
+%     with its derivatives \\
+%     |UPSE2-DarkGray1| \testclr{UPSE2-DarkGray1},
+%     |UPSE2-DarkGray2| \testclr{UPSE2-DarkGray2},
+%     |UPSE2-DarkGray3| \testclr{UPSE2-DarkGray3},
+%     |UPSE2-DarkGray4| \testclr{UPSE2-DarkGray4}, and
+%     |UPSE2-DarkGray5| \testclr{UPSE2-DarkGray5}.
+%   \item |UPSE2-White| \testclr{UPSE2-White}
+%     with its derivatives \\
+%     |UPSE2-White1| \testclr{UPSE2-White1},
+%     |UPSE2-White2| \testclr{UPSE2-White2},
+%     |UPSE2-White3| \testclr{UPSE2-White3},
+%     |UPSE2-White4| \testclr{UPSE2-White4}, and
+%     |UPSE2-White5| \testclr{UPSE2-White5}.
+%   \item |UPSE2-MediumGray| \testclr{UPSE2-MediumGray}
+%     with its derivatives \\
+%     |UPSE2-MediumGray1| \testclr{UPSE2-MediumGray1},
+%     |UPSE2-MediumGray2| \testclr{UPSE2-MediumGray2},
+%     |UPSE2-MediumGray3| \testclr{UPSE2-MediumGray3},
+%     |UPSE2-MediumGray4| \testclr{UPSE2-MediumGray4}, and
+%     |UPSE2-MediumGray5| \testclr{UPSE2-MediumGray5}.
+%   \item |UPSE2-LightGray| \testclr{UPSE2-LightGray}
+%     with its derivatives \\
+%     |UPSE2-LightGray1| \testclr{UPSE2-LightGray1},
+%     |UPSE2-LightGray2| \testclr{UPSE2-LightGray2},
+%     |UPSE2-LightGray3| \testclr{UPSE2-LightGray3},
+%     |UPSE2-LightGray4| \testclr{UPSE2-LightGray4}, and
+%     |UPSE2-LightGray5| \testclr{UPSE2-LightGray5}.
+%   \item |UPSE2-Orange| \testclr{UPSE2-Orange}
+%     with its derivatives \\
+%     |UPSE2-Orange1| \testclr{UPSE2-Orange1},
+%     |UPSE2-Orange2| \testclr{UPSE2-Orange2},
+%     |UPSE2-Orange3| \testclr{UPSE2-Orange3},
+%     |UPSE2-Orange4| \testclr{UPSE2-Orange4}, and
+%     |UPSE2-Orange5| \testclr{UPSE2-Orange5}.
 %   \item |UPSE2-LightRed| \testclr{UPSE2-LightRed}
+%     with its derivatives \\
+%     |UPSE2-LightRed1| \testclr{UPSE2-LightRed1},
+%     |UPSE2-LightRed2| \testclr{UPSE2-LightRed2},
+%     |UPSE2-LightRed3| \testclr{UPSE2-LightRed3},
+%     |UPSE2-LightRed4| \testclr{UPSE2-LightRed4}, and
+%     |UPSE2-LightRed5| \testclr{UPSE2-LightRed5}.
+%   \item |UPSE2-DarkRed| \testclr{UPSE2-DarkRed}
+%     with its derivatives \\
+%     |UPSE2-DarkRed1| \testclr{UPSE2-DarkRed1},
+%     |UPSE2-DarkRed2| \testclr{UPSE2-DarkRed2},
+%     |UPSE2-DarkRed3| \testclr{UPSE2-DarkRed3},
+%     |UPSE2-DarkRed4| \testclr{UPSE2-DarkRed4}, and
+%     |UPSE2-DarkRed5| \testclr{UPSE2-DarkRed5}.
+%   \item |UPSE2-Green| \testclr{UPSE2-Green}
+%     with its derivatives \\
+%     |UPSE2-Green1| \testclr{UPSE2-Green1},
+%     |UPSE2-Green2| \testclr{UPSE2-Green2},
+%     |UPSE2-Green3| \testclr{UPSE2-Green3},
+%     |UPSE2-Green4| \testclr{UPSE2-Green4}, and
+%     |UPSE2-Green5| \testclr{UPSE2-Green5}.
+%   \item |UPSE2-Blue| \testclr{UPSE2-Blue}
+%     with its derivatives \\
+%     |UPSE2-Blue1| \testclr{UPSE2-Blue1},
+%     |UPSE2-Blue2| \testclr{UPSE2-Blue2},
+%     |UPSE2-Blue3| \testclr{UPSE2-Blue3},
+%     |UPSE2-Blue4| \testclr{UPSE2-Blue4}, and
+%     |UPSE2-Blue5| \testclr{UPSE2-Blue5}.
+%   \item |UPSE2-AccentGray| \testclr{UPSE2-AccentGray}
+%     with its derivatives \\
+%     |UPSE2-AccentGray1| \testclr{UPSE2-AccentGray1},
+%     |UPSE2-AccentGray2| \testclr{UPSE2-AccentGray2},
+%     |UPSE2-AccentGray3| \testclr{UPSE2-AccentGray3},
+%     |UPSE2-AccentGray4| \testclr{UPSE2-AccentGray4}, and
+%     |UPSE2-AccentGray5| \testclr{UPSE2-AccentGray5}.
 % \end{itemize}
 %
 % \section{The \pkg{se2fonts} package}\label{sec:doc-se2fonts}
@@ -926,9 +990,9 @@
 % The following option is defined by the \pkg{se2fonts} package
 % to influence the selection of the fonts.
 %
-% \begin{function}[updated = 2022-09-27]{fontmode}
+% \begin{function}[updated = 2022-11-03]{fmode}
 %   \begin{syntax}
-%     |fontmode| = \meta{choice}
+%     |fmode| = \meta{choice}
 %   \end{syntax}
 %   Sets the font-selection mode based on a choice:
 %   |original| selects the fonts we recommend for using,
@@ -1607,7 +1671,7 @@
   \footnotesize%
   \hspace*{\l_@@_headmarkspace_dim}%
   \group_begin:
-    \color{UPSE2-DarkBlue}%
+    \color{UPSE2-Blue}%
     \rule[\l_@@_ruleraise_dim]{\l_@@_rulewidth_dim}{\l_@@_rulethickness_dim}%
   \group_end:
   \hspace*{\l_@@_rulespace_dim}%
@@ -1619,11 +1683,11 @@
   \group_begin: \ \group_end:
   \footnotesize%
   \group_begin:
-    \color{UPSE2-DarkBlue}\headmark
+    \color{UPSE2-Blue}\headmark
   \group_end:
   \hspace*{\l_@@_rulespace_dim}%
   \group_begin:
-    \color{UPSE2-DarkBlue}%
+    \color{UPSE2-Blue}%
     \rule[\l_@@_ruleraise_dim]{\l_@@_rulewidth_dim}{\l_@@_rulethickness_dim}%
   \group_end:
   \hspace*{\l_@@_rulespace_dim}%
@@ -1646,7 +1710,7 @@
   \footnotesize%
   \hspace*{\l_@@_rulespace_dim}%
   \group_begin:
-    \color{UPSE2-DarkBlue}%
+    \color{UPSE2-Blue}%
     \rule[\l_@@_ruleraise_dim]{\l_@@_rulewidth_dim}{\l_@@_rulethickness_dim}%
   \group_end:
 }]{%
@@ -1658,12 +1722,12 @@
   \footnotesize%
   \hspace*{\l_@@_rulespace_dim}%
   \group_begin:
-    \color{UPSE2-DarkBlue}%
+    \color{UPSE2-Blue}%
     \rule[\l_@@_ruleraise_dim]{\l_@@_rulewidth_dim}{\l_@@_rulethickness_dim}%
   \group_end:
   \hspace*{\l_@@_headmarkspace_dim}%
   \group_begin:
-    \color{UPSE2-DarkBlue}\headmark
+    \color{UPSE2-Blue}\headmark
   \group_end:
 }
 %    \end{macrocode}
@@ -2292,30 +2356,30 @@
 %    \begin{macrocode}
 \keys_define:nn { seiicolors }
   {
-    colormode .choice:,
-    colormode / 4C .code:n = {
+    cmode .choice:,
+    cmode / 4C .code:n = {
       \PassOptionsToPackage{cmyk}{xcolor}
       \tl_gset:Nn \l_@@_colormode_tl {4C}
     },
-    colormode / RGB .code:n = {
+    cmode / RGB .code:n = {
       \PassOptionsToPackage{rgb}{xcolor}
       \tl_gset:Nn \l_@@_colormode_tl {RGB}
     },
-    colormode / BW .code:n = {
+    cmode / BW .code:n = {
       \PassOptionsToPackage{gray}{xcolor}
       \tl_gset:Nn \l_@@_colormode_tl {BW}
     },
-    colormode / CMYK .meta:n = {colormode=4C},
-    colormode / cmyk .meta:n = {colormode=4C},
-    colormode / rgb .meta:n = {colormode=RGB},
-    colormode / gray .meta:n = {colormode=BW},
-    RGB .meta:n = {colormode=RGB},
-    rgb .meta:n = {colormode=rgb},
-    CMYK .meta:n = {colormode=4C},
-    cmyk .meta:n = {colormode=4C},
-    gray .meta:n = {colormode=BW},
+    cmode / CMYK .meta:n = {cmode=4C},
+    cmode / cmyk .meta:n = {cmode=4C},
+    cmode / rgb .meta:n = {cmode=RGB},
+    cmode / gray .meta:n = {cmode=BW},
+    RGB .meta:n = {cmode=RGB},
+    rgb .meta:n = {cmode=rgb},
+    CMYK .meta:n = {cmode=4C},
+    cmyk .meta:n = {cmode=4C},
+    gray .meta:n = {cmode=BW},
   }
-\keys_set:nn { seiicolors } { colormode = 4C }
+\keys_set:nn { seiicolors } { cmode = 4C }
 %    \end{macrocode}
 % \end{variable}
 %
@@ -2341,30 +2405,76 @@
 % Passau's style guides.
 %    \begin{macrocode}
 \definecolorset[named]{RGB/cmyk}{UPSE2-}{}{%
-  Gray,123,131,133/.08,.02,0,.48;%
-  Orange,229,137,0/0,.40,1.0,.10%
+  Orange,242,148,0/0.00,0.44,0.95,0.01;%
+  Gray,153,159,158/0.40,0.28,0.28,0.00;%
+  JUR,229,49,56/0.01,0.90,0.81,0.01;%
+  WIWI,0,96,57/0.87,0.20,0.87,0.36;%
+  PHIL,188,42,51/0.06,0.93,0.81,0.11;%
+  FIM,0,90,161/0.93,0.63,0.01,0.02;%
+  DarkGray,77,77,77/0.74,0.67,0.62,0.18;%
+  White,255,255,255/0.00,0.00,0.00,0.00;%
+  MediumGray,127,127,127/0.52,0.43,0.40,0.02;%
+  LightGray,229,229,229/0.08,0.06,0.04,0.00;%
+  LightRed,229,49,56/0.01,0.90,0.81,0.01;%
+  DarkRed,188,42,51/0.06,0.93,0.80,0.11;%
+  Green,0,96,57/0.87,0.20,0.86,0.35;%
+  Blue,0,90,161/0.93,0.63,0.01,0.02;%
+  AccentGray,153,159,158/0.40,0.28,0.28,0.00%
 }
 %    \end{macrocode}
 %
-% Define the additional colours.
+% Define the derived colours.
 %    \begin{macrocode}
-\definecolorset[named]{RGB/cmyk}{UPSE2-}{}{%
-  DarkGreen,85,100,85/.6,.2,.6,.35;%
-  MediumGreen,105,150,115/.55,0,.55,.10;%
-  LightGreen,140,175,130/.4,0,.5,.05;%
-  DarkBlue,80,110,150/.70,.40,0,.15;%
-  MediumBlue,105,155,190/.55,.1,0,.1;%
-  LightBlue,135,185,200/.4,0,.10,.05;%
-  DarkPurple,100,80,120/.6,.8,.05,.15;%
-  MediumPurple,130,90,125/.35,.7,.1,.15;%
-  LightPurple,160,135,170/.3,.45,.05,0;%
-  DarkOcher,120,100,80/.35,.45,.65,.25;%
-  MediumOcher,150,130,95/.25,.3,.6,.15;%
-  LightOcher,185,145,100/.1,.25,.6,.1;%
-  DarkRed,180,20,40/.05,1,.8,.05;%
-  MediumRed,210,90,80/0,.75,.6,.1;%
-  LightRed,255,145,125/.05,.5,.45,.05%
-}
+\colorlet{UPSE2-DarkGray1}{UPSE2-DarkGray!20!white}
+\colorlet{UPSE2-DarkGray2}{UPSE2-DarkGray!40!white}
+\colorlet{UPSE2-DarkGray3}{UPSE2-DarkGray!60!white}
+\colorlet{UPSE2-DarkGray4}{UPSE2-DarkGray!75!black}
+\colorlet{UPSE2-DarkGray5}{UPSE2-DarkGray!50!black}
+\colorlet{UPSE2-White1}{UPSE2-White!95!black}
+\colorlet{UPSE2-White2}{UPSE2-White!85!black}
+\colorlet{UPSE2-White3}{UPSE2-White!75!black}
+\colorlet{UPSE2-White4}{UPSE2-White!65!black}
+\colorlet{UPSE2-White5}{UPSE2-White!50!black}
+\colorlet{UPSE2-MediumGray1}{UPSE2-MediumGray!20!white}
+\colorlet{UPSE2-MediumGray2}{UPSE2-MediumGray!40!white}
+\colorlet{UPSE2-MediumGray3}{UPSE2-MediumGray!60!white}
+\colorlet{UPSE2-MediumGray4}{UPSE2-MediumGray!75!black}
+\colorlet{UPSE2-MediumGray5}{UPSE2-MediumGray!50!black}
+\colorlet{UPSE2-LightGray1}{UPSE2-LightGray!90!black}
+\colorlet{UPSE2-LightGray2}{UPSE2-LightGray!75!black}
+\colorlet{UPSE2-LightGray3}{UPSE2-LightGray!55!black}
+\colorlet{UPSE2-LightGray4}{UPSE2-LightGray!25!black}
+\colorlet{UPSE2-LightGray5}{UPSE2-LightGray!10!black}
+\colorlet{UPSE2-Orange1}{UPSE2-Orange!20!white}
+\colorlet{UPSE2-Orange2}{UPSE2-Orange!40!white}
+\colorlet{UPSE2-Orange3}{UPSE2-Orange!60!white}
+\colorlet{UPSE2-Orange4}{UPSE2-Orange!75!black}
+\colorlet{UPSE2-Orange5}{UPSE2-Orange!50!black}
+\colorlet{UPSE2-LightRed1}{UPSE2-LightRed!20!white}
+\colorlet{UPSE2-LightRed2}{UPSE2-LightRed!40!white}
+\colorlet{UPSE2-LightRed3}{UPSE2-LightRed!60!white}
+\colorlet{UPSE2-LightRed4}{UPSE2-LightRed!75!black}
+\colorlet{UPSE2-LightRed5}{UPSE2-LightRed!50!black}
+\colorlet{UPSE2-DarkRed1}{UPSE2-DarkRed!20!white}
+\colorlet{UPSE2-DarkRed2}{UPSE2-DarkRed!40!white}
+\colorlet{UPSE2-DarkRed3}{UPSE2-DarkRed!60!white}
+\colorlet{UPSE2-DarkRed4}{UPSE2-DarkRed!75!black}
+\colorlet{UPSE2-DarkRed5}{UPSE2-DarkRed!50!black}
+\colorlet{UPSE2-Green1}{UPSE2-Green!10!white}
+\colorlet{UPSE2-Green2}{UPSE2-Green!25!white}
+\colorlet{UPSE2-Green3}{UPSE2-Green!50!white}
+\colorlet{UPSE2-Green4}{UPSE2-Green!75!white}
+\colorlet{UPSE2-Green5}{UPSE2-Green!90!white}
+\colorlet{UPSE2-Blue1}{UPSE2-Blue!20!white}
+\colorlet{UPSE2-Blue2}{UPSE2-Blue!40!white}
+\colorlet{UPSE2-Blue3}{UPSE2-Blue!60!white}
+\colorlet{UPSE2-Blue4}{UPSE2-Blue!75!black}
+\colorlet{UPSE2-Blue5}{UPSE2-Blue!50!black}
+\colorlet{UPSE2-AccentGray1}{UPSE2-AccentGray!20!white}
+\colorlet{UPSE2-AccentGray2}{UPSE2-AccentGray!40!white}
+\colorlet{UPSE2-AccentGray3}{UPSE2-AccentGray!60!white}
+\colorlet{UPSE2-AccentGray4}{UPSE2-AccentGray!75!black}
+\colorlet{UPSE2-AccentGray5}{UPSE2-AccentGray!50!black}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -2398,21 +2508,21 @@
 %    \begin{macrocode}
 \keys_define:nn { seiifonts }
   {
-    fontmode .choice:,
-    fontmode / original .code:n = {
+    fmode .choice:,
+    fmode / original .code:n = {
       \tl_gset:Nn \l_@@_fontmode_tl {original}
     },
-    fontmode / replacement .code:n = {
+    fmode / replacement .code:n = {
       \tl_gset:Nn \l_@@_fontmode_tl {replacement}
     },
-    fontmode / auto .code:n = {
+    fmode / auto .code:n = {
       \tl_gset:Nn \l_@@_fontmode_tl {auto}
     },
-    original .meta:n = {fontmode=original},
-    replacement .meta:n = {fontmode=replacement},
-    auto .meta:n = {fontmode=auto},
+    original .meta:n = {fmode=original},
+    replacement .meta:n = {fmode=replacement},
+    auto .meta:n = {fmode=auto},
   }
-\keys_set:nn { seiifonts } { fontmode = auto }
+\keys_set:nn { seiifonts } { fmode = auto }
 %    \end{macrocode}
 % \end{variable}
 %

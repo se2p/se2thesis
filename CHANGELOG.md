@@ -9,7 +9,12 @@ and this project adheres to
 
 ### Updated
 
+These changes might be breaking changes!
+
 - Change the width of the text block to match a golden ratio with its height.
+- Change the available predefined colours.
+- Change the option names of `se2colors` and `se2fonts` to `cmode` and `fmode`,
+  respectively.
 
 ## [v1.2.0] – 2022–10–24
 
