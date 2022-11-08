@@ -17,6 +17,11 @@ These changes might be breaking changes!
   respectively.
 - Use Helvetica instead of Optima as the sans-serif default font.
 
+### Fixed
+
+- For summary boxes a white space was missing between the text “Summary” and the
+  opening bracket, reported by @Wooza
+
 ## [v1.2.0] – 2022–10–24
 
 ### Added
