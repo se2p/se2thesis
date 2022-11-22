@@ -7,6 +7,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v1.3.1] – 2022–11–22
+
+### Fixed
+
+- Fix typos that caused issues with missing spaces, thanks to @Wooza
+
 ## [v1.3.0] – 2022–11–08
 
 ### Changed
@@ -55,6 +61,7 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
+[v1.3.1]: https://github.com/se2p/se2thesis/compare/v1.3.1...v1.3.0
 [v1.3.0]: https://github.com/se2p/se2thesis/compare/v1.3.0...v1.2.0
 [v1.2.0]: https://github.com/se2p/se2thesis/compare/v1.2.0...v1.1.1
 [v1.1.1]: https://github.com/se2p/se2thesis/compare/v1.1.0...v1.1.1
