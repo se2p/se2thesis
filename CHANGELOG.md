@@ -7,6 +7,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Fixed
+
+- Get correct translation for lower-title back for PhD theses
+
 ## [v1.3.1] – 2022–11–22
 
 ### Fixed
