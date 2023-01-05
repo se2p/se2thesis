@@ -31,7 +31,7 @@ for those people who are interested.
 
 % stop DocStrip adding rather wordy text
 \preamble
-Copyright (C) 2022 by Stephan Lukasczyk <tex@lukasczyk.me>
+Copyright (C) 2022--2023 by Stephan Lukasczyk <tex@lukasczyk.me>
 
 It may be distributed and/or modified under the conditions of
 the LaTeX Project Public License (LPPL), either version 1.3c of
@@ -45,6 +45,8 @@ This work is "maintained" (as per LPPL maintenance status by
 
 This work consists of the files se2thesis.dtx,
                                 se2thesis.ins,
+                                se2colors.dtx,
+                                se2fonts.dtx,
           and the derived files se2thesis.pdf,
                                 se2thesis.cls,
                                 se2translations-english.trsl,
@@ -83,7 +85,7 @@ This work consists of the files se2thesis.dtx,
     \file{se2colors.sty}
       {%
         \from{se2thesis.dtx}{init}
-        \from{se2thesis.dtx}{colors}
+        \from{se2colors.dtx}{package}
       }
   }
 \generate
@@ -91,7 +93,7 @@ This work consists of the files se2thesis.dtx,
     \file{se2fonts.sty}
       {%
         \from{se2thesis.dtx}{init}
-        \from{se2thesis.dtx}{fonts}
+        \from{se2fonts.dtx}{package}
       }
   }
 

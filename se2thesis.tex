@@ -1,0 +1,245 @@
+\iffalse meta-comment
+
+File: se2thesis.tex Copyright (C) 2022--2023 Stephan Lukasczyk
+
+It may be distributed and/or modified under the conditions of the
+LaTeX Project Public License (LPPL), either version 1.3c of this
+license or (at your option) any later version.  The latest version
+of this license is in the file
+
+   https://www.latex-project.org/lppl.txt
+
+This file is part of the "se2thesis bundle" (The Work in LPPL)
+and all files in that bundle must be distributed together.
+
+The released version of this bundle is available from CTAN.
+
+---------------------------------------------------------------------
+
+The development version of the bundle can be found at
+
+   https://github.com/se2p/se2thesis
+
+for those people who are interested.
+
+---------------------------------------------------------------------
+
+\fi
+
+\documentclass{l3doc}
+
+% The next line is needed so that \GetFileInfo will be able to pick up
+% version data.
+\usepackage{se2colors}
+
+%
+% Commands for this document, taken from Joseph Wright's siunitx
+% documentation:
+\ExplSyntaxOn
+\makeatletter
+\NewDocumentCommand \acro { m }
+  {
+    \textsc
+      {
+        \exp_args:NV \tl_if_head_eq_charcode:nNTF \f@series { m }
+        { \text_lowercase:n }
+        { \use:n }
+          {#1}
+      }
+  }
+\makeatother
+\ExplSyntaxOff
+\NewDocumentCommand{\email}{m}{\href{mailto:#1}{\nolinkurl{#1}}}
+\NewDocumentCommand{\ext}{m}{\texttt.#1}
+\NewDocumentCommand{\opt}{m}{\texttt{#1}}
+% Tidy up the above in bookmarks
+\makeatletter
+\pdfstringdefDisableCommands{%
+  \let\acro\@firstofone
+  \let\ext\@firstofone
+  \let\opt\@firstofone
+}
+\makeatother
+
+% For creating code demonstration, taken from Joseph Wright's siunitx
+% documentation:
+\usepackage{listings}
+\makeatletter
+\lst@RequireAspects{writefile}
+\newsavebox\LaTeXdemo@box
+\lstnewenvironment{LaTeXdemo}[1][code and example]
+  {%
+    \global\let\lst@intname\@empty
+    \edef\LaTeXdemo@end{%
+      \expandafter\noexpand\csname LaTeXdemo@@#1@end\endcsname
+    }%
+    \@nameuse{LaTeXdemo@@#1}%
+  }
+  {\LaTeXdemo@end}
+\newcommand\LaTeXdemo@new[3]{%
+  \@namedef{LaTeXdemo@@#1}{#2}
+  \@namedef{LaTeXdemo@@#1@end}{#3}%
+}
+\newcommand*\LaTeXdemo@common{%
+  \setkeys{lst}
+    {%
+      basicstyle       = \small\ttfamily,
+      breaklines       = true,
+      basewidth        = 0.51em,
+      captionpos       = t,
+      extendedchars    = true,
+      frame            = single,
+      gobble           = 2,
+      keywordstyle     = \color{blue}\bfseries,
+      language         = [LaTeX]{TeX},
+      showspaces       = false,
+      showstringspaces = false,
+      showtabs         = false,
+      tabsize          = 2,
+    }%
+}
+\newcount\LaTeXdemo@count
+\newcommand*\LaTeXdemo@input{%
+  \catcode`\^^M = 10\relax
+  \input{\jobname-\number\LaTeXdemo@count.tmp}%
+}
+\LaTeXdemo@new{code and example}{%
+  \setbox\LaTeXdemo@box=\hbox\bgroup
+    \global\advance\LaTeXdemo@count by 1 %
+    \lst@BeginAlsoWriteFile{\jobname-\number\LaTeXdemo@count.tmp}%
+    \LaTeXdemo@common
+}{%
+    \lst@EndWriteFile
+  \egroup
+  \begin{center}
+    \ifdim\wd\LaTeXdemo@box > 0.48\linewidth
+      \begin{minipage}{\linewidth}
+        \usebox\LaTeXdemo@box
+      \end{minipage}%
+      \par
+      \begin{minipage}{\linewidth}
+        \LaTeXdemo@input
+      \end{minipage}
+    \else
+      \begin{minipage}{0.48\linewidth}
+        \LaTeXdemo@input
+      \end{minipage}%
+      \hspace{\fill}%
+      \begin{minipage}{0.48\linewidth}
+        \usebox\LaTeXdemo@box
+      \end{minipage}%
+    \fi
+  \end{center}
+}
+\LaTeXdemo@new{code and float}{%
+  \global\advance\LaTeXdemo@count by 1 %
+  \lst@BeginAlsoWriteFile{\jobname-\number\LaTeXdemo@count.tmp}%
+  \LaTeXdemo@common
+}{%
+  \lst@EndWriteFile
+  \LaTeXdemo@input
+}
+\LaTeXdemo@new{code only}{\LaTeXdemo@common}{}
+\makeatother
+
+\usepackage[UKenglish]{babel}
+\usepackage{fontspec}
+\usepackage{hvlogos}
+
+% Taken from xcolor.dtx
+\makeatletter
+\def\testclr#1#{\@testclr{#1}}
+\def\@testclr#1#2{{\fboxsep\z@\fbox{\colorbox#1{#2}{\phantom{XX}}}}}
+\makeatother
+
+\usepackage{hvfloat}
+\hypersetup{%
+  allcolors=UPSE2-Blue,%
+  pdftitle={se2thesis -- A Thesis Class for the Chair of Software Engineering II
+  at the University of Passau, Germany},%
+  pdfauthor={Stephan Lukasczyk},
+}
+\usepackage[capitalise]{cleveref}
+
+\begin{document}
+
+\GetFileInfo{se2colors.sty}
+
+\title{%
+  \pkg{se2thesis} -- A Thesis Class for the Chair of Software
+  Engineering~II at the University of Passau, Germany%
+  \thanks{This file describes \fileversion,
+    last revised \filedate.}%
+}
+
+\author{%
+  Stephan Lukasczyk%
+  \thanks{%
+    E-mail: \href{mailto:tex@lukasczyk.me}{tex@lukasczyk.me}%
+  }%
+}
+
+\date{Released \filedate}
+
+\pagenumbering{roman}
+
+\maketitle
+
+\begin{abstract}
+  One can choose from a wide variety of templates to write a thesis.
+  Many universities provide very rigorous style guides and force their
+  students to obey to those guides, even though they might be questionable
+  from a typographics point of view.
+  Other universities do not provide such guides and leave it to their students
+  to choose or come up with a template.
+  The latter is causing very differently-looking theses.
+
+  To avoid such a situation in the future this bundle combines several
+  \LaTeX{} packages and classes for the use at the Chair of Software
+  Engineering~II at the University of Passau.
+  We provide, among others, a document class for theses that shall be
+  used by our students.
+  The bundle is designed in a way that one can use the basic components as
+  standalone packages to allow their reuse for other projects.
+\end{abstract}
+
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+% Make the separate source files into a single whole, format-wise
+\RenewDocumentCommand{\maketitle}{}{%
+  \clearpage
+}
+\DeclareExpandableDocumentCommand{\thanks}{m}{}
+
+\let\DelayPrintIndex\PrintIndex
+\RenewDocumentCommand{\PrintIndex}{}{}
+
+\DisableImplementation
+
+\part{User Documentation}\label{sec:doc}
+
+The first part of this file provides the documentation for the user
+of the \pkg{se2thesis} bundle.
+We provide the implementation in the second part of this document,
+starting at page~\pageref{sec:impl}, for those who are curious.
+
+% Load the source files in order
+\DocInput{se2thesis.dtx}
+\DocInput{se2colors.dtx}
+\DocInput{se2fonts.dtx}
+
+\EnableImplementation
+\DisableDocumentation
+
+\part{Implementation}\label{sec:impl}
+
+The second part of this file provides the implementation of the package
+for a better understanding of what is happening.
+
+\DocInputAgain
+
+\DelayPrintIndex
+
+\end{document}

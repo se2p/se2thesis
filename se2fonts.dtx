@@ -1,0 +1,324 @@
+% \iffalse meta-comment
+%
+% File: se2fonts.dtx Copyright (C) 2022--2023 Stephan Lukasczyk
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    https://www.latex-project.org/lppl.txt
+%
+% This file is part of the "se2thesis bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+% The released version of this bundle is available from CTAN.
+%
+% ---------------------------------------------------------------------
+%
+% The development version of the bundle can be found at
+%
+%    https://github.com/se2p/se2thesis
+%
+% for those people who are interested.
+%
+% ---------------------------------------------------------------------
+%
+%<*driver>
+\documentclass{l3doc}
+% The next line is needed so that \GetFileInfo will be able to pick up
+% version data.
+\usepackage{se2fonts}
+
+\usepackage[UKenglish]{babel}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\usepackage{hvlogos}
+
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \GetFileInfo{se2fonts.sty}
+%
+% \title{^^A
+%   \pkg{se2fonts} -- Font Definitions for the \pkg{se2thesis} Bundle^^A
+%   \thanks{This file describes \fileversion, last revised \filedate.}^^A
+% }
+%
+% \author{^^A
+%   Stephan Lukasczyk^^A
+%   \thanks{^^A
+%     E-mail: \href{mailto:tex@lukasczyk.me}{tex@lukasczyk.me}^^A
+%   }^^A
+% }
+%
+% \date{Released \filedate}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{The \pkg{se2fonts} package}\label{sec:doc-se2fonts}
+%
+% The \pkg{se2fonts} package sets the fonts of the document.
+% In the first version of the bundle, we were running to use Hermann Zaph's
+% \emph{Palatino}, \emph{Helvetica}, and \emph{Neo Euler} fonts.
+% However, we figured out that they are not part of a standard \LaTeX{}
+% installation, and thus required manual work by the user to install them.
+% Furthermore, loading the fonts did not always work in a correct way.
+%
+% Thus, we decided to rethink this decision and---as a consequence---now use
+% different fonts that are part of a recent standard \LaTeX{} installation:
+% we use the \emph{Libertinus} fonts\footnote{
+%   \href{https://github.com/alerque/libertinus}{https://github.com/alerque/libertinus}
+% } for serif, sans-serif, and math typesetting
+% and the \emph{Anonymous Pro} font\footnote{
+%   \href{https://www.marksimonson.com/fonts/view/anonymous-pro}{https://www.marksimonson.com/fonts/view/anonymous-pro}
+% } as a monospaced font.
+%
+% \emph{Please note:} this change might affect they way your documents look,
+% and also might affect paragraph and line breaks!
+%
+% If you are using \LuaTeX{},
+% fonts are expected to be present as open-type fonts;
+% using \pdfLaTeX{} will fallback to Type-1 fonts.
+%
+% \emph{Please note:} the package does not support \XeTeX{}!
+%
+% The following options are defined by the \pkg{se2fonts} package
+% to influence the selection of the fonts.
+%
+% \begin{function}[updated = 2022-11-03, deprecated = 2023-01-05]{fmode}
+%   \begin{syntax}
+%     |fmode| = \meta{choice}
+%   \end{syntax}
+%   The argument is deprecated and will raise a warning.
+%   It is to be removed by a future version of the \pkg{se2thesis} bundle.
+% \end{function}
+%
+% The following list provides examples for each of the fonts:
+% \begin{itemize}
+%   \item {\fontspec{Libertinus Serif}An example text in Libertinus Serif}
+%   \item {\fontspec{Libertinus Sans}An example text in Libertinus Sans}
+%   \item {\fontspec{Anonymous Pro}An example text in Anonymous Pro}
+% \end{itemize}
+%
+% The package provides additional helper functions
+% that are also available to the user.
+%
+% \begin{function}{\pdftexengine, \xetexengine, \luatexengine}
+%   \begin{syntax}
+%     \cmd{\pdftexengine}
+%     \cmd{\xetexengine}
+%     \cmd{\luatexengine}
+%   \end{syntax}
+%   These commands alias the built-in \LaTeX3{} macros
+%   \cs{sys_if_engine_pdftex_p:},
+%   \cs{sys_if_engine_xetex_p:}, and
+%   \cs{sys_if_engine_luatex_p:}.
+%   They can be used to check which engine the user is currently running.
+% \end{function}
+%
+% \begin{function}{\ifengineTF, \ifengineT, \ifengineF}
+%   \begin{syntax}
+%     \cmd{\ifengineTF} \marg{engine} \marg{then block} \marg{else block}
+%     \cmd{\ifengineT} \marg{engine} \marg{then block}
+%     \cmd{\ifengineF} \marg{engine} \marg{then block}
+%   \end{syntax}
+%   Allows to execute code based on the running engine.
+%   The base variant \cs{ifengineTF} expects the user to specify a condition,
+%   which can be built of combinations of the \cs{pdftexengine},
+%   \cs{xetexengine}, and \cs{luatexengine} macros,
+%   followed by the code that will be executed if the condition holds
+%   and the code that will be executed if the condition does not hold.
+%
+%   For convenience,
+%   we provide the variants \cs{ifengineT} and \cs{ifengineF}
+%   that allow to omit an empty then or else branch, respectively.
+% \end{function}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{\pkg{se2fonts} implementation}
+%
+% Start the \pkg{DocStrip} guards.
+%    \begin{macrocode}
+%<*package>
+%    \end{macrocode}
+%
+% Identify the internal prefix (\LaTeX3 \pkg{DocStrip} convention): only
+% internal material in this \emph{submodule} should be used directly.
+%    \begin{macrocode}
+%<@@=slcd_fonts>
+%    \end{macrocode}
+%
+% Identify the package and give the overall version information.
+%    \begin{macrocode}
+\ProvidesExplPackage {se2fonts} {2022-01-05} {2.0.0}
+  {A font-selection support package for the se2thesis bundle}
+%    \end{macrocode}
+%
+% \subsection{Load-time options}
+%
+% \begin{macro}{\l_@@_fontmode_tl}
+%   Holds the font-selection mode specified by the user as a package
+%   load-time option.
+%   \emph{Please note:} this option is deprecated!
+%    \begin{macrocode}
+\tl_new:N \l_@@_fontmode_tl
+\keys_define:nn { seiifonts }
+  {
+    fmode .choice:,
+    fmode / original .code:n = {
+      \tl_gset:Nn \l_@@_fontmode_tl {original}
+    },
+    fmode / replacement .code:n = {
+      \tl_gset:Nn \l_@@_fontmode_tl {replacement}
+    },
+    fmode / auto .code:n = {
+      \tl_gset:Nn \l_@@_fontmode_tl {auto}
+    },
+    original .meta:n = {fmode=original},
+    replacement .meta:n = {fmode=replacement},
+    auto .meta:n = {fmode=auto},
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Option handling}
+%
+%    \begin{macrocode}
+\IfFormatAtLeastTF { 2022-06-01 }
+  { \ProcessKeyOptions [ seiifonts ] }
+  {
+    \RequirePackage{ l3keys2e }
+    \ProcessKeysOptions { seiifonts }
+  }
+%    \end{macrocode}
+%
+% Define a warning message
+%    \begin{macrocode}
+\msg_set:nnnn { seiifonts } { deprecated-option }
+  { The~ option~ fmode~ to~ the~ se2fonts~ package~ is~ deprecated. }
+  { Remove~ it~ from~ your~ code.}
+%    \end{macrocode}
+%
+% Raise the warning if the option was used
+%    \begin{macrocode}
+\tl_if_empty:NF \l_@@_fontmode_tl
+  {
+    \msg_warning:nn { seiifonts } { deprecated-option }
+  }
+%    \end{macrocode}
+%
+% \subsection{Helper macros}
+%
+% \begin{macro}{\pdftexengine, \xetexengine, \luatexengine}
+%   We define several alias macros to identify which engine the user is running.
+%    \begin{macrocode}
+\cs_new_eq:NN \pdftexengine \sys_if_engine_pdftex_p:
+\cs_new_eq:NN \xetexengine \sys_if_engine_xetex_p:
+\cs_new_eq:NN \luatexengine \sys_if_engine_luatex_p:
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ifengineTF, \ifengineT, \ifengineF}
+%   True, if the engine used matches the given first argument.
+%    \begin{macrocode}
+\NewExpandableDocumentCommand \ifengineTF { mmm }
+  {
+    \bool_if:nTF { #1 } { #2 } { #3 }
+  }
+\NewExpandableDocumentCommand \ifengineT { mm }
+  {
+    \bool_if:nT { #1 } { #2 } 
+  }
+\NewExpandableDocumentCommand \ifengineF { mm }
+  {
+    \bool_if:nF { #1 } { #2 }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% The package is not tested with \XeTeX{}, thus we provide an error to the user
+% and stop the execution if they want to use the package with \XeTeX.
+%    \begin{macrocode}
+\ifengineT { \xetexengine }
+  {
+    \msg_set:nnnn { seiifonts } { xetex-not-supported }
+      { XeTeX~ is~ not~ supported~ by~ the~ se2fonts~ package. }
+      { Switch~ to~ pdfTeX~ or~ (preferably)~ LuaTeX. }
+    \msg_error:nn { seiifonts } { xetex-not-supported }
+  }
+%    \end{macrocode}
+%
+% \subsection{Font loading}
+%
+% Depending on the engine used by the user,
+% we can use \pkg{fontspec} for loading fonts.
+%    \begin{macrocode}
+\ifengineTF { \luatexengine }
+  {
+%    \end{macrocode}
+%
+% If the user uses \LuaTeX{}, load \pkg{fontspec} and \pkg{unicode-math}.
+%    \begin{macrocode}
+    \RequirePackage{fontspec}
+    \RequirePackage{unicode-math}
+%    \end{macrocode}
+%
+% To make sure the scaling of the fonts matches, we let \pkg{fontspec} do this
+% matching based on the lower-case characters.
+%    \begin{macrocode}
+    \defaultfontfeatures{ Scale = MatchLowercase }
+    \defaultfontfeatures[\rmfamily]{ Scale = 1 }
+%    \end{macrocode}
+%
+% Load the respective \pkg{libertinus-otf} package and omit the monospaced font.
+%    \begin{macrocode}
+    \PassOptionsToPackage{mono=false}{libertinus-otf}
+    \RequirePackage{libertinus-otf}
+%    \end{macrocode}
+%
+% Load the \emph{Anonymous Pro} monospaced font.
+%    \begin{macrocode}
+    \setmonofont{AnonymousPro}[
+      RawFeature     = {+tnum, +lnum},
+      Scale          = {MatchLowercase},
+      FakeStretch    = {0.9},
+      UprightFont    = *-Regular,
+      ItalicFont     = *-Italic,
+      SlantedFont    = *-Italic,
+      BoldFont       = *-Bold,
+      BoldItalicFont = *-BoldItalic,
+      Extension      = .ttf,
+    ]
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+  } {
+%    \end{macrocode}
+%
+% The user does not use \LuaTeX{}, thus fallback to T1 fonts.
+%    \begin{macrocode}
+    \PassOptionsToPackage{T1}{fontenc}
+    \PassOptionsToPackage{scale=0.85}{AnonymousPro}
+    \PassOptionsToPackage{mono=false}{libertinus-type1}
+    \RequirePackage{fontenc}
+    \RequirePackage{AnonymousPro}
+    \RequirePackage{libertinus-type1}
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \PrintIndex

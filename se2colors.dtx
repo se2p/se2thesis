@@ -1,0 +1,373 @@
+% \iffalse meta-comment
+%
+% File: se2colors.dtx Copyright (C) 2022--2023 Stephan Lukasczyk
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%    https://www.latex-project.org/lppl.txt
+%
+% This file is part of the "se2thesis bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+% The released version of this bundle is available from CTAN.
+%
+% ---------------------------------------------------------------------
+%
+% The development version of the bundle can be found at
+%
+%    https://github.com/se2p/se2thesis
+%
+% for those people who are interested.
+%
+% ---------------------------------------------------------------------
+%
+%<*driver>
+\documentclass{l3doc}
+% The next line is needed so that \GetFileInfo will be able to pick up
+% version data.
+\usepackage{se2colors}
+
+\usepackage[UKenglish]{babel}
+\usepackage{hvfloat}
+\usepackage{hvlogos}
+\usepackage{booktabs}
+
+% Taken from xcolor.dtx
+\makeatletter
+\def\testclr#1#{\@testclr{#1}}
+\def\@testclr#1#2{{\fboxsep\z@\fbox{\colorbox#1{#2}{\phantom{XXX}}}}}
+\makeatother
+
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \GetFileInfo{se2colors.sty}
+%
+% \title{^^A
+%   \pkg{se2colors} -- Colour Definitions for the \pkg{se2thesis} Bundle^^A
+%   \thanks{This file describes \fileversion, last revised \filedate.}^^A
+% }
+%
+% \author{^^A
+%   Stephan Lukasczyk^^A
+%   \thanks{^^A
+%     E-mail: \href{mailto:tex@lukasczyk.me}{tex@lukasczyk.me}^^A
+%   }^^A
+% }
+%
+% \date{Released \filedate}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{The \pkg{se2colors} package}\label{sec:doc-se2colors}
+%
+% Several colours are specific to the university
+% and we want to have a comprehensive interface
+% to access them throughout all our packages.
+%
+% The \pkg{se2colors} package provides this exact features.
+% One can load it using |\usepackage{se2colors}| in the document preamble.
+%
+% \begin{function}[updated = 2022-11-03]{cmode}
+%   \begin{syntax}
+%     |cmode| = \meta{choice}
+%   \end{syntax}
+%   Selects the colour mode that shall be used for creating the results,
+%   a choice from the options specified in \cref{tab:coloursoptions}.
+%   The default setting is |4C|.
+% \end{function}
+%
+% \begin{table}[th]
+%   \tabcaption{\label{tab:coloursoptions}%
+%     Options provided by \pkg{se2colors}.%
+%   }
+%   \centering
+%   \begin{tabular}{@{} l l @{}} \toprule
+%     Option & Description \\ \midrule
+%     %
+%     |cmode=4C|
+%            & Define colours in CMYK colour space (\emph{default}). \\
+%     %
+%     |cmode=CMYK|
+%            & Alias for the previous. \\
+%     %
+%     |CMYK|, |cmyk|
+%            & Aliases for the previous. \\
+%     %
+%     |cmode=RGB|
+%            & Define colours in RGB colour space. \\
+%     %
+%     |RGB|, |rgb|
+%            & Aliases for the previous. \\
+%     %
+%     |cmode=BW|
+%            & Define colours in black-and-white colour space. \\
+%     %
+%     |cmode=1C|
+%            & Alias for the previous. \\
+%     %
+%     |gray|
+%            & Alias for the previous. \\
+%     %
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
+%
+% We define two basic colours that are taken from the University's logo,
+% namely |UPSE2-Gray| \testclr{UPSE2-Gray}
+% and |UPSE2-Orange| \testclr{UPSE2-Orange}.
+%
+% Additionally,
+% we define four colours for the four faculties of the University:
+% \begin{itemize}
+%   \item the Faculty of Law |UPSE2-JUR| \testclr{UPSE2-JUR},
+%   \item the School of Business, Economics and Information Systems
+%     |UPSE2-WIWI| \testclr{UPSE2-WIWI},
+%   \item the Faculty of Arts and Humanities
+%     |UPSE2-PHIL| \testclr{UPSE2-PHIL}, and
+%   \item the Faculty of Computer Science and Mathematics
+%     |UPSE2-FIM| \testclr{UPSE2-FIM}.
+% \end{itemize}
+%
+% Finally,
+% we define a full set of supplementary colours:
+% \begin{itemize}
+%   \item |UPSE2-DarkGray| \testclr{UPSE2-DarkGray}
+%     with its derivatives \\
+%     |UPSE2-DarkGray1| \testclr{UPSE2-DarkGray1},
+%     |UPSE2-DarkGray2| \testclr{UPSE2-DarkGray2},
+%     |UPSE2-DarkGray3| \testclr{UPSE2-DarkGray3},
+%     |UPSE2-DarkGray4| \testclr{UPSE2-DarkGray4}, and
+%     |UPSE2-DarkGray5| \testclr{UPSE2-DarkGray5}.
+%   \item |UPSE2-White| \testclr{UPSE2-White}
+%     with its derivatives \\
+%     |UPSE2-White1| \testclr{UPSE2-White1},
+%     |UPSE2-White2| \testclr{UPSE2-White2},
+%     |UPSE2-White3| \testclr{UPSE2-White3},
+%     |UPSE2-White4| \testclr{UPSE2-White4}, and
+%     |UPSE2-White5| \testclr{UPSE2-White5}.
+%   \item |UPSE2-MediumGray| \testclr{UPSE2-MediumGray}
+%     with its derivatives \\
+%     |UPSE2-MediumGray1| \testclr{UPSE2-MediumGray1},
+%     |UPSE2-MediumGray2| \testclr{UPSE2-MediumGray2},
+%     |UPSE2-MediumGray3| \testclr{UPSE2-MediumGray3},
+%     |UPSE2-MediumGray4| \testclr{UPSE2-MediumGray4}, and
+%     |UPSE2-MediumGray5| \testclr{UPSE2-MediumGray5}.
+%   \item |UPSE2-LightGray| \testclr{UPSE2-LightGray}
+%     with its derivatives \\
+%     |UPSE2-LightGray1| \testclr{UPSE2-LightGray1},
+%     |UPSE2-LightGray2| \testclr{UPSE2-LightGray2},
+%     |UPSE2-LightGray3| \testclr{UPSE2-LightGray3},
+%     |UPSE2-LightGray4| \testclr{UPSE2-LightGray4}, and
+%     |UPSE2-LightGray5| \testclr{UPSE2-LightGray5}.
+%   \item |UPSE2-Orange| \testclr{UPSE2-Orange}
+%     with its derivatives \\
+%     |UPSE2-Orange1| \testclr{UPSE2-Orange1},
+%     |UPSE2-Orange2| \testclr{UPSE2-Orange2},
+%     |UPSE2-Orange3| \testclr{UPSE2-Orange3},
+%     |UPSE2-Orange4| \testclr{UPSE2-Orange4}, and
+%     |UPSE2-Orange5| \testclr{UPSE2-Orange5}.
+%   \item |UPSE2-LightRed| \testclr{UPSE2-LightRed}
+%     with its derivatives \\
+%     |UPSE2-LightRed1| \testclr{UPSE2-LightRed1},
+%     |UPSE2-LightRed2| \testclr{UPSE2-LightRed2},
+%     |UPSE2-LightRed3| \testclr{UPSE2-LightRed3},
+%     |UPSE2-LightRed4| \testclr{UPSE2-LightRed4}, and
+%     |UPSE2-LightRed5| \testclr{UPSE2-LightRed5}.
+%   \item |UPSE2-DarkRed| \testclr{UPSE2-DarkRed}
+%     with its derivatives \\
+%     |UPSE2-DarkRed1| \testclr{UPSE2-DarkRed1},
+%     |UPSE2-DarkRed2| \testclr{UPSE2-DarkRed2},
+%     |UPSE2-DarkRed3| \testclr{UPSE2-DarkRed3},
+%     |UPSE2-DarkRed4| \testclr{UPSE2-DarkRed4}, and
+%     |UPSE2-DarkRed5| \testclr{UPSE2-DarkRed5}.
+%   \item |UPSE2-Green| \testclr{UPSE2-Green}
+%     with its derivatives \\
+%     |UPSE2-Green1| \testclr{UPSE2-Green1},
+%     |UPSE2-Green2| \testclr{UPSE2-Green2},
+%     |UPSE2-Green3| \testclr{UPSE2-Green3},
+%     |UPSE2-Green4| \testclr{UPSE2-Green4}, and
+%     |UPSE2-Green5| \testclr{UPSE2-Green5}.
+%   \item |UPSE2-Blue| \testclr{UPSE2-Blue}
+%     with its derivatives \\
+%     |UPSE2-Blue1| \testclr{UPSE2-Blue1},
+%     |UPSE2-Blue2| \testclr{UPSE2-Blue2},
+%     |UPSE2-Blue3| \testclr{UPSE2-Blue3},
+%     |UPSE2-Blue4| \testclr{UPSE2-Blue4}, and
+%     |UPSE2-Blue5| \testclr{UPSE2-Blue5}.
+%   \item |UPSE2-AccentGray| \testclr{UPSE2-AccentGray}
+%     with its derivatives \\
+%     |UPSE2-AccentGray1| \testclr{UPSE2-AccentGray1},
+%     |UPSE2-AccentGray2| \testclr{UPSE2-AccentGray2},
+%     |UPSE2-AccentGray3| \testclr{UPSE2-AccentGray3},
+%     |UPSE2-AccentGray4| \testclr{UPSE2-AccentGray4}, and
+%     |UPSE2-AccentGray5| \testclr{UPSE2-AccentGray5}.
+% \end{itemize}
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{\pkg{se2colors} implementation}
+%
+% Start the \pkg{DocStrip} guards.
+%    \begin{macrocode}
+%<*package>
+%    \end{macrocode}
+%
+% Identify the internal prefix (\LaTeX3 \pkg{DocStrip} convention): only
+% internal material in this \emph{submodule} should be used directly.
+%    \begin{macrocode}
+%<@@=slcd_colors>
+%    \end{macrocode}
+%
+% Identify the package and give the overall version information.
+%    \begin{macrocode}
+\ProvidesExplPackage {se2colors} {2022-01-05} {2.0.0}
+  {A colour support package for the se2thesis bundle}
+%    \end{macrocode}
+%
+% \subsection{Load-time options}
+%
+% \begin{macro}{\l_@@_colormode_tl}
+%   Holds the colour mode selected by the user as a package load-time option.
+%    \begin{macrocode}
+\keys_define:nn { seiicolors }
+  {
+    cmode .choice:,
+    cmode / 4C .code:n = {
+      \PassOptionsToPackage{cmyk}{xcolor}
+      \tl_gset:Nn \l_@@_colormode_tl {4C}
+    },
+    cmode / RGB .code:n = {
+      \PassOptionsToPackage{rgb}{xcolor}
+      \tl_gset:Nn \l_@@_colormode_tl {RGB}
+    },
+    cmode / BW .code:n = {
+      \PassOptionsToPackage{gray}{xcolor}
+      \tl_gset:Nn \l_@@_colormode_tl {BW}
+    },
+    cmode / CMYK .meta:n = {cmode=4C},
+    cmode / cmyk .meta:n = {cmode=4C},
+    cmode / rgb .meta:n = {cmode=RGB},
+    cmode / gray .meta:n = {cmode=BW},
+    RGB .meta:n = {cmode=RGB},
+    rgb .meta:n = {cmode=RGB},
+    CMYK .meta:n = {cmode=4C},
+    cmyk .meta:n = {cmode=4C},
+    gray .meta:n = {cmode=BW},
+  }
+\keys_set:nn { seiicolors } { cmode = 4C }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Option handling}
+%
+%    \begin{macrocode}
+\IfFormatAtLeastTF { 2022-06-01 }
+  { \ProcessKeyOptions [ seiicolors ] }
+  {
+    \RequirePackage { l3keys2e }
+    \ProcessKeysOptions { seiicolors }
+  }
+%    \end{macrocode}
+%
+% \subsection{Colour definitions}
+%
+% Load the \pkg{xcolor} package for colour definitions.
+%    \begin{macrocode}
+\RequirePackage{xcolor}
+%    \end{macrocode}
+%
+%
+% Define the primary colours gray and orange as given by the University of
+% Passau's style guides.
+%    \begin{macrocode}
+\definecolorset[named]{RGB/cmyk}{UPSE2-}{}{%
+  Orange,242,148,0/0.00,0.44,0.95,0.01;%
+  Gray,153,159,158/0.40,0.28,0.28,0.00;%
+  JUR,229,49,56/0.01,0.90,0.81,0.01;%
+  WIWI,0,96,57/0.87,0.20,0.87,0.36;%
+  PHIL,188,42,51/0.06,0.93,0.81,0.11;%
+  FIM,0,90,161/0.93,0.63,0.01,0.02;%
+  DarkGray,77,77,77/0.74,0.67,0.62,0.18;%
+  White,255,255,255/0.00,0.00,0.00,0.00;%
+  MediumGray,127,127,127/0.52,0.43,0.40,0.02;%
+  LightGray,229,229,229/0.08,0.06,0.04,0.00;%
+  LightRed,229,49,56/0.01,0.90,0.81,0.01;%
+  DarkRed,188,42,51/0.06,0.93,0.80,0.11;%
+  Green,0,96,57/0.87,0.20,0.86,0.35;%
+  Blue,0,90,161/0.93,0.63,0.01,0.02;%
+  AccentGray,153,159,158/0.40,0.28,0.28,0.00%
+}
+%    \end{macrocode}
+%
+% Define the derived colours.
+%    \begin{macrocode}
+\colorlet{UPSE2-DarkGray1}{UPSE2-DarkGray!20!white}
+\colorlet{UPSE2-DarkGray2}{UPSE2-DarkGray!40!white}
+\colorlet{UPSE2-DarkGray3}{UPSE2-DarkGray!60!white}
+\colorlet{UPSE2-DarkGray4}{UPSE2-DarkGray!75!black}
+\colorlet{UPSE2-DarkGray5}{UPSE2-DarkGray!50!black}
+\colorlet{UPSE2-White1}{UPSE2-White!95!black}
+\colorlet{UPSE2-White2}{UPSE2-White!85!black}
+\colorlet{UPSE2-White3}{UPSE2-White!75!black}
+\colorlet{UPSE2-White4}{UPSE2-White!65!black}
+\colorlet{UPSE2-White5}{UPSE2-White!50!black}
+\colorlet{UPSE2-MediumGray1}{UPSE2-MediumGray!20!white}
+\colorlet{UPSE2-MediumGray2}{UPSE2-MediumGray!40!white}
+\colorlet{UPSE2-MediumGray3}{UPSE2-MediumGray!60!white}
+\colorlet{UPSE2-MediumGray4}{UPSE2-MediumGray!75!black}
+\colorlet{UPSE2-MediumGray5}{UPSE2-MediumGray!50!black}
+\colorlet{UPSE2-LightGray1}{UPSE2-LightGray!90!black}
+\colorlet{UPSE2-LightGray2}{UPSE2-LightGray!75!black}
+\colorlet{UPSE2-LightGray3}{UPSE2-LightGray!55!black}
+\colorlet{UPSE2-LightGray4}{UPSE2-LightGray!25!black}
+\colorlet{UPSE2-LightGray5}{UPSE2-LightGray!10!black}
+\colorlet{UPSE2-Orange1}{UPSE2-Orange!20!white}
+\colorlet{UPSE2-Orange2}{UPSE2-Orange!40!white}
+\colorlet{UPSE2-Orange3}{UPSE2-Orange!60!white}
+\colorlet{UPSE2-Orange4}{UPSE2-Orange!75!black}
+\colorlet{UPSE2-Orange5}{UPSE2-Orange!50!black}
+\colorlet{UPSE2-LightRed1}{UPSE2-LightRed!20!white}
+\colorlet{UPSE2-LightRed2}{UPSE2-LightRed!40!white}
+\colorlet{UPSE2-LightRed3}{UPSE2-LightRed!60!white}
+\colorlet{UPSE2-LightRed4}{UPSE2-LightRed!75!black}
+\colorlet{UPSE2-LightRed5}{UPSE2-LightRed!50!black}
+\colorlet{UPSE2-DarkRed1}{UPSE2-DarkRed!20!white}
+\colorlet{UPSE2-DarkRed2}{UPSE2-DarkRed!40!white}
+\colorlet{UPSE2-DarkRed3}{UPSE2-DarkRed!60!white}
+\colorlet{UPSE2-DarkRed4}{UPSE2-DarkRed!75!black}
+\colorlet{UPSE2-DarkRed5}{UPSE2-DarkRed!50!black}
+\colorlet{UPSE2-Green1}{UPSE2-Green!10!white}
+\colorlet{UPSE2-Green2}{UPSE2-Green!25!white}
+\colorlet{UPSE2-Green3}{UPSE2-Green!50!white}
+\colorlet{UPSE2-Green4}{UPSE2-Green!75!white}
+\colorlet{UPSE2-Green5}{UPSE2-Green!90!white}
+\colorlet{UPSE2-Blue1}{UPSE2-Blue!20!white}
+\colorlet{UPSE2-Blue2}{UPSE2-Blue!40!white}
+\colorlet{UPSE2-Blue3}{UPSE2-Blue!60!white}
+\colorlet{UPSE2-Blue4}{UPSE2-Blue!75!black}
+\colorlet{UPSE2-Blue5}{UPSE2-Blue!50!black}
+\colorlet{UPSE2-AccentGray1}{UPSE2-AccentGray!20!white}
+\colorlet{UPSE2-AccentGray2}{UPSE2-AccentGray!40!white}
+\colorlet{UPSE2-AccentGray3}{UPSE2-AccentGray!60!white}
+\colorlet{UPSE2-AccentGray4}{UPSE2-AccentGray!75!black}
+\colorlet{UPSE2-AccentGray5}{UPSE2-AccentGray!50!black}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \PrintIndex

@@ -8,13 +8,16 @@ module = "se2thesis"
 packtdszip = true
 
 -- Typeset only the .tex files
--- typesetfiles = {"*.tex"}
+typesetfiles = {"*.tex"}
 
 -- Sources files cover those for rollback
 sourcesfiles =
   {
     "se2thesis.dtx",
     "se2thesis.ins",
+    "se2thesis.tex",
+    "se2colors.dtx",
+    "se2fonts.dtx",
   }
 demofiles =
   {
@@ -42,6 +45,7 @@ function update_tag(file, content, tagname, tagdate)
   dict_tagdate = string.gsub(tagdate, "-", "/")
 
   if string.match(file, "CHANGELOG.md") then
+    -- CHANGELOG
     local pattern = "v%d%.%d.%d%?"
     local url = "https://github.com/se2p/se2thesis/compare/"
     local previous = string.match(content, "compare/(" .. pattern .. ")%.%.%.HEAD")

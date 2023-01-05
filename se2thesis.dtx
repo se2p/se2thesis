@@ -29,135 +29,6 @@
 % The next line is needed so that \GetFileInfo will be able to pick up
 % version data.
 \usepackage{se2colors}
-%
-% Commands for this document, taken from Joseph Wright's siunitx
-% documentation:
-\ExplSyntaxOn
-\makeatletter
-\NewDocumentCommand \acro { m }
-  {
-    \textsc
-      {
-        \exp_args:NV \tl_if_head_eq_charcode:nNTF \f@series { m }
-        { \text_lowercase:n }
-        { \use:n }
-          {#1}
-      }
-  }
-\makeatother
-\ExplSyntaxOff
-\NewDocumentCommand{\email}{m}{\href{mailto:#1}{\nolinkurl{#1}}}
-\NewDocumentCommand{\ext}{m}{\texttt.#1}
-\NewDocumentCommand{\opt}{m}{\texttt{#1}}
-% Tidy up the above in bookmarks
-\makeatletter
-\pdfstringdefDisableCommands{%
-  \let\acro\@firstofone
-  \let\ext\@firstofone
-  \let\opt\@firstofone
-}
-\makeatother
-
-% For creating code demonstration, taken from Joseph Wright's siunitx
-% documentation:
-\usepackage{listings}
-\makeatletter
-\lst@RequireAspects{writefile}
-\newsavebox\LaTeXdemo@box
-\lstnewenvironment{LaTeXdemo}[1][code and example]
-  {%
-    \global\let\lst@intname\@empty
-    \edef\LaTeXdemo@end{%
-      \expandafter\noexpand\csname LaTeXdemo@@#1@end\endcsname
-    }%
-    \@nameuse{LaTeXdemo@@#1}%
-  }
-  {\LaTeXdemo@end}
-\newcommand\LaTeXdemo@new[3]{%
-  \@namedef{LaTeXdemo@@#1}{#2}
-  \@namedef{LaTeXdemo@@#1@end}{#3}%
-}
-\newcommand*\LaTeXdemo@common{%
-  \setkeys{lst}
-    {%
-      basicstyle       = \small\ttfamily,
-      breaklines       = true,
-      basewidth        = 0.51em,
-      captionpos       = t,
-      extendedchars    = true,
-      frame            = single,
-      gobble           = 2,
-      keywordstyle     = \color{blue}\bfseries,
-      language         = [LaTeX]{TeX},
-      showspaces       = false,
-      showstringspaces = false,
-      showtabs         = false,
-      tabsize          = 2,
-    }%
-}
-\newcount\LaTeXdemo@count
-\newcommand*\LaTeXdemo@input{%
-  \catcode`\^^M = 10\relax
-  \input{\jobname-\number\LaTeXdemo@count.tmp}%
-}
-\LaTeXdemo@new{code and example}{%
-  \setbox\LaTeXdemo@box=\hbox\bgroup
-    \global\advance\LaTeXdemo@count by 1 %
-    \lst@BeginAlsoWriteFile{\jobname-\number\LaTeXdemo@count.tmp}%
-    \LaTeXdemo@common
-}{%
-    \lst@EndWriteFile
-  \egroup
-  \begin{center}
-    \ifdim\wd\LaTeXdemo@box > 0.48\linewidth
-      \begin{minipage}{\linewidth}
-        \usebox\LaTeXdemo@box
-      \end{minipage}%
-      \par
-      \begin{minipage}{\linewidth}
-        \LaTeXdemo@input
-      \end{minipage}
-    \else
-      \begin{minipage}{0.48\linewidth}
-        \LaTeXdemo@input
-      \end{minipage}%
-      \hspace{\fill}%
-      \begin{minipage}{0.48\linewidth}
-        \usebox\LaTeXdemo@box
-      \end{minipage}%
-    \fi
-  \end{center}
-}
-\LaTeXdemo@new{code and float}{%
-  \global\advance\LaTeXdemo@count by 1 %
-  \lst@BeginAlsoWriteFile{\jobname-\number\LaTeXdemo@count.tmp}%
-  \LaTeXdemo@common
-}{%
-  \lst@EndWriteFile
-  \LaTeXdemo@input
-}
-\LaTeXdemo@new{code only}{\LaTeXdemo@common}{}
-\makeatother
-
-\usepackage[UKenglish]{babel}
-\usepackage{fontspec}
-\usepackage{hvlogos}
-
-% Taken from xcolor.dtx
-\makeatletter
-\def\testclr#1#{\@testclr{#1}}
-\def\@testclr#1#2{{\fboxsep\z@\fbox{\colorbox#1{#2}{\phantom{XX}}}}}
-\makeatother
-
-\usepackage{hvfloat}
-\hypersetup{%
-  allcolors=UPSE2-Blue,%
-  pdftitle={se2thesis -- A Thesis Class for the Chair of Software Engineering II
-  at the University of Passau, Germany},%
-  pdfauthor={Stephan Lukasczyk},
-}
-\usepackage[capitalise]{cleveref}
-
 \begin{document}
   \DocInput{\jobname.dtx}
 \end{document}
@@ -167,56 +38,18 @@
 % \GetFileInfo{se2colors.sty}
 %
 % \title{^^A
-%   \pkg{se2thesis} -- A Thesis Class for the Chair of Software
-%   Engineering~II at the University of Passau, Germany^^A
-%   \thanks{This file describes \fileversion,
-%     last revised \filedate.}^^A
+%   \pkg{se2thesis} -- Overall set up^^A
+%   \thanks{This file describes \fileversion, last revised \filedate.}^^A
 % }
 %
 % \author{^^A
 %   Stephan Lukasczyk^^A
 %   \thanks{^^A
-%     E-mail: \href{mailto:tex@lukasczyk.me}{tex@lukasczyk.me}^^A
+%     E-Mail: \href{mailto:tex@lukasczyk.me}{tex@lukasczyk.me}^^A
 %   }^^A
 % }
 %
-% \date{Released \filedate}
-%
-% \maketitle
-%
-% \begin{abstract}
-%   One can choose from a wide variety of templates to write a thesis.
-%   Many universities provide very rigorous style guides and force their
-%   students to obey to those guides, even though they might be questionable
-%   from a typographics point of view.
-%   Other universities do not provide such guides and leave it to their students
-%   to choose or come up with a template.
-%   The latter is causing very differently-looking theses.
-%
-%   To avoid such a situation in the future this bundle combines several
-%   \LaTeX{} packages and classes for the use at the Chair of Software
-%   Engineering~II at the University of Passau.
-%   We provide, among others, a document class for theses that shall be
-%   used by our students.
-%   The bundle is designed in a way that one can use the basic components as
-%   standalone packages to allow their reuse for other projects.
-% \end{abstract}
-%
-% \tableofcontents
-%
 % \begin{documentation}
-%
-% \part{User Documentation}\label{sec:doc}
-%
-% This documentation is split into two parts:
-% the first part is the documentation for the user,
-% which provides all macros, variables, and functions
-% that are provided by the \pkg{se2thesis} bundle.
-% The second part (starting on page~\pageref{sec:impl})
-% shows the implementation.
-% This might be interesting for you
-% if you are curious how certain things are defined
-% of if you need to change some of the default implementation.
 %
 % \section{Introduction}\label{sec:doc-intro}
 %
@@ -242,8 +75,7 @@
 % that also allow reuse of various parts of it.
 % Its main class is the \pkg{se2thesis} document class,
 % an extension of the \KOMAScript{} |scrreprt| document class.
-% The packages \pkg{se2colors} (documented in \cref{sec:doc-se2colors}) and
-% \pkg{se2fonts} (documented in \cref{sec:doc-se2fonts}) provide necessary
+% The packages \pkg{se2colors} and \pkg{se2fonts} provide necessary
 % colour and font settings for the \pkg{se2thesis} class.
 % They are available as separate packages, however, to allow their reuse for
 % other classes, packages, and projects, as well.
@@ -287,10 +119,10 @@
 % The following packages and classes are loaded:
 % \pkg{expl3}, \pkg{l3keys2e} in case one uses a \LaTeX{} kernel from before
 % 2022--06--01, \pkg{graphicx}, \pkg{translations}, \KOMAScript, \pkg{xcolor},
-% \pkg{ifthen}, as well as \pkg{fontspec} and \pkg{unicode-math} if one uses
-% \LuaTeX{};
-% for \pdfLaTeX{} we load \pkg{fontenc}, \pkg{FiraMono}, \pkg{tgheros},
-% \pkg{tgpagella} instead of the latter two.
+% \pkg{ifthen}, as well as \pkg{fontspec}, \pkg{unicode-math},
+% and \pkg{libertinus-otf} if one uses \LuaTeX{};
+% for \pdfLaTeX{} we load \pkg{fontenc}, \pkg{libertinus-type1}, and
+% \pkg{AnonymousPro} instead of the latter three.
 % Furthermore, we load \pkg{microtype};
 % when using \LuaTeX{}, we also load \pkg{lua-widow-control} and \pkg{selnolig}.
 %
@@ -301,9 +133,9 @@
 %
 % Before we start with a detailed documentation of the class, we explain one
 % helper macro that can be used to check whether a package has been loaded.
-% \begin{function}[EXP, pTF, updated = 2022-09-27]{\slcd_package_if_loaded:}
+% \begin{function}[pTF, updated = 2022-09-27]{\slcd_package_if_loaded:n}
 %   \begin{syntax}
-%     |\slcd_package_if_loaded:TF| \Arg{true code} \Arg{false code}
+%     |\slcd_package_if_loaded:nTF| \Arg{package name} \Arg{true code} \Arg{false code}
 %   \end{syntax}
 %   Checks whether a package has been loaded and conditionally executes code.
 % \end{function}
@@ -814,254 +646,17 @@
 % question;
 % however, this can also be arbitrary text.
 %
-% \section{The \pkg{se2colors} package}\label{sec:doc-se2colors}
-%
-% Several colours are specific to the university
-% and we want to have a comprehensive interface
-% to access them throughout all our packages.
-%
-% The \pkg{se2colors} package provides this exact features.
-% One can load it using |\usepackage{se2colors}| in the document preamble.
-%
-% \begin{function}[updated = 2022-11-03]{cmode}
-%   \begin{syntax}
-%     |cmode| = \meta{choice}
-%   \end{syntax}
-%   Selects the colour mode that shall be used for creating the results,
-%   a choice from the options specified in \cref{tab:coloursoptions}.
-%   The default setting is |4C|.
-% \end{function}
-%
-% \begin{table}[th]
-%   \tabcaption{\label{tab:coloursoptions}%
-%     Options provided by \pkg{se2colors}.%
-%   }
-%   \centering
-%   \begin{tabular}{@{} l l @{}} \toprule
-%     Option & Description \\ \midrule
-%     %
-%     |cmode=4C|
-%            & Define colours in CMYK colour space (\emph{default}). \\
-%     %
-%     |CMYK|, |cmyk|
-%            & Aliases for the previous. \\
-%     %
-%     |cmode=RGB|
-%            & Define colours in RGB colour space. \\
-%     %
-%     |RGB|, |rgb|
-%            & Aliases for the previous. \\
-%     %
-%     |cmode=BW|
-%            & Define colours in black-and-white colour space. \\
-%     %
-%     |cmode=1C|
-%            & Alias for the previous. \\
-%     %
-%     |gray|
-%            & Alias for the previous. \\
-%     %
-%     \bottomrule
-%   \end{tabular}
-% \end{table}
-%
-% We define two basic colours
-% that are taken from the University's logo,
-% namely |UPSE2-Gray| \testclr{UPSE2-Gray}
-% and |UPSE2-Orange| \testclr{UPSE2-Orange}.
-%
-% Additionally,
-% we define four colours for the four faculties of the University:
-% \begin{itemize}
-%   \item the Faculty of Law |UPSE2-JUR| \testclr{UPSE2-JUR},
-%   \item the School of Business, Economics and Information Systems |UPSE2-WIWI| \testclr{UPSE2-WIWI},
-%   \item the Faculty of Arts and Humanities |UPSE2-PHIL| \testclr{UPSE2-PHIL}, and
-%   \item the Faculty of Computer Science and Mathematics |UPSE2-FIM| \testclr{UPSE2-FIM}.
-% \end{itemize}
-%
-% Finally,
-% we define a full set of supplementary colours:
-% \begin{itemize}
-%   \item |UPSE2-DarkGray| \testclr{UPSE2-DarkGray}
-%     with its derivatives \\
-%     |UPSE2-DarkGray1| \testclr{UPSE2-DarkGray1},
-%     |UPSE2-DarkGray2| \testclr{UPSE2-DarkGray2},
-%     |UPSE2-DarkGray3| \testclr{UPSE2-DarkGray3},
-%     |UPSE2-DarkGray4| \testclr{UPSE2-DarkGray4}, and
-%     |UPSE2-DarkGray5| \testclr{UPSE2-DarkGray5}.
-%   \item |UPSE2-White| \testclr{UPSE2-White}
-%     with its derivatives \\
-%     |UPSE2-White1| \testclr{UPSE2-White1},
-%     |UPSE2-White2| \testclr{UPSE2-White2},
-%     |UPSE2-White3| \testclr{UPSE2-White3},
-%     |UPSE2-White4| \testclr{UPSE2-White4}, and
-%     |UPSE2-White5| \testclr{UPSE2-White5}.
-%   \item |UPSE2-MediumGray| \testclr{UPSE2-MediumGray}
-%     with its derivatives \\
-%     |UPSE2-MediumGray1| \testclr{UPSE2-MediumGray1},
-%     |UPSE2-MediumGray2| \testclr{UPSE2-MediumGray2},
-%     |UPSE2-MediumGray3| \testclr{UPSE2-MediumGray3},
-%     |UPSE2-MediumGray4| \testclr{UPSE2-MediumGray4}, and
-%     |UPSE2-MediumGray5| \testclr{UPSE2-MediumGray5}.
-%   \item |UPSE2-LightGray| \testclr{UPSE2-LightGray}
-%     with its derivatives \\
-%     |UPSE2-LightGray1| \testclr{UPSE2-LightGray1},
-%     |UPSE2-LightGray2| \testclr{UPSE2-LightGray2},
-%     |UPSE2-LightGray3| \testclr{UPSE2-LightGray3},
-%     |UPSE2-LightGray4| \testclr{UPSE2-LightGray4}, and
-%     |UPSE2-LightGray5| \testclr{UPSE2-LightGray5}.
-%   \item |UPSE2-Orange| \testclr{UPSE2-Orange}
-%     with its derivatives \\
-%     |UPSE2-Orange1| \testclr{UPSE2-Orange1},
-%     |UPSE2-Orange2| \testclr{UPSE2-Orange2},
-%     |UPSE2-Orange3| \testclr{UPSE2-Orange3},
-%     |UPSE2-Orange4| \testclr{UPSE2-Orange4}, and
-%     |UPSE2-Orange5| \testclr{UPSE2-Orange5}.
-%   \item |UPSE2-LightRed| \testclr{UPSE2-LightRed}
-%     with its derivatives \\
-%     |UPSE2-LightRed1| \testclr{UPSE2-LightRed1},
-%     |UPSE2-LightRed2| \testclr{UPSE2-LightRed2},
-%     |UPSE2-LightRed3| \testclr{UPSE2-LightRed3},
-%     |UPSE2-LightRed4| \testclr{UPSE2-LightRed4}, and
-%     |UPSE2-LightRed5| \testclr{UPSE2-LightRed5}.
-%   \item |UPSE2-DarkRed| \testclr{UPSE2-DarkRed}
-%     with its derivatives \\
-%     |UPSE2-DarkRed1| \testclr{UPSE2-DarkRed1},
-%     |UPSE2-DarkRed2| \testclr{UPSE2-DarkRed2},
-%     |UPSE2-DarkRed3| \testclr{UPSE2-DarkRed3},
-%     |UPSE2-DarkRed4| \testclr{UPSE2-DarkRed4}, and
-%     |UPSE2-DarkRed5| \testclr{UPSE2-DarkRed5}.
-%   \item |UPSE2-Green| \testclr{UPSE2-Green}
-%     with its derivatives \\
-%     |UPSE2-Green1| \testclr{UPSE2-Green1},
-%     |UPSE2-Green2| \testclr{UPSE2-Green2},
-%     |UPSE2-Green3| \testclr{UPSE2-Green3},
-%     |UPSE2-Green4| \testclr{UPSE2-Green4}, and
-%     |UPSE2-Green5| \testclr{UPSE2-Green5}.
-%   \item |UPSE2-Blue| \testclr{UPSE2-Blue}
-%     with its derivatives \\
-%     |UPSE2-Blue1| \testclr{UPSE2-Blue1},
-%     |UPSE2-Blue2| \testclr{UPSE2-Blue2},
-%     |UPSE2-Blue3| \testclr{UPSE2-Blue3},
-%     |UPSE2-Blue4| \testclr{UPSE2-Blue4}, and
-%     |UPSE2-Blue5| \testclr{UPSE2-Blue5}.
-%   \item |UPSE2-AccentGray| \testclr{UPSE2-AccentGray}
-%     with its derivatives \\
-%     |UPSE2-AccentGray1| \testclr{UPSE2-AccentGray1},
-%     |UPSE2-AccentGray2| \testclr{UPSE2-AccentGray2},
-%     |UPSE2-AccentGray3| \testclr{UPSE2-AccentGray3},
-%     |UPSE2-AccentGray4| \testclr{UPSE2-AccentGray4}, and
-%     |UPSE2-AccentGray5| \testclr{UPSE2-AccentGray5}.
-% \end{itemize}
-%
-% \section{The \pkg{se2fonts} package}\label{sec:doc-se2fonts}
-%
-% The \pkg{se2fonts} package sets the fonts for the document.
-% By default,
-% we recommend using Hermann Zapf's beautiul \emph{Palatino} font
-% as the main text font,
-% accompanied with the sans-serif font \emph{Helvetica}
-% and \emph{Neo Euler} as the default math font;
-% we set \emph{Meslo LGS Nerd Font Mono} as the monospaced font.
-% Palatino and Helvetica get shipped with any macOS system,
-% the user, however, needs to download Neo Euler themself\footnote{
-%   for example from
-%   \href{https://fontlibrary.org/en/font/euler-otf}{https://fontlibrary.org/en/font/euler-otf}.
-% }.
-% Being aware that these fonts might not be available on every user's system,
-% we recommend using \emph{\TeX{} Gyre Pagella} as an alternative to
-% Palatino, \emph{\TeX{} Gyre Heros} as an alternative to Helvetica,
-% and the \emph{\TeX{} Gyre Pagella Math} as the default math font;
-% \emph{Fira Code} is a nice monospaced font.
-% Although they look different in various details
-% they still provide a nice-looking alternative
-% that is bundled with a recent standard \TeX{} distribution.
-%
-% If you are using \LuaTeX{},
-% fonts are expected to be present as open-type fonts;
-% using \pdfLaTeX{} will fallback to Type-1 fonts,
-% and will use \TeX{} Gyre Pagella,
-% \TeX{} Gyre Heros,
-% Fira Code,
-% and \TeX{} Gyre Pagella Math as the default fonts.
-%
-% \emph{Note that the package does not support \XeTeX{}!}
-%
-% The following option is defined by the \pkg{se2fonts} package
-% to influence the selection of the fonts.
-%
-% \begin{function}[updated = 2022-11-03]{fmode}
-%   \begin{syntax}
-%     |fmode| = \meta{choice}
-%   \end{syntax}
-%   Sets the font-selection mode based on a choice:
-%   |original| selects the fonts we recommend for using,
-%   |replacement| selects fonts that are part of a standard \TeX{}
-%   distribution,
-%   in case one has no access to the |original| fonts;
-%   |auto| selects fonts automatically,
-%   preferring the |original| fonts if available.
-%   The default is |auto|.
-%
-%   The fonts are automatically scaled based on their lower-case characters
-%   using the mechanisms provided by \pkg{fontspec} when using \LuaTeX.
-% \end{function}
-%
-% The following list provides examples for each of the fonts:
-% \begin{itemize}
-%   \item {\fontspec{Palatino}An example text in Palatino}
-%   \item {\fontspec{TeX Gyre Pagella}An example text in \TeX{} Gyre Pagella}
-%   \item {\fontspec{Helvetica}An example text in Helvetica}
-%   \item {\fontspec{TeX Gyre Heros}An example text in \TeX{} Gyre Heros}
-%   \item {\fontspec{MesloLGSNerd Font Mono}An example text in MesloLGS}
-%   \item {\fontspec{Fira Code}An example text in Fira Code}
-%   \item {\fontspec{Neo Euler}An example text in Neo Euler}
-%   \item {\fontspec{TeX Gyre Pagella Math}An example text in \TeX{} Gyre
-%     Pagella Math}
-% \end{itemize}
-%
-% The package provides additional helper functions
-% that are also available to the user.
-%
-% \begin{function}{\pdftexengine, \xetexengine, \luatexengine}
-%   \begin{syntax}
-%     \cmd{\pdftexengine}
-%     \cmd{\xetexengine}
-%     \cmd{luatexengine}
-%   \end{syntax}
-%   These commands alias the built-in \LaTeX3{} macros
-%   \cs{sys_if_engine_pdftex_p:},
-%   \cs{sys_if_engine_xetex_p:}, and
-%   \cs{sys_if_engine_luatex_p:}.
-%   They can be used to check which engine the user is currently running.
-% \end{function}
-%
-% \begin{function}{\ifengineTF, \ifengineT, \ifengineF}
-%   \begin{syntax}
-%     \cmd{\ifengineTF} \marg{engine} \marg{then block} \marg{else block}
-%     \cmd{\ifengineT} \marg{engine} \marg{then block}
-%     \cmd{\ifengineF} \marg{engine} \marg{then block}
-%   \end{syntax}
-%   Allows to execute code based on the running engine.
-%   The base variant \cs{ifengineTF} expects the user to specify a condition,
-%   which can be built of combinations of the \cs{pdftexengine},
-%   \cs{xetexengine},
-%   and \cs{luatexengine} macros,
-%   followed by the code that will be executed if the condition holds
-%   and the code that will be executed if the condition does not hold.
-%
-%   For convenience,
-%   we provide the variants \cs{ifengineT} and \cs{ifengineF}
-%   that allow to omit an empty then or else branch, respectivly.
-% \end{function}
+% \begin{thebibliography}{9}
+%   \bibitem{DBLP:journals/sttt/BeyerLW19} Dirk Beyer, Stefan Löwe, and Philipp
+%   Wendler: \emph{Reliable benchmarking: requirements and solutions}. STTT
+%   21(1): 1--29 (2019)
+% \end{thebibliography}
 %
 % \end{documentation}
 %
 % \clearpage
 %
 % \begin{implementation}
-%
-% \part{Implementation}\label{sec:impl}
 %
 % \section{Global helpers}\label{sec:impl-global}
 %
@@ -1167,16 +762,16 @@
 % \subsection{Define Variables}
 %
 % The following variables are necessary for the argument handling.
-% \begin{variable}{\l_@@_paper_int}
+% \begin{macro}{\l_@@_paper_int}
 %   A variable to store the key of the page size selected by the user.
 %    \begin{macrocode}
 \int_new:N \l_@@_paper_int
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 % We also need properties to store class options that are not for us,
 % thus shall be handled by the underlying base class.
-% \begin{variable}
+% \begin{macro}
 %   {
 %     \l_@@_base_class_tl,
 %     \l_@@_clsopts_prop,
@@ -1189,19 +784,19 @@
 \prop_new:N \l_@@_clsopts_prop
 \prop_new:N \l_@@_unknown_clsopts_prop
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
-% \begin{variable}{\l_@@_biblatex_bool}
+% \begin{macro}{\l_@@_biblatex_bool}
 %   The user wants to load the \pkg{biblatex} package together with our
 %   settings.
 %    \begin{macrocode}
 \bool_new:N \l_@@_biblatex_bool
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 % Define internal variables to hold the values of the fields of the title
 % page.
-% \begin{variable}
+% \begin{macro}
 %   {
 %     \l_@@_version_tl,
 %     \l_@@_degreeprogramme_tl,
@@ -1232,11 +827,11 @@
 \tl_new:N \l_@@_signature_tl
 \tl_new:N \l_@@_location_tl
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 % Define several dimensions for the \pkg{typearea} package to define the
 % package style.
-% \begin{variable}
+% \begin{macro}
 %   {
 %     \l_@@_marginspace_dim,
 %     \l_@@_headmarkspace_dim,
@@ -1262,12 +857,12 @@
 \dim_gset:Nn \l_@@_rulewidth_dim { 1.25pt }
 \dim_gset:Nn \l_@@_rulethickness_dim { 110pt }
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 % \subsection{Load-time options}
 %
 % We define the key-value interface for the class.
-% \begin{variable}
+% \begin{macro}
 %   {
 %     \l_@@_base_class_tl,
 %     \l_@@_unknown_clsopts_prop,
@@ -1332,7 +927,7 @@
     },
   }
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 % Handle the options
 %    \begin{macrocode}
@@ -1606,7 +1201,7 @@
 %
 % For the logo on the titlepage, we define further variables to store its height
 % and a box to store the logo itself.
-% \begin{variable}{\l_@@_logo_height_dim, \l_@@_logo_box}
+% \begin{macro}{\l_@@_logo_height_dim, \l_@@_logo_box}
 %    \begin{macrocode}
 \dim_if_exist:NF \l_@@_logo_height_dim
   {
@@ -1627,7 +1222,7 @@
       }
   }
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 % Set the paper size depending on the selected |paper| option.
 %    \begin{macrocode}
@@ -1749,7 +1344,7 @@
 \setkomafont{publishers}{\normalsize}
 %    \end{macrocode}
 %
-% \begin{variable}{\author, \@author}
+% \begin{macro}{\author, \@author}
 %   Allow for automated splitting of author's names.
 %    \begin{macrocode}
 \seq_new:N \l_@@_author_seq
@@ -1766,7 +1361,7 @@
   \group_end:
 }
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 % Define a new layer using the functionality from \pkg{scrlayer-scrpage} for the
 % logo image.
@@ -1841,7 +1436,7 @@
 }
 %    \end{macrocode}
 %
-% \begin{variable}{\l_@@_title_box}
+% \begin{macro}{\l_@@_title_box}
 %   Define a box for the title if it does not yet exist.
 %    \begin{macrocode}
 \box_if_exist:NF \l_@@_title_box
@@ -1849,9 +1444,9 @@
     \box_new:N \l_@@_title_box
   }
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
-% \begin{variable}{\@maketitle}
+% \begin{macro}{\@maketitle}
 %   Redeclare the \cs{@maketitle} macro.
 %    \begin{macrocode}
 \renewcommand*{\@maketitle}{%
@@ -1870,7 +1465,7 @@
   \@thanks\let\@thanks\@empty
 }
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 % Load the \pkg{ifthen} package.
 %    \begin{macrocode}
@@ -1983,7 +1578,7 @@
   }
 %    \end{macrocode}
 %
-% \begin{variable}{\@lowertitleback}
+% \begin{macro}{\@lowertitleback}
 %   Afterwards, override the definition of \cs{@lowertitleback}.
 %    \begin{macrocode}
 \renewcommand*{\@lowertitleback}{%
@@ -2000,7 +1595,7 @@
   \group_end:
 }
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 % \subsection{Provide an environment for abstracts}
 %
@@ -2141,7 +1736,7 @@
           wörtlich~ und~ sinngemäß~ übernommenen~ Passagen~ aus~ anderen~
           Werken~ kenntlich~ gemacht~ habe.
         \item Außerdem~ erkläre~ ich,~ dass~ ich~ der~ Universität~ ein~
-          einfaches~ Nutzungsrecht~ zum~ Zwecke~ der~ Überprüfung~ mittels~ 
+          einfaches~ Nutzungsrecht~ zum~ Zwecke~ der~ Überprüfung~ mittels~
           einer~ Plagiatssoftware~ in~ anonymisierter~ Form~ einräume.
       \end{enumerate}\par
       \bigskip
@@ -2329,358 +1924,8 @@
 %</translations>
 %    \end{macrocode}
 %
-% \section{The \pkg{se2colors} implementation}\label{sec:impl-se2colors}
-%
-% Start the \pkg{DocStrip} guards.
-%    \begin{macrocode}
-%<*colors>
-%    \end{macrocode}
-%
-% Identify the internal prefix (\LaTeX3 \pkg{DocStrip} convention): only
-% internal material in this \emph{submodule} should be used directly.
-%    \begin{macrocode}
-%<@@=slcd_colors>
-%    \end{macrocode}
-%
-% Identify the package and give the overall version information.
-%    \begin{macrocode}
-\ProvidesExplPackage {se2colors} {2022-11-22} {1.3.1}
-  {A colour support package for the se2thesis bundle}
-%    \end{macrocode}
-%
-%
-% \subsection{Load-time options}
-%
-% \begin{variable}{\l_@@_colormode_tl}
-%   Holds the colour mode selected by the user as a package load-time option.
-%    \begin{macrocode}
-\keys_define:nn { seiicolors }
-  {
-    cmode .choice:,
-    cmode / 4C .code:n = {
-      \PassOptionsToPackage{cmyk}{xcolor}
-      \tl_gset:Nn \l_@@_colormode_tl {4C}
-    },
-    cmode / RGB .code:n = {
-      \PassOptionsToPackage{rgb}{xcolor}
-      \tl_gset:Nn \l_@@_colormode_tl {RGB}
-    },
-    cmode / BW .code:n = {
-      \PassOptionsToPackage{gray}{xcolor}
-      \tl_gset:Nn \l_@@_colormode_tl {BW}
-    },
-    cmode / CMYK .meta:n = {cmode=4C},
-    cmode / cmyk .meta:n = {cmode=4C},
-    cmode / rgb .meta:n = {cmode=RGB},
-    cmode / gray .meta:n = {cmode=BW},
-    RGB .meta:n = {cmode=RGB},
-    rgb .meta:n = {cmode=rgb},
-    CMYK .meta:n = {cmode=4C},
-    cmyk .meta:n = {cmode=4C},
-    gray .meta:n = {cmode=BW},
-  }
-\keys_set:nn { seiicolors } { cmode = 4C }
-%    \end{macrocode}
-% \end{variable}
-%
-% \subsection{Option handling}
-%
-%    \begin{macrocode}
-\IfFormatAtLeastTF { 2022-06-01 }
-  { \ProcessKeyOptions [ seiicolors ] }
-  {
-    \RequirePackage { l3keys2e }
-    \ProcessKeysOptions { seiicolors }
-  }
-%    \end{macrocode}
-%
-% \subsection{Colour definitions}
-%
-% Load the \pkg{xcolor} package for colour definitions.
-%    \begin{macrocode}
-\RequirePackage{xcolor}
-%    \end{macrocode}
-%
-% Define the primary colours gray and orange as given by the University of
-% Passau's style guides.
-%    \begin{macrocode}
-\definecolorset[named]{RGB/cmyk}{UPSE2-}{}{%
-  Orange,242,148,0/0.00,0.44,0.95,0.01;%
-  Gray,153,159,158/0.40,0.28,0.28,0.00;%
-  JUR,229,49,56/0.01,0.90,0.81,0.01;%
-  WIWI,0,96,57/0.87,0.20,0.87,0.36;%
-  PHIL,188,42,51/0.06,0.93,0.81,0.11;%
-  FIM,0,90,161/0.93,0.63,0.01,0.02;%
-  DarkGray,77,77,77/0.74,0.67,0.62,0.18;%
-  White,255,255,255/0.00,0.00,0.00,0.00;%
-  MediumGray,127,127,127/0.52,0.43,0.40,0.02;%
-  LightGray,229,229,229/0.08,0.06,0.04,0.00;%
-  LightRed,229,49,56/0.01,0.90,0.81,0.01;%
-  DarkRed,188,42,51/0.06,0.93,0.80,0.11;%
-  Green,0,96,57/0.87,0.20,0.86,0.35;%
-  Blue,0,90,161/0.93,0.63,0.01,0.02;%
-  AccentGray,153,159,158/0.40,0.28,0.28,0.00%
-}
-%    \end{macrocode}
-%
-% Define the derived colours.
-%    \begin{macrocode}
-\colorlet{UPSE2-DarkGray1}{UPSE2-DarkGray!20!white}
-\colorlet{UPSE2-DarkGray2}{UPSE2-DarkGray!40!white}
-\colorlet{UPSE2-DarkGray3}{UPSE2-DarkGray!60!white}
-\colorlet{UPSE2-DarkGray4}{UPSE2-DarkGray!75!black}
-\colorlet{UPSE2-DarkGray5}{UPSE2-DarkGray!50!black}
-\colorlet{UPSE2-White1}{UPSE2-White!95!black}
-\colorlet{UPSE2-White2}{UPSE2-White!85!black}
-\colorlet{UPSE2-White3}{UPSE2-White!75!black}
-\colorlet{UPSE2-White4}{UPSE2-White!65!black}
-\colorlet{UPSE2-White5}{UPSE2-White!50!black}
-\colorlet{UPSE2-MediumGray1}{UPSE2-MediumGray!20!white}
-\colorlet{UPSE2-MediumGray2}{UPSE2-MediumGray!40!white}
-\colorlet{UPSE2-MediumGray3}{UPSE2-MediumGray!60!white}
-\colorlet{UPSE2-MediumGray4}{UPSE2-MediumGray!75!black}
-\colorlet{UPSE2-MediumGray5}{UPSE2-MediumGray!50!black}
-\colorlet{UPSE2-LightGray1}{UPSE2-LightGray!90!black}
-\colorlet{UPSE2-LightGray2}{UPSE2-LightGray!75!black}
-\colorlet{UPSE2-LightGray3}{UPSE2-LightGray!55!black}
-\colorlet{UPSE2-LightGray4}{UPSE2-LightGray!25!black}
-\colorlet{UPSE2-LightGray5}{UPSE2-LightGray!10!black}
-\colorlet{UPSE2-Orange1}{UPSE2-Orange!20!white}
-\colorlet{UPSE2-Orange2}{UPSE2-Orange!40!white}
-\colorlet{UPSE2-Orange3}{UPSE2-Orange!60!white}
-\colorlet{UPSE2-Orange4}{UPSE2-Orange!75!black}
-\colorlet{UPSE2-Orange5}{UPSE2-Orange!50!black}
-\colorlet{UPSE2-LightRed1}{UPSE2-LightRed!20!white}
-\colorlet{UPSE2-LightRed2}{UPSE2-LightRed!40!white}
-\colorlet{UPSE2-LightRed3}{UPSE2-LightRed!60!white}
-\colorlet{UPSE2-LightRed4}{UPSE2-LightRed!75!black}
-\colorlet{UPSE2-LightRed5}{UPSE2-LightRed!50!black}
-\colorlet{UPSE2-DarkRed1}{UPSE2-DarkRed!20!white}
-\colorlet{UPSE2-DarkRed2}{UPSE2-DarkRed!40!white}
-\colorlet{UPSE2-DarkRed3}{UPSE2-DarkRed!60!white}
-\colorlet{UPSE2-DarkRed4}{UPSE2-DarkRed!75!black}
-\colorlet{UPSE2-DarkRed5}{UPSE2-DarkRed!50!black}
-\colorlet{UPSE2-Green1}{UPSE2-Green!10!white}
-\colorlet{UPSE2-Green2}{UPSE2-Green!25!white}
-\colorlet{UPSE2-Green3}{UPSE2-Green!50!white}
-\colorlet{UPSE2-Green4}{UPSE2-Green!75!white}
-\colorlet{UPSE2-Green5}{UPSE2-Green!90!white}
-\colorlet{UPSE2-Blue1}{UPSE2-Blue!20!white}
-\colorlet{UPSE2-Blue2}{UPSE2-Blue!40!white}
-\colorlet{UPSE2-Blue3}{UPSE2-Blue!60!white}
-\colorlet{UPSE2-Blue4}{UPSE2-Blue!75!black}
-\colorlet{UPSE2-Blue5}{UPSE2-Blue!50!black}
-\colorlet{UPSE2-AccentGray1}{UPSE2-AccentGray!20!white}
-\colorlet{UPSE2-AccentGray2}{UPSE2-AccentGray!40!white}
-\colorlet{UPSE2-AccentGray3}{UPSE2-AccentGray!60!white}
-\colorlet{UPSE2-AccentGray4}{UPSE2-AccentGray!75!black}
-\colorlet{UPSE2-AccentGray5}{UPSE2-AccentGray!50!black}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-%</colors>
-%    \end{macrocode}
-%
-% \section{The \pkg{se2fonts} implementation}\label{sec:impl-se2fonts}
-%
-% Start the \pkg{DocStrip} guards.
-%    \begin{macrocode}
-%<*fonts>
-%    \end{macrocode}
-%
-% Identify the internal prefix (\LaTeX3 \pkg{DocStrip} convention): only
-% internal material in this \emph{submodule} should be used directly.
-%    \begin{macrocode}
-%<@@=slcd_fonts>
-%    \end{macrocode}
-%
-% Identify the package and give the overall version information.
-%    \begin{macrocode}
-\ProvidesExplPackage {se2fonts} {2022-11-22} {1.3.1}
-  {A font-selection support package for the se2thesis bundle}
-%    \end{macrocode}
-%
-% \subsection{Load-time options}
-%
-% \begin{variable}{\l_@@_fontmode_tl}
-%   Holds the font-selection mode specified by the user as a package
-%   load-time option.
-%    \begin{macrocode}
-\keys_define:nn { seiifonts }
-  {
-    fmode .choice:,
-    fmode / original .code:n = {
-      \tl_gset:Nn \l_@@_fontmode_tl {original}
-    },
-    fmode / replacement .code:n = {
-      \tl_gset:Nn \l_@@_fontmode_tl {replacement}
-    },
-    fmode / auto .code:n = {
-      \tl_gset:Nn \l_@@_fontmode_tl {auto}
-    },
-    original .meta:n = {fmode=original},
-    replacement .meta:n = {fmode=replacement},
-    auto .meta:n = {fmode=auto},
-  }
-\keys_set:nn { seiifonts } { fmode = auto }
-%    \end{macrocode}
-% \end{variable}
-%
-% \subsection{Option handling}
-%
-%    \begin{macrocode}
-\IfFormatAtLeastTF { 2022-06-01 }
-  { \ProcessKeyOptions [ seiifonts ] }
-  {
-    \RequirePackage{ l3keys2e }
-    \ProcessKeysOptions { seiifonts }
-  }
-%    \end{macrocode}
-%
-% \subsection{Helper macros}
-%
-% \begin{macro}{\pdftexengine, \xetexengine, \luatexengine}
-%   We define several alias macros to identify which engine the user is
-%   running.
-%    \begin{macrocode}
-\cs_new_eq:NN \pdftexengine \sys_if_engine_pdftex_p:
-\cs_new_eq:NN \xetexengine \sys_if_engine_xetex_p:
-\cs_new_eq:NN \luatexengine \sys_if_engine_luatex_p:
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\ifengineTF, \ifengineT, \ifengineF}
-%   True, if the engine used matches the given first argument.
-%    \begin{macrocode}
-\NewExpandableDocumentCommand \ifengineTF { mmm }
-  {
-    \bool_if:nTF { #1 } { #2 } { #3 }
-  }
-\NewExpandableDocumentCommand \ifengineT { mm }
-  {
-    \bool_if:nT { #1 } { #2 }
-  }
-\NewExpandableDocumentCommand \ifengineF { mm }
-  {
-    \bool_if:nF { #1 } { #2 }
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-% The package is not tested with \XeTeX{}, thus we provide an error to the
-% user and stop the execution, when they want to use the package with
-% \XeTeX{}.
-%    \begin{macrocode}
-\ifengineT { \xetexengine }
-  {
-    \msg_set:nnnn { seiifonts } { xetex-not-supported }
-      { XeTeX~ is~ not~ supported~ by~ the~ se2fonts~ package. }
-      { Switch~ to~ pdfTeX~ or~ (preferably)~ LuaTeX. }
-    \msg_error:nn { seiifonts } { xetex-not-supported }
-  }
-%    \end{macrocode}
-%
-% \subsection{Font loading}
-%
-% Depending on the engine used by the user,
-% we can use \pkg{fontspec} for loading fonts.
-%    \begin{macrocode}
-\ifengineTF { \luatexengine }
-  {
-%    \end{macrocode}
-%
-% If the user uses \LuaTeX{}, load \pkg{fontspec} and
-% \pkg{unicode-math}.
-%    \begin{macrocode}
-    \RequirePackage{fontspec}
-    \RequirePackage{unicode-math}
-%    \end{macrocode}
-% To make sure the scaling of the fonts matches, we let \pkg{fontspec} do this
-% matching based on the lower-case characters.
-%    \begin{macrocode}
-    \defaultfontfeatures{ Scale = MatchLowercase }
-    \defaultfontfeatures[\rmfamily]{ Scale = 1 }
-%    \end{macrocode}
-%
-% The user wants to have the |original| fonts,
-% which are Palatino, Helvetica, MesloLGS Nerd Font Mono, and Neo Euler.
-%    \begin{macrocode}
-    \tl_if_eq:NnT \l_@@_fontmode_tl {original}
-      {
-        \setmainfont{Palatino}
-        \setsansfont{Helvetica}
-        \setmonofont{MesloLGS Nerd Font Mono}
-        \setmathfont{Neo Euler}[math-style=upright]
-      }
-%    \end{macrocode}
-%
-% The user wants to have the |replacement| fonts,
-% which are \TeX{} Gyre Pagella, \TeX{} Gyre Heros, Fira Code, and \TeX{}
-% Gyre Pagella Math.
-%    \begin{macrocode}
-    \tl_if_eq:NnT \l_@@_fontmode_tl {replacement}
-      {
-        \setmainfont{TeX Gyre Pagella}
-        \setsansfont{TeX Gyre Heros}
-        \setmonofont{Fira Code}
-        \setmathfont{TeX Gyre Pagella Math}
-        \setmathfont{Latin Modern Math}[range={\mathcal,\mathbb}]
-      }
-%    \end{macrocode}
-%
-% The user set the |auto| mode,
-% which causes the package to check whether a font from the |original| fonts
-% exists on the system.
-% If such a font exists,
-% it will be used;
-% otherwise, a |replacement| font will be used.
-%    \begin{macrocode}
-    \tl_if_eq:NnT \l_@@_fontmode_tl {auto}
-      {
-        \IfFontExistsTF { Palatino }
-          { \setmainfont{Palatino} }
-          { \setmainfont{TeX Gyre Pagella} }
-        \IfFontExistsTF { Helvetica }
-          { \setsansfont{Helvetica} }
-          { \setsansfont{TeXGyre Heros} }
-        \IfFontExistsTF{ MesloLGS Nerd Font Mono }
-          { \setmonofont{MesloLGS Nerd Font Mono} }
-          { \setmonofont{Fira Code} }
-        \IfFontExistsTF { Neo Euler }
-          { \setmathfont{Neo Euler}[math-style=upright] }
-          {
-            \setmathfont{TeX Gyre Pagella Math}
-            \setmathfont{Latin Modern Math}[range={\mathcal,\mathbb}]
-          }
-      }
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-  } {
-%    \end{macrocode}
-%
-% The user does neither use \LuaTeX{}, fall back
-%    \begin{macrocode}
-    \PassOptionsToPackage{T1}{fontenc}
-    \RequirePackage{fontenc}
-    \RequirePackage{FiraMono}
-    \RequirePackage{tgheros}
-    \RequirePackage{tgpagella}
-  }
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-%</fonts>
-%    \end{macrocode}
-%
 % \end{implementation}
 %
 % \clearpage
-%
-% \begin{thebibliography}{9}
-%   \bibitem{DBLP:journals/sttt/BeyerLW19} Dirk Beyer, Stefan Löwe, and Philipp
-%   Wendler: \emph{Reliable benchmarking: requirements and solutions}. STTT
-%   21(1): 1--29 (2019)
-% \end{thebibliography}
 %
 % \PrintIndex
