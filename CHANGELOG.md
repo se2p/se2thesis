@@ -15,6 +15,7 @@ and this project adheres to
 ### Changed
 
 - Split the large `se2thesis.dtx` into several DTX files for the different packages
+- The `build.lua` now also builds all `*.tex` files
 
 ### Fixed
 
