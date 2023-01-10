@@ -1050,9 +1050,8 @@
     \PassOptionsToPackage
       {
         backend=biber,
-        hyperref=true,
+        hyperref=auto,
         backref=true,
-        backrefstyle=none,
         style=alphabetic,
         maxnames=100,
         minalphanames=3,
@@ -1060,38 +1059,6 @@
         giveninits=true,
       }{biblatex}
     \RequirePackage{biblatex}
-%    \end{macrocode}
-% Define strings for back-referencing.
-%    \begin{macrocode}
-    \DefineBibliographyStrings{english}{
-      backrefpage = {\lowercase{c}ited~ on~ p.},
-      backrefpages = {\lowercase{c}ited~ on~ pp.},
-    }
-    \DefineBibliographyStrings{german}{
-      backrefpage = {\lowercase{z}itiert~ auf~ S.},
-      backrefpages = {\lowercase{z}itiert~ auf~ S.},
-    }
-%    \end{macrocode}
-% Design the page-ref format.
-%    \begin{macrocode}
-    \DeclareFieldFormat{pagerefformat}{
-      {
-        \color{UPSE2-Gray}
-        \mkbibparens{\mkbibemph{#1}}
-      }
-    }
-    \renewbibmacro*{pageref}{
-      \iflistundef{pageref}{}{
-        \printtext[pagerefformat]{
-          \ifnumgreater{
-            \value{pageref}
-          }{1}
-          {\bibstring{backrefpages}\ppspace}
-          {\bibstring{backrefpage}\ppspace}
-          \printlist[pageref][-\value{listtotal}]{pageref}
-        }
-      }
-    }
 %    \end{macrocode}
 % End of the \BibLaTeX{} settings.
 %    \begin{macrocode}
