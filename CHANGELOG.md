@@ -11,17 +11,22 @@ and this project adheres to
 
 - A file `se2thesis.tex` that contains the combined documentation from all DTX
   files as well as their code
+- Use Libertinus and Fira Code as fonts
 
 ### Changed
 
 - Split the large `se2thesis.dtx` into several DTX files for the different packages
+- Deprecate the `fmode` argument to `se2fonts.sty`.  *Attention:* This is a breaking change!
 - The `build.lua` now also builds all `*.tex` files
+- Use the default back-reference styling of `biblatex`
 
 ### Fixed
 
 - Get correct translation for lower-title back for PhD theses
 
-## Removed
+### Removed
+
+- Support for the TeX Gyre and Palatino/Helvetica fonts.  We replace all fonts by the Libertinus font family.
 
 ## [v1.3.1] – 2022–11–22
 
