@@ -853,9 +853,9 @@
 \dim_gset:Nn \l_@@_headmarkspace_dim { 0.75cm }
 \dim_gset:Nn \l_@@_rulespace_dim { 10pt }
 \dim_gset:Nn \l_@@_pagemark_minipage_dim { 1.5cm }
-\dim_gset:Nn \l_@@_ruleraise_dim { -100pt }
+\dim_gset:Nn \l_@@_ruleraise_dim { -5pt }
 \dim_gset:Nn \l_@@_rulewidth_dim { 1.25pt }
-\dim_gset:Nn \l_@@_rulethickness_dim { 110pt }
+\dim_gset:Nn \l_@@_rulethickness_dim { 15pt }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1195,17 +1195,17 @@
 %    \begin{macrocode}
 \int_compare:nTF { \l_@@_paper_int=1 }
   {
-    \areaset[current]{389pt}{630pt}
+    \areaset[current]{350pt}{567pt}
     \setlength{\marginparsep}{8.5cm}
     \setlength{\marginparsep}{1em}
   }{
     \int_compare:nTF { \l_@@_paper_int=2 }
       {
-        \areaset[current]{275pt}{445pt}
+        \areaset[current]{247pt}{400pt}
         \setlength{\marginparsep}{6.0cm}
         \setlength{\marginparsep}{0.71em}
       }{
-        \areaset[current]{337pt}{545pt}
+        \areaset[current]{303pt}{491pt}
         \setlength{\marginparsep}{7.4cm}
         \setlength{\marginparsep}{0.87em}
       }

@@ -19,6 +19,7 @@ and this project adheres to
 - Deprecate the `fmode` argument to `se2fonts.sty`.  *Attention:* This is a breaking change!
 - The `build.lua` now also builds all `*.tex` files
 - Use the default back-reference styling of `biblatex`
+- Changed the dimensions of the type area
 
 ### Fixed
 
