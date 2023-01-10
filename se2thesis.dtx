@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% File: se2thesis.dtx Copyright (C) 2022 Stephan Lukasczyk
+% File: se2thesis.dtx Copyright (C) 2022--2023 Stephan Lukasczyk
 %
 % It may be distributed and/or modified under the conditions of the
 % LaTeX Project Public License (LPPL), either version 1.3c of this
@@ -198,12 +198,14 @@
 %   package, see \cref{sec:doc-se2colors} for a description.
 % \end{function}
 %
-% \begin{function}{fontmode}
+% \begin{function}[updated = 2023-01-10]{fontmode}
 %   \begin{syntax}
 %     |fontmode| = \meta{choice}
 %   \end{syntax}
 %   Select the font scheme used by the automatically loaded \pkg{se2fonts}
 %   package, see \cref{sec:doc-se2fonts} for a description.
+%
+%   \emph{This option is deprecated and will be removed in the future!}
 % \end{function}
 %
 %
@@ -719,7 +721,7 @@
 %
 % Identify the class and give the overall version number.
 %    \begin{macrocode}
-\ProvidesExplClass {se2thesis} {2022-11-22} {1.3.1}
+\ProvidesExplClass {se2thesis} {2023-01-10} {2.0.0}
   {A thesis class for the Chair of Software Engineering II}
 %    \end{macrocode}
 %
@@ -981,7 +983,6 @@
 \PassOptionsToPackage{\l_@@_colormode_tl}{se2colors}
 \RequirePackage{se2colors}
 
-\PassOptionsToPackage{\l_@@_fontmode_tl}{se2fonts}
 \RequirePackage{se2fonts}
 %    \end{macrocode}
 %
@@ -1794,7 +1795,7 @@
 % We provide the following English translations.
 %
 %    \begin{macrocode}
-\ProvideDictionaryFor{English}{se2translations}[2022/11/22]
+\ProvideDictionaryFor{English}{se2translations}[2023/01/10]
 \ProvideDictTranslation{abstract}{abstract}
 \ProvideDictTranslation{Abstract}{Abstract}
 \ProvideDictTranslation{acknowledgement}{acknowledgement}
@@ -1845,7 +1846,7 @@
 % We provide the following German translations.
 %
 %    \begin{macrocode}
-\ProvideDictionaryFor{German}{se2translations}[2022/11/22]
+\ProvideDictionaryFor{German}{se2translations}[2023/01/10]
 \ProvideDictTranslation{abstract}{Zusammenfassung}
 \ProvideDictTranslation{Abstract}{Zusammenfassung}
 \ProvideDictTranslation{acknowledgement}{Danksagung}

@@ -7,6 +7,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v2.0.0] – 2023–01–10
+
 ### Added
 
 - A file `se2thesis.tex` that contains the combined documentation from all DTX
@@ -83,6 +85,7 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
+[v2.0.0]: https://github.com/se2p/se2thesis/compare/v2.0.0...v1.3.1
 [v1.3.1]: https://github.com/se2p/se2thesis/compare/v1.3.1...v1.3.0
 [v1.3.0]: https://github.com/se2p/se2thesis/compare/v1.3.0...v1.2.0
 [v1.2.0]: https://github.com/se2p/se2thesis/compare/v1.2.0...v1.1.1

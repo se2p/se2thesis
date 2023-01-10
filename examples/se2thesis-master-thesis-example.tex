@@ -8,7 +8,6 @@
 \listfiles
 \usepackage[ngerman,main=UKenglish]{babel}
 \usepackage{blindtext}
-\usepackage{csquotes}
 \usepackage[%
   group-minimum-digits=4,%
   list-final-separator={, and },%
@@ -33,18 +32,18 @@
   frame=single,%
 }
 
-\usepackage{filecontents}
-
-\begin{filecontents*}{\jobname.bib}
+\begin{filecontents}{\jobname.bib}
   @book{Knu86,
     author = {Knuth, Donald E.},
     year = {1986},
     title = {The \TeX book},
   }
-\end{filecontents*}
+\end{filecontents}
 \addbibresource{\jobname.bib}
 
 \usepackage{booktabs}
+
+\usepackage{csquotes}
 
 \usepackage{hyperref}
 \usepackage{cleveref}
