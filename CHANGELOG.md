@@ -7,6 +7,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Add license text of LaTeX Project Public License (LPPL) to repository
+
 ## [v2.0.0] – 2023–01–10
 
 ### Added
