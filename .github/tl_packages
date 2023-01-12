@@ -1,0 +1,82 @@
+# The test framework itself
+l3build
+#
+# Required to build plain and LaTeX formats
+latex-bin
+luahbtex
+tex
+#
+# Then get the rest of required LaTeX
+amsmath
+tools
+#
+# Assuming a 'basic' font set up, metafont is required to avoid
+# warnings with some packages and errors with others
+metafont
+mfware
+#
+# Dependencies for tests that are not auto-resolved
+bibtex
+biblatex
+biber
+lualatex-math
+#
+# For the doc target
+adjustbox
+alphalph
+amsfonts
+anonymouspro
+babel
+babel-english
+babel-german
+bookmark
+booktabs
+caption
+catchfile
+cleveref
+colortbl
+csquotes
+dantelogo
+dvips
+ec
+enumitem
+epstopdf
+epstopdf-pkg
+everysel
+fancyvrb
+fetamont
+fira
+fontspec
+framed
+graphics
+hologo
+hvfloat
+hvlogos
+hypdoc
+hyperref
+ifoddpage
+libertine
+libertinus
+libertinus-fonts
+libertinus-type1
+libertinus-otf
+listings
+makeindex
+marginnote
+mathpazo
+metalogo
+multido
+oberdiek
+pgf
+picture
+psnfss
+ragged2e
+siunitx
+sttools
+times
+underscore
+unicode-math
+units
+varwidth
+xcolor
+xits
