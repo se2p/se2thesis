@@ -10,6 +10,7 @@ and this project adheres to
 ### Added
 
 - Add license text of LaTeX Project Public License (LPPL) to repository
+- Add a continuous integration pipline using GitHub Actions
 
 ## [v2.0.0] – 2023–01–10
 
