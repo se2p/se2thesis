@@ -1,13 +1,10 @@
 # The test framework itself
 l3build
 #
-# Required to build plain and LaTeX formats including (u)pLaTeX
+# Required to build plain and LaTeX formats
 latex-bin
 luahbtex
-platex
-uplatex
 tex
-xetex
 #
 # Then get the rest of required LaTeX
 amsmath
@@ -28,12 +25,15 @@ lualatex-math
 alphalph
 amsfonts
 babel
+babel-english
+babel-german
 bookmark
 booktabs
 catchfile
 cleveref
 colortbl
 csquotes
+dantelogo
 dvips
 ec
 enumitem
@@ -41,6 +41,7 @@ epstopdf
 epstopdf-pkg
 everysel
 fancyvrb
+fetamont
 fira
 fontspec
 framed
@@ -67,3 +68,4 @@ underscore
 unicode-math
 units
 xcolor
+xspace
