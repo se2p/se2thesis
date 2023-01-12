@@ -41,7 +41,7 @@ epstopdf
 epstopdf-pkg
 everysel
 fancyvrb
-FiraCode
+fira
 fontspec
 framed
 graphics
@@ -52,7 +52,6 @@ hypdoc
 hyperref
 libertinus-type1
 libertinus-otf
-libsum
 listings
 makeindex
 marginnote
