@@ -22,8 +22,10 @@ biber
 lualatex-math
 #
 # For the doc target
+adjustbox
 alphalph
 amsfonts
+anonymouspro
 babel
 babel-english
 babel-german
@@ -52,8 +54,10 @@ hvfloat
 hvlogos
 hypdoc
 hyperref
+ifoddpage
 libertine
 libertinus
+libertinus-fonts
 libertinus-type1
 libertinus-otf
 listings
@@ -61,11 +65,14 @@ makeindex
 marginnote
 mathpazo
 metalogo
+multido
 oberdiek
 pgf
+picture
 psnfss
 ragged2e
 siunitx
+sttools
 times
 underscore
 unicode-math
