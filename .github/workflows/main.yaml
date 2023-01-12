@@ -1,15 +1,10 @@
 name: Automated testing
 
 on:
-  # Whenever someone pushes to a branch in our repo
   push:
+  pull_request:
     branches:
-      - "*"
-  # Whenever a pull request is opened, reopened, or gets new commits.
-  pull_requests:
-# This implies that for every push to a local branch in our repo for which a
-# pull request is open this runs twice. But it is important to ensure that pull
-# requests get tested even if their branch comes from a fork.
+      - main
 
 jobs:
   l3build:
