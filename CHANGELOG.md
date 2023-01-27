@@ -12,6 +12,11 @@ and this project adheres to
 - Add license text of LaTeX Project Public License (LPPL) to repository
 - Add a continuous integration pipline using GitHub Actions
 
+### Fixed
+
+- Fix the definitions of `\frontmatter`, `\mainmatter`, and `\backmatter` to
+  match the definitions from KOMA Script's `scrbook` class.
+
 ## [v2.0.0] – 2023–01–10
 
 ### Added
