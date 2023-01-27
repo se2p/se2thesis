@@ -1631,13 +1631,17 @@
 % \subsection{Document structuring macros}
 %
 % Ensure that these macros are defined.
+% These are the exact definitions from \KOMAScript.
+%    \begin{macrocode}
+\newif\if@mainmatter\@mainmattertrue
+%    \end{macrocode}
 % \begin{macro}{\frontmatter}
 %   Starts the frontmatter.
 %   Most notably, set the page numbers to roman.
 %    \begin{macrocode}
 \providecommand*{\frontmatter}
   {
-    \if@twoside\cleardoublepage\else\clearpage\fi
+    \if@twoside\cleardoubleoddpage\else\clearpage\fi
     \@mainmatterfalse
     \pagenumbering { roman }
   }
@@ -1649,13 +1653,13 @@
 %    \begin{macrocode}
 \providecommand*{\mainmatter}
   {
-    \if@twoside\cleardoublepage\else\clearpage\fi
+    \if@twoside\cleardoubleoddpage\else\clearpage\fi
     \@mainmattertrue
     \pagenumbering { arabic }
   }
 \providecommand*{\backmatter}
   {
-    \if@twoside\cleardoublepage\else\clearpage\fi
+    \if@twoside\cleardoubleoddpage\else\clearpage\fi
     \@mainmatterfalse
   }
 %    \end{macrocode}
