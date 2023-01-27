@@ -12,6 +12,11 @@ and this project adheres to
 - Add license text of LaTeX Project Public License (LPPL) to repository
 - Add a continuous integration pipline using GitHub Actions
 
+### Fixed
+
+- Fix the font selection in the documentation of `se2fonts` to only use the
+  filename but not the font name
+
 ## [v2.0.0] – 2023–01–10
 
 ### Added
