@@ -1565,6 +1565,42 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \subsection{Styling of the sectioning commans}
+%
+% We change the formatting of the chapter, section, and sub-section headings.
+%    \begin{macrocode}
+\addtokomafont{chapterprefix}{\raggedleft\bfseries}
+\addtokomafont{chapter}{\mdseries}
+\addtokomafont{section}{\large\mdseries}
+\addtokomafont{subsection}{\normalsize\mdseries}
+\renewcommand*{\chapterformat}{%
+  \mbox{%
+    \scalebox{1.3}{\chapappifchapterprefix{\nobreakspace}}%
+    \scalebox{3.5}{\color{UPSE2-Gray}\thechapter\autodot}\enskip%
+  }%
+}
+\renewcommand*{\chapterlineswithprefixformat}[3]{%
+  \Ifstr{#1}{chapter}
+    {#2\textls*[75]{\MakeUppercase{#3}}}% change definition for chapter
+    {#2#3}% original definition
+}%
+\renewcommand*{\sectionlinesformat}[4]{%
+  #3\textls*[75]{\MakeUppercase{#4}}%
+}
+%    \end{macrocode}
+%
+% Change the loop of a \cmd{\paragraph} to be italic and end with a full stop.
+%    \begin{macrocode}
+\setkomafont{paragraph}{\normalsize\normalfont\itshape}
+\AddtoDoHook{heading/endgroup/paragraph}{\headingdot}
+\newcommand*{\headingdot}[1]{.}
+%    \end{macrocode}
+%
+% Change the width of a dictum
+%    \begin{macrocode}
+\renewcommand*{\dictumwidth}{0.42\linewidth}
+%    \end{macrocode}
+%
 % \subsection{Provide an environment for abstracts}
 %
 % We want to allow abstracts in German and English, which is also a requirement

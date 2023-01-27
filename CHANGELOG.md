@@ -11,6 +11,7 @@ and this project adheres to
 
 - Add license text of LaTeX Project Public License (LPPL) to repository
 - Add a continuous integration pipline using GitHub Actions
+- Add styling for chapter, section, and sub-section headings
 
 ### Fixed
 
