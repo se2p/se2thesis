@@ -14,6 +14,8 @@ and this project adheres to
 
 ### Fixed
 
+- Fix the font selection in the documentation of `se2fonts` to only use the
+  filename but not the font name
 - Fix the definitions of `\frontmatter`, `\mainmatter`, and `\backmatter` to
   match the definitions from KOMA Script's `scrbook` class.
 
