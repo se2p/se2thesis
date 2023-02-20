@@ -1,0 +1,32 @@
+name: Create release
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    name: Build release
+    environment: Release
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install TeX Live
+        uses: zauguin/install-texlive@v2
+        with:
+          # List the required TeX Live packages in a separate file to allow
+          # reuse in different workflows.
+          package_file: .github/tl_packages
+
+      - name: Run l3build
+        run: l3build ctan -q -H
+
+      - name: Create GitHub release
+        uses: ncipollo/release-action@a2e71bdd4e7dab70ca26a852f29600c98b33153e # v1.12.0
+        id: release
+        with:
+          artifacts: "build/distrib/ctan/*.zip"
