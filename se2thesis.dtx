@@ -80,6 +80,46 @@
 % They are available as separate packages, however, to allow their reuse for
 % other classes, packages, and projects, as well.
 %
+% \subsection{Installation}\label{sec:doc-intro-install}
+%
+% The \pkg{se2thesis} bundle is available from \CTAN\footnote{
+%   \href{https://ctan.org/pkg/se2thesis}{ctan.org/pkg/se2thesis}
+% }.
+% It is part of both \MiKTeX{} and \TeXLive.
+% You can find its development version from GitHub\footnote{
+%   \href{https://github.com/se2p/se2thesis}{github.com/se2p/se2thesis}
+% }.
+% The easiest way of installing it is through your \TeX{} distribution;
+% please check your distribution's documentation on this.
+% Note that it might be necessary to update your \TeX{} distribution
+% because they might not provide you updates;
+% for example, there is a new version of \TeXLive{} every year
+% which needs to be installed separately.
+% If you have installed an older version of \pkg{se2thesis}
+% consider updating it to the latest version available from \CTAN{}
+% through your distribution.
+%
+% For manual installation, we recommend to clone the Git repository
+% and run the \texttt{l3build} tool that we also use for building the bundle.
+% Running |l3build ctan| builds the source files and compiles the documentation.
+% This creates a folder |build| containing these artefacts;
+% |build/doc| contains the documentation,
+% |build/local| the source files.
+% See the documentation of \texttt{l3build} and your \TeX{} distribution
+% on how to install them manually.
+% Please note that \texttt{l3build} also provides a |l3build install| target
+% to install the bundle files to your local texmf tree.
+%
+% The “Island of \TeX{}” project provides Docker images of \TeXLive.
+% If you do not want to install/update \TeXLive{} on your system
+% you might want to consider their \texttt{latest} image,
+% which contains a recent \TeXLive{} 2023 build.
+% They build their images weekly,
+% thus also recent releases of \pkg{se2thesis} will be part of the image
+% soon after their release date.
+%
+% \subsection{General Macros}\label{sec:doc-intro-macros}
+%
 % They all have in common one macro, \cs{IfFormatAtLeastTF};
 % this macro is part of the latest \LaTeX{} kernel.
 % However, not all users might have upgraded their \TeX{} installation

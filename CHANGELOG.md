@@ -7,6 +7,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Add documentation on how to install the bundle if it is not part of the
+  existing TeX distribution.
+
 ## [v2.1.0] – 2023–01–27
 
 ### Added
