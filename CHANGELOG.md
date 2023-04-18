@@ -19,6 +19,7 @@ and this project adheres to
 - The `paper=a4` and `paper=b5` options now produce the exact same text-block
   sizes.
 - Make the logo height smaller for B5 paper.
+- The default class is now `scrbook` instead of `scrreprt`.
 
 ### Removed
 

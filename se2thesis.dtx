@@ -191,7 +191,7 @@
 %   \end{syntax}
 %   Set the base document class.
 %   Values are \cls{scrreprt}, \cls{scrartcl}, or \cls{scrbook}.
-%   Default is |scrreprt|.
+%   Default is |scrbook|.
 % \end{function}
 %
 % \begin{function}{paper}
@@ -746,7 +746,7 @@
     class / scrartcl .code:n = \tl_gset:Nn \l_@@_base_class_tl {scrartcl},
     class / book .meta:n = {class=scrbook},
     class / scrbook .code:n = \tl_gset:Nn \l_@@_base_class_tl {scrbook},
-    class .initial:n = scrreprt,
+    class .initial:n = scrbook,
 
     paper .choices:nn = {a4,b5}{
       \int_gset_eq:NN \l_@@_paper_int \l_keys_choice_int
