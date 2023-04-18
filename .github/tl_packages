@@ -19,7 +19,12 @@ mfware
 bibtex
 biblatex
 biber
+ctablestack
 lualatex-math
+luatexbase
+lua-widow-control
+microtype
+selnolig
 #
 # For the doc target
 adjustbox
@@ -61,19 +66,16 @@ libertinus-fonts
 libertinus-type1
 libertinus-otf
 listings
-lua-widow-control
 makeindex
 marginnote
 mathpazo
 metalogo
-microtype
 multido
 oberdiek
 pgf
 picture
 psnfss
 ragged2e
-selnolig
 siunitx
 sttools
 times
