@@ -18,6 +18,7 @@ sourcesfiles =
     "se2thesis.tex",
     "se2colors.dtx",
     "se2fonts.dtx",
+    "se2packages.dtx"
   }
 demofiles =
   {
@@ -70,6 +71,10 @@ function update_tag(file, content, tagname, tagdate)
     content = string.gsub(content,
       "\n\\ProvidesExplPackage %{se2fonts%} %{[^}]+%} %{[^}]+%}\n",
       "\n\\ProvidesExplPackage {se2fonts} {"
+        .. tagdate .. "} {" .. tagname .. "}\n")
+    content = string.gsub(content,
+      "\n\\ProvidesExplPackage %{se2packages%} %{[^}]+%} %{[^}]+%}\n",
+      "\n\\ProvidesExplPackage {se2packages} {"
         .. tagdate .. "} {" .. tagname .. "}\n")
     content = string.gsub(content,
       "\n\\ProvideDictionaryFor%{English%}%{se2translations%}%[[^]]+%]\n",

@@ -47,6 +47,7 @@ This work consists of the files se2thesis.dtx,
                                 se2thesis.ins,
                                 se2colors.dtx,
                                 se2fonts.dtx,
+                                se2packages.dtx,
                                 se2thesis-master-thesis-example.tex
           and the derived files se2thesis.pdf,
                                 se2thesis.cls,
@@ -54,6 +55,7 @@ This work consists of the files se2thesis.dtx,
                                 se2translations-german.trsl,
                                 se2colors.sty,
                                 se2fonts.sty,
+                                se2packages.sty,
                                 se2thesis-master-thesis-example.bib, and
                                 se2thesis-master-thesis-example.pdf
 \endpreamble
@@ -97,6 +99,14 @@ This work consists of the files se2thesis.dtx,
       {%
         \from{se2thesis.dtx}{init}
         \from{se2fonts.dtx}{package}
+      }
+  }
+\generate
+  {%
+    \file{se2packages.sty}
+      {%
+        \from{se2thesis.dtx}{init}
+        \from{se2packages.dtx}{package}
       }
   }
 

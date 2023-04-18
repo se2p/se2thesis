@@ -1,0 +1,742 @@
+% \iffalse meta-comment
+%
+% File: se2packages.dtx Copyright (C) 2022--2023 Stephan Lukasczyk
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file
+%
+%   https://www.latex-project.org/lppl.txt
+%
+% This file is part of the "se2thesis bundle" (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+%
+% The released version of this bundle is available from CTAN.
+%
+% ----------------------------------------------------------------------
+%
+% The development version of the bundle can be found at
+%
+%   https://github.com/se2p/se2thesis
+%
+% for those people who are interested.
+%
+% ----------------------------------------------------------------------
+%
+%<*driver>
+\documentclass{l3doc}
+% The next line is needed so that \GetFileInfo will be able to pick up
+% version data.
+\usepackage{se2packages}
+
+\usepackage[UKenglish]{babel}
+\usepackage{hvlogos}
+
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \GetFileInfo{se2packages.sty}
+%
+% \title{^^A
+%   \pkg{se2packages} -- Supporting Packages for the \pkg{se2thesis} Bundle^^A
+%   \thanks{This file describes \fileversion, last revised \filedate.}^^A
+% }
+%
+% \author{^^A
+%   Stephan Lukasczyk^^A
+%   \thanks{Email: \href{mailto:stephan@dante.de}{stephan@dante.de}}^^A
+% }
+%
+% \date{Released \filedate}
+%
+% \maketitle
+%
+% \begin{documentation}
+%
+% \section{The \pkg{se2packages} package}\label{sec:doc-se2packages}
+%
+% Several packages can be useful for writing a thesis.
+% We provide a simple package for the user
+% that loads these support packages with the recommended options.
+% Please note that you might not need all these packages,
+% however,
+% having a look at them (especially their documentation)
+% might give you an insight whether to use a certain package.
+% Our general recommendation is to use as few packages as you can;
+% some might have conflicts,
+% others basically do the same,
+% or are outdated.
+% Please consider reading the documentation of each package you are using
+% to figure out whether they have any conflicts with other packages
+% (for example, one cannot use the recommended \pkg{siunitx} package
+% together with \pkg{SIunits}) or they might require to be loaded
+% at special places in your preamble (for example, \pkg{hyperref}
+% is usually meant to be loaded as the last package,
+% except you are also using \pkg{cleveref},
+% which needs to be loaded \emph{after} \pkg{hyperref}).
+%
+% \subsection{The Recommended Packages}
+%
+% We first present the packages we recommend
+% and give a rationale why we believe they should be used.
+% Afterwards,
+% we will discuss how to load the \pkg{se2packages} package
+% to use one or the other of these recommended packages
+% in the next section.
+%
+% \subsubsection{Quoting with \pkg{csquotes}}
+%
+% The \pkg{csquotes} packages allows you for intelligent quoting of text.
+% While verbose quotes are not that common in computer science,
+% the package still provides some useful macros to the user.
+%
+% \subsubsection{Number formatting with \pkg{siunitx}}
+%
+% While \pkg{siunitx}'s original purpose was to format physical quantities,
+% it provides a lot of useful features
+% when typesetting theses (and other documents) in computer science.
+% When you skim through its documentation,
+% especiall look at the \cmd{\qty} and \cmd{\num} macros,
+% as well as the section on typesetting tabular material.
+% We also recommend reading an extensive discussion on number formatting,
+% precision of presented numbers,
+% and more related topics in Beyer et al.'s journal paper
+% on requirements and solutions for reliable
+% benchmarking~\cite{DBLP:journals/sttt/BeyerLW19}.
+%
+% \subsubsection{Code Listings}
+%
+% We prefer using the \pkg{minted} package for code listings
+% because it provides a lot of options for styling
+% as well as built-in support for a huge number of languages.
+% However,
+% this package requires the installation of Python
+% and the setting of the |-shell-escape| option to your \TeX{} engine.
+% Please read the package's documentation to set it up;
+% the aforementioned Docker images from the Island of \TeX{} project
+% provide you everything set up already.
+%
+% In case you do not want to use the \pkg{minted} package,
+% please consider using \pkg{listings} for typesetting your code listings.
+%
+% Please be aware to use \emph{either} \pkg{minted} \emph{or} \pkg{listings}!
+%
+% \subsubsection{Designing Tables}
+%
+% A basically mandatory package to all users of tables
+% is the \pkg{booktabs} package.
+% Especially its documentation is a must-read!
+% It provides a large variety of hints for designing tables,
+% most notably that one should never ever use vertical lines;
+% horizontal lines should be used sparesly;
+% \pkg{booktabs} provides three macros for lines that shall be used
+% instead of \cmd{\hline} from standard \LaTeX:
+% \cmd{\toprule} for a rule on the top of a table,
+% above the column heads;
+% \cmd{\midrule} to separate column heads and the content,
+% and \cmd{\bottomrule} to mark the bottom of a table.
+% We highly recommend that you follow this style when writing your thesis.
+%
+% Note that captions of tables shall be put \emph{above} the table
+% whereas captions of figures shall go \emph{below} the figure.
+% The rationale is that a figure should be more or less self explaining
+% while a table almost always needs some explanation.
+%
+% Unfortunately,
+% the distances when using a \cmd{\caption} above a table are wrong by default;
+% when creating tables,
+% consider loading the \pkg{hvfloats} package
+% and use its \cmd{\tabcaption} instead of \cmd{\caption} for tables.
+% The \pkg{hvfloats} package furthermore provides additional useful macros
+% to typeset all kinds of floats.
+%
+% \subsubsection{Controlling Ligatures, Orphans, and Widows}
+%
+% When using \LuaTeX{}~(which we recommend anyway),
+% we additionally recommend to use the \pkg{selnolig}
+% and \pkg{lua-widow-control} packages.
+% The former implements a better control over ligatures,
+% the latter provides better control over orphans and widows.
+%
+% \subsubsection{Use \pkg{microtype} for Microtypographic Optimisation}
+%
+% \pkg{microtype} is a game changer when writing documents.
+% While standard \LaTeX{} provides reasonably good typography,
+% the \pkg{microtype} package brings it to the next level.
+% We refer you to the documentation of the package for details.
+%
+% Additionally,
+% we prefer to have a thin space around the m-dash.
+% Although we are aware of the discussion
+% whether to have such a space in English,
+% we think it looks more beautiful and thus recommend it.
+%
+% \subsubsection{Use \pkg{biblatex} for Bibliographic References}
+%
+% The standard way of typesetting bibliographic references used to be \BibTeX.
+% The original \BibTeX,
+% however,
+% seems to be very outdated in various ways:
+% it originally only supported 7\,bit character sets
+% and creating citation styles requires the usage
+% of a kind of an archaic language.
+% \BibLaTeX{} resolves many of the drawbacks of \BibTeX;
+% when combined with the |biber| engine,
+% it supports full UTF-8 unicode,
+% therefore correct sorting of the references now works out of the box;
+% also creating citation styles can now be done using simple \LaTeX{} commands.
+%
+% \subsubsection{Use \pkg{cleveref} for Internal References}
+%
+% \LaTeX{} provides an easy-to-use reference mechanism using the \cmd{\label}
+% and \cmd{\ref} macros.
+% However,
+% this requires some manual effort and the text needs to specify
+% whether a reference is to a figure, section, or table.
+% We often see in drafts artefacts such as \enquote{we discuss our findings in 4};
+% but what is \enquote{4} here?
+% Is it a section?
+% A table?
+% A figure?
+%
+% To avoid such confusion,
+% use the \pkg{cleveref} package,
+% which automatically infers the type of the reference~(see its documentation
+% on how this works).
+% The \pkg{cleveref} package furthermore avoids an additional, common mistake:
+% between the name of the element and its reference
+% one needs to have a non-breaking space that is often forgotten.
+% Instead people are using normal spaces that can break at the end of a line
+% which looks very ugly.
+%
+% Please note that,
+% in contrast to most other packages,
+% \pkg{cleveref} has to be loaded \emph{after} the \pkg{hyperref} package!
+%
+% \subsection{Loading \pkg{se2packages}}
+%
+% When you load the \pkg{se2packages} package
+% it will automatically load the \pkg{csquotes} and \pkg{booktabs} packages
+% because we believe that you definitely should use them.
+% Still, it is possible to avoid this by setting the following
+% load-time options to the package.
+% \begin{function}{csquotes,nocsquotes}
+%   \begin{syntax}
+%     |csquotes| = \meta{true,false}
+%     |nocsquotes|
+%   \end{syntax}
+%   The argument to |csquotes| can be one of |true| or |false|.
+%   The latter does not load \pkg{csquotes}, the former is the default value.
+%   By using |nocsquotes| you can also avoid that \pkg{csquote} is loaded.
+% \end{function}
+%
+% \begin{function}{booktabs,nobooktabs}
+%   \begin{syntax}
+%     |booktabs| = \meta{true,false}
+%     |nobooktabs|
+%   \end{syntax}
+%   The argument to |booktabs| can be one of |true| or |false|.
+%   The latter does not load \pkg{booktabs}, the former is the default value.
+%   By using |nobooktabs| you can also avoid that \pkg{booktabs} is loaded.
+% \end{function}
+%
+% The \pkg{siunitx} package is helpful to set quantities
+% and to automatically format numbers consistently.
+% The following load-time option loads it automatically.
+% \begin{function}{siunitx}
+%   \begin{syntax}
+%     |siunitx| = \meta{true,false}
+%   \end{syntax}
+%   Decides whether the package loads \pkg{siunitx}
+%   and sets the options for \pkg{siunitx} to the values we recommend.
+%   The default value is |false|, set it to |true| to load \pkg{siunitx}.
+% \end{function}
+%
+% We provide a load-time option to load \pkg{minted}
+% and configure it.
+% \begin{function}{minted}
+%   \begin{syntax}
+%     |minted| = \meta{true,false}
+%   \end{syntax}
+%   Decides whether the package loads \pkg{minted}
+%   and sets the options for \pkg{minted} to the values we recommend.
+%   The default value is |false|, set it to |true| to load \pkg{minted}.
+%   Note that \pkg{minted} requires additional installation effort
+%   and the use of the |-shell-escape| option, see its documentation.
+% \end{function}
+%
+% We also provide a load-time option to load \pkg{listings}
+% and configure it.
+% This option and the |minted| option are mutually exclusive!
+% \begin{function}{listings}
+%   \begin{syntax}
+%     |listings| = \meta{true,false}
+%   \end{syntax}
+%   Decides whether the package loads \pkg{listings}
+%   and sets the options for \pkg{listings} to the values we recommend.
+%   The default value is |false|, set it to |true| to load \pkg{listings}.
+% \end{function}
+%
+% We provide a load-time option to load \pkg{selnolig}.
+% \begin{function}{selnolig,noselnolig}
+%   \begin{syntax}
+%     |selnolig| = \meta{true,false}
+%     |noselnolig|
+%   \end{syntax}
+%   The argument to |selnolig| can be one of |true| or |false|.
+%   The latter does not load \pkg{selnolig}, the former is the default value.
+%   By using |noselnolig| you can also avoid that \pkg{selnolig} is loaded.
+% \end{function}
+%
+% We provide a load-time option to load \pkg{lua-widow-control}.
+% \begin{function}{widowcontrol,nowidowcontrol}
+%   \begin{syntax}
+%     |widowcontrol| = \meta{true,false}
+%     |nowidowcontrol|
+%   \end{syntax}
+%   The argument to |widowcontrol| can be one of |true| or |false|.
+%   The latter does not load \pkg{lua-widow-control},
+%   the former is the default value.
+%   By using |nowidowcontrol| you can also avoid
+%   that \pkg{lua-widow-control} is loaded.
+% \end{function}
+%
+% We provide a load-time option to load and configure \pkg{microtype}.
+% \begin{function}{microtype,nomicrotype}
+%   \begin{syntax}
+%     |microtype| = \meta{true,false}
+%     |nomicrotype|
+%   \end{syntax}
+%   The argument to |microtype| can be one of |true| or |false|.
+%   The latter does not load \pkg{microtype}, the former is the default value.
+%   By using |nomicrotype| you can also avoid that \pkg{microtype} is loaded.
+% \end{function}
+%
+% We provide a load-time option to load and configure \pkg{biblatex}.
+% \begin{function}{biblatex}
+%   \begin{syntax}
+%     |biblatex| = \meta{true,false}
+%   \end{syntax}
+%   Decides whether the package loads \pkg{biblatex}
+%   and sets the options for \pkg{biblatex} to the values we recommend.
+%   The default value is |false|, set it to |true| to load \pkg{biblatex}.
+% \end{function}
+%
+% Additionally,
+% we provide a load-time option to load \pkg{cleveref}.
+% This option makes use of \LaTeX's hook system to load it as the very last
+% thing in the preamble.
+% You shall not use this option, but load \pkg{cleveref} on your own,
+% if your document requires packages that need to be loaded even \emph{after}
+% \pkg{cleveref}.
+% \begin{function}{cleveref}
+%   \begin{syntax}
+%     |cleveref| = \meta{true,false}
+%   \end{syntax}
+%   Decides whether the package load \pkg{cleveref}.
+%   The default value is |false|, set it to |true| to load \pkg{cleveref}.
+% \end{function}
+%
+% Lastly,
+% we provide one option to load all recommended packages~(with \pkg{minted}
+% prefered over \pkg{listings}).
+% \begin{function}{all}
+%   \begin{syntax}
+%     |all| = \meta{true,false}
+%   \end{syntax}
+%   Decides whether the package loads all recommended packages.
+%   The default value is |false|, set it to |true| to load them.
+% \end{function}
+%
+% \begin{thebibliography}{9}
+%   \bibitem{DBLP:journals/sttt/BeyerLW19} Dirk Beyer, Stefan Löwe, and Philipp
+%   Wendler: \emph{Reliable benchmarking: requirements and solutions}. STTT
+%   21(1): 1--29 (2019)
+% \end{thebibliography}
+% 
+%
+%
+%
+% \end{documentation}
+%
+% \begin{implementation}
+%
+% \section{\pkg{se2packages} implementation}
+%
+% Start the \pkg{DocStrip} guards.
+%    \begin{macrocode}
+%<*package>
+%    \end{macrocode}
+%
+% Identify the internal prefix (\LaTeX3 \pkg{DocStrip} convention): only
+% internal material in this \emph{submodule} should be used directly.
+%    \begin{macrocode}
+%<@@=slcd_packages>
+%    \end{macrocode}
+%
+% Identify the package and give the overall version information.
+%    \begin{macrocode}
+\ProvidesExplPackage {se2packages} {2023-04-17} {3.0.0}
+  {Supporting packages for the se2thesis bundle}
+%    \end{macrocode}
+%
+% \subsection{Load-time options}
+%
+% Before we define the actual options,
+% define some Boolean variables to store the selected values.
+%
+% \begin{macro}{\l_@@_csquotes_bool}
+%   Whether or not to load \pkg{csquotes}.
+%    \begin{macrocode}
+\bool_new:N \l_@@_csquotes_bool
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\l_@@_booktabs_bool}
+%   Whether or not to load \pkg{booktabs}.
+%    \begin{macrocode}
+\bool_new:N \l_@@_booktabs_bool
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\l_@@_siunitx_bool}
+%   Whether or not to load and configure \pkg{siunitx}.
+%    \begin{macrocode}
+\bool_new:N \l_@@_siunitx_bool
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\l_@@_minted_bool}
+%   Whether or not to load and configure \pkg{minted}.
+%    \begin{macrocode}
+\bool_new:N \l_@@_minted_bool
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\l_@@_listings_bool}
+%   Whether or not to load and configure \pkg{listings}.
+%    \begin{macrocode}
+\bool_new:N \l_@@_listings_bool
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\l_@@_biblatex_bool}
+%   Whether or not to load and configure \pkg{biblatex}.
+%    \begin{macrocode}
+\bool_new:N \l_@@_biblatex_bool
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\l_@@_selnolig_bool}
+%   Whether or not to load \pkg{selnolig} (\LuaTeX{} only).
+%    \begin{macrocode}
+\bool_new:N \l_@@_selnolig_bool
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\l_@@_luawidowcontrol_bool}
+%   Whether or not to load \pkg{luawidowcontrol} (\LuaTeX{} only).
+%    \begin{macrocode}
+\bool_new:N \l_@@_luawidowcontrol_bool
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\l_@@_microtype_bool}
+%   Whether or not to load \pkg{microtype}.
+%    \begin{macrocode}
+\bool_new:N \l_@@_microtype_bool
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\l_@@_cleveref_bool}
+%   Whether or not to load and configure \pkg{cleveref}.
+%    \begin{macrocode}
+\bool_new:N \l_@@_cleveref_bool
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\l_@@_all_bool}
+%   Whether or not to load and configure all recommended packages.
+%    \begin{macrocode}
+\bool_new:N \l_@@_all_bool
+%    \end{macrocode}
+% \end{macro}
+%
+% Define the actual load-time options.
+%    \begin{macrocode}
+\keys_define:nn { seiipackages }
+  {
+    csquotes .bool_gset:N = \l_@@_csquotes_bool,
+    csquotes .initial:n = true,
+    nocsquotes .meta:n = {csquotes=false},
+
+    booktabs .bool_gset:N = \l_@@_booktabs_bool,
+    booktabs .initial:n = true,
+    nobooktabs .meta:n = {booktabs=false},
+
+    siunitx .bool_gset:N = \l_@@_siunitx_bool,
+    siunitx .initial:n = false,
+
+    minted .bool_gset:N = \l_@@_minted_bool,
+    minted .initial:n = false,
+
+    listings .bool_gset:N = \l_@@_listings_bool,
+    listings .initial:n = false,
+
+    biblatex .bool_gset:N = \l_@@_biblatex_bool,
+    biblatex .initial:n = false,
+
+    selnolig .bool_gset:N = \l_@@_selnolig_bool,
+    selnolig .initial:n = true,
+    noselnolig .meta:n = {selnolig=false},
+
+    widowcontrol .bool_gset:N = \l_@@_luawidowcontrol_bool,
+    widowcontrol .initial:n = true,
+    nowidowcontrol .meta:n = {widowcontrol=false},
+
+    microtype .bool_gset:N = \l_@@_microtype_bool,
+    microtype .initial:n = true,
+    nomicrotype .meta:n = {microtype=false},
+
+    cleveref .bool_gset:N = \l_@@_cleveref_bool,
+    cleveref .initial:n = false,
+
+    all .bool_gset:N = \l_@@_all_bool,
+    all .initial:n = false,
+  }
+%    \end{macrocode}
+%
+% \subsection{Option handling}
+%
+%    \begin{macrocode}
+\IfFormatAtLeastTF { 2022-06-01 }
+  { \ProcessKeyOptions [ seiipackages ] }
+  {
+    \RequirePackage{ l3keys2e }
+    \ProcessKeysOptions { seiipackages }
+  }
+%    \end{macrocode}
+%
+% Define an error message if both \pkg{minted} and \pkg{listings} are requested.
+%    \begin{macrocode}
+\msg_set:nnnn { seiipackages } { conflicting-packages }
+  { Setting~ both~ minted~ and~ listings~ to~ true~ is~ not~ possible. }
+  { Choose~ either~ of~ them! }
+%    \end{macrocode}
+%
+% Define a message for logging that a specific package will be loaded by
+% \pkg{se2packages}.
+% Expects as parameter the name of the package that will be loaded.
+%    \begin{macrocode}
+\msg_new:nnn { seiipackages } { load-package }
+  { se2packages~ loads~ the~ #1~ package now. }
+%    \end{macrocode}
+%
+% And, in case both values are set to |true|,
+% raise the error message.
+%    \begin{macrocode}
+\bool_lazy_and:nnT { \l_@@_minted_bool } { \l_@@_listings_bool }
+  {
+    \msg_error:nn { seiipackages } { conflicting-packages }
+  }
+%    \end{macrocode}
+%
+% In case the |all| option is set,
+% set all other values to |true|.
+%    \begin{macrocode}
+\bool_if:NT \l_@@_all_bool
+  {
+    \bool_gset_true:N \l_@@_csquotes_bool
+    \bool_gset_true:N \l_@@_booktabs_bool
+    \bool_gset_true:N \l_@@_siunitx_bool
+    \bool_gset_true:N \l_@@_minted_bool
+    \bool_gset_true:N \l_@@_listings_bool
+    \bool_gset_true:N \l_@@_selnolig_bool
+    \bool_gset_true:N \l_@@_luawidowcontrol_bool
+    \bool_gset_true:N \l_@@_microtype_bool
+    \bool_gset_true:N \l_@@_biblatex_bool
+    \bool_gset_true:N \l_@@_cleveref_bool
+  }
+%    \end{macrocode}
+%
+% \subsection{Package loading}
+%
+% Conditionally load the \pkg{csquotes} package.
+%    \begin{macrocode}
+\bool_if:NT \l_@@_csquotes_bool
+  {
+    \msg_info:nnn { seiipackages } { load-package } { csquotes }
+    \RequirePackage{csquotes}
+  }
+%    \end{macrocode}
+%
+% Conditionally load the \pkg{booktabs} package.
+%    \begin{macrocode}
+\bool_if:NT \l_@@_booktabs_bool
+  {
+    \msg_info:nnn { seiipackages } { load-package } { booktabs }
+    \RequirePackage{booktabs}
+  }
+%    \end{macrocode}
+%
+% Conditionally load and configure the \pkg{siunitx} package.
+%    \begin{macrocode}
+\bool_if:NT \l_@@_siunitx_bool
+  {
+    \msg_info:nnn { seiipackages } { load-package } { siunitx }
+    \RequirePackage[
+      add-integer-zero=false,
+      detect-inline-weight=math,
+      detect-weight=true,
+      free-standing-units,
+      group-minimum-digits=4,
+      list-final-separator={, and },
+      round-mode=figures,
+      round-precision=3,
+      separate-uncertainty=true,
+      uncertainty-mode=separate,
+    ]{siunitx}
+  }
+%    \end{macrocode}
+%
+% Conditionally load and configure the \pkg{minted} package.
+%    \begin{macrocode}
+\bool_if:NT \l_@@_minted_bool
+  {
+    \msg_info:nnn { seiipackages } { load-package } { minted }
+    \RequirePackage[newfloat=true]{minted}
+    \setminted{
+      autogobble,
+      breaklines=true,
+      fontsize=\footnotesize,
+      frame=single,
+      linenos=false,
+      resetmargins=true,
+      xleftmargin=1em,
+      xrightmargin=1em,
+    }
+  }
+%    \end{macrocode}
+%
+% Conditionally load and configure the \pkg{listings} package.
+%    \begin{macrocode}
+\bool_if:NT \l_@@_listings_bool
+  {
+    \msg_info:nnn { seiipackages } { load-package } { listings }
+    \RequirePackage{listings}
+    \lstset{
+      basicstyle=\footnotesize\ttfamily,
+      breaklines=true,
+      captionpos=t,
+      extendedchars=true,
+      frame=single,
+      keywordstyle=\color{blue}\bfseries,
+      showspaces=false,
+      showtabs=false,
+      showstringspaces=false,
+      tabsize=2,
+    }
+  }
+%    \end{macrocode}
+%
+% Conditionally load \pkg{selnolig} if present and we run \LuaTeX.
+%    \begin{macrocode}
+\bool_lazy_and:nnT { \l_@@_selnolig_bool } { \sys_if_engine_luatex_p: }
+  {
+    \IfFileExists { selnolig.sty }
+      {
+        \RequirePackage{selnolig}
+      } {
+        \msg:nnnn { seiipackages }
+          { selnolig-not-available }
+          { Could~ not~ find~ selnolig.sty }
+          { You~ might~ want~ to~ install~ it~ for~ better~ ligatures~ control.}
+        \msg_note:nn { seipackages } { selnolig-not-available }
+      }
+  }
+%    \end{macrocode}
+%
+% Conditionally load \pkg{luawidowcontrol} if present and we run \LuaTeX.
+%    \begin{macrocode}
+\bool_lazy_and:nnT { \l_@@_luawidowcontrol_bool } { \sys_if_engine_luatex_p: }
+  {
+    \IfFileExists { lua-widow-control.sty }
+      {
+        \RequirePackage{lua-widow-control}
+      } {
+        \msg:nnnn { seiipackages }
+          { lua-widow-control-not-available }
+          { Could~ not~ find~ lua-widow-control.sty }
+          { 
+            You~ might~ want~ to~ install~ it~ for~ better~ control~ over~
+            widows~ and~ orphans.
+          }
+        \msg_note:nn { seipackages } { lua-widow-control-not-available }
+      }
+  }
+%    \end{macrocode}
+%
+% Conditionally load and configure \pkg{microtype}.
+%    \begin{macrocode}
+\bool_if:NT \l_@@_microtype_bool
+  {
+    \msg_info:nnn { seiipackages } { load-package } { microtype }
+    \RequirePackage{microtype}
+    \clubpenalty=10000
+    \widowpenalty=10000
+    \displaywidowpenalty=10000
+    \SetExtraKerning{
+      encoding = {OT1,T1,T2A,LY1,OT4,QX,T5,TS1,EU1,EU2}
+    }{
+      \textemdash = {167,167},
+      — = {167,167}
+    }
+  }
+%    \end{macrocode}
+%
+% Conditionally load and configure the \pkg{biblatex} package.
+%    \begin{macrocode}
+\bool_if:NT \l_@@_biblatex_bool
+  {
+    \msg_info:nnn { seiipackages } { load-package } { biblatex }
+    \PassOptionsToPackage
+      {
+        backend=biber,
+        backref=true,
+        giveninits=true,
+        hyperref=auto,
+        maxnames=100,
+        minalphanames=3,
+        sorting=nyt,
+        style=alphabetic,
+      } { biblatex }
+      \RequirePackage{biblatex}
+  }
+%    \end{macrocode}
+%
+% Conditionally load the \pkg{cleveref} package as the last of the preamble.
+%    \begin{macrocode}
+\bool_if:NT \l_@@_cleveref_bool
+  {
+    \msg_info:nnn { seiipackages } { load-package } { cleveref }
+    \AddToHook { begindocument/before }
+      {
+        \RequirePackage[capitalise]{cleveref}
+      }
+  }
+%    \end{macrocode}
+%
+%
+%
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+% \end{implementation}
+%
+% \PrintIndex

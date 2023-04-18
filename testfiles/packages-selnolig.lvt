@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{expl3}
+\ExplSyntaxOn
+\bool_if:NT \sys_if_engine_luatex_p: { \usepackage{fontspec} }
+\ExplSyntaxOff
+\usepackage[%
+  csquotes=false,%
+  booktabs=false,%
+  siunitx=false,%
+  minted=false,%
+  listings=false,%
+  selnolig=true,%
+  widowcontrol=false,%
+  microtype=false,%
+  biblatex=false,%
+  cleveref=false,%
+  all=false,%
+]{se2packages}
+\input{regression-test}
+
+\begin{document}
+
+\START
+\ExplSyntaxOn
+\showoutput
+
+\TEST { selnolig~ loaded~ in~ LuaTeX }
+  {
+    \bool_if:NT \sys_if_engine_luatex_p:
+      {
+        \cs_if_exist:NTF \uselig { \TRUE } { \ERROR }
+      }
+  }
+
+\TEST { selnolig~ not~ loaded~ in~ pdfTeX }
+  {
+    \bool_if:NF \sys_if_engine_luatex_p:
+      {
+        \cs_if_exist:NTF \uselig { \ERROR } { \TRUE }
+      }
+  }
+
+\ExplSyntaxOff
+\END
+
+\end{document}
+
+%% vim: set ft=tex :

@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage{expl3}
+\usepackage[%
+  csquotes=false,%
+  booktabs=false,%
+  siunitx=false,%
+  minted=false,%
+  listings=false,%
+  selnolig=false,%
+  widowcontrol=false,%
+  microtype=false,%
+  biblatex=false,%
+  cleveref=true,%
+  all=false,%
+]{se2packages}
+\usepackage{hyperref}
+\input{regression-test}
+
+\begin{document}
+
+\START
+\ExplSyntaxOn
+\showoutput
+
+\TEST { cleveref~ loaded }
+  {
+    \cs_if_exist:NTF \cref { \TRUE } { \ERROR }
+  }
+
+\ExplSyntaxOff
+\END
+
+\end{document}
+
+%% vim: set ft=tex :

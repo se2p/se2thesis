@@ -11,6 +11,15 @@ and this project adheres to
 
 - Add documentation on how to install the bundle if it is not part of the
   existing TeX distribution.
+- Add a package `se2packages` that provides the ability to directly load
+  recommended packages with recommended options.
+
+### Removed
+
+- **Breaking:** Removed the `biblatex` class option from `se2thesis`, use the
+  `se2packages` package with its `biblatex=true` option instead.
+- Removed the automated loading of the `microtype`, `selnolig`, and
+  `lua-widow-control` packages from `se2thesis`—use `se2packages` instead.
 
 ## [v2.1.0] – 2023–01–27
 

@@ -1,0 +1,34 @@
+\documentclass{article}
+\usepackage{expl3}
+\usepackage[%
+  csquotes=true,%
+  booktabs=false,%
+  siunitx=false,%
+  minted=false,%
+  listings=false,%
+  selnolig=false,%
+  widowcontrol=false,%
+  microtype=false,%
+  biblatex=false,%
+  cleveref=false,%
+  all=false,%
+]{se2packages}
+\input{regression-test}
+
+\begin{document}
+
+\START
+\ExplSyntaxOn
+\showoutput
+
+\TEST { csquotes~ loaded }
+  {
+    \cs_if_exist:NTF \enquote { \TRUE } { \ERROR }
+  }
+
+\ExplSyntaxOff
+\END
+
+\end{document}
+
+%% vim: set ft=tex :

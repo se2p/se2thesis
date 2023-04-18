@@ -168,7 +168,7 @@
 %
 % However, we recommend to use a couple of further packages, together with some
 % further options to those package.  We describe these settings in
-% \cref{sec:doc-se2thesis-pkgs}.
+% \cref{sec:doc-se2packages}.
 % Please consider looking at this section when starting to write your document.
 %
 % Before we start with a detailed documentation of the class, we explain one
@@ -220,14 +220,6 @@
 %   a bachelor thesis, |master| for a master thesis, |masterproposal| for
 %   a proposal to a master thesis, |phdproposal| for a proposal to a PhD thesis,
 %   and |phd| for a PhD thesis.
-% \end{function}
-%
-% \begin{function}{biblatex}
-%   \begin{syntax}
-%     |biblatex| = \meta{true,false}
-%   \end{syntax}
-%   Whether \cls{se2thesis} shall load the \pkg{biblatex} package together with
-%   some settings automatically.
 % \end{function}
 %
 % \begin{function}{colormode}
@@ -394,164 +386,6 @@
 % page numbers in the outer margin and the headmarks split from the page numbers
 % by a vertical bar.
 %
-% \subsection{Recommended additional packages}\label{sec:doc-se2thesis-pkgs}
-%
-% Several packages can be useful for writing a thesis.
-% We list them in this section; for the recommended option settings, please have
-% a look at our examples.
-% Please note that you might not need all these packages, however, having a look
-% at them (especially their documentation) might give you an insight, whether to
-% use a package.
-% Our general recommendation is to use as few packages as you can; some might
-% have conflicts, others basically do the same or are outdated.
-% Please consider reading the documentation of each package you are using to
-% figure out whether they have any conflicts with other packages~(for example,
-% one cannot use the recommended \pkg{siunitx} package together with
-% \pkg{SIunits}) or they might require to be loaded at special places in your
-% preamble~(for example, \pkg{hyperref} is usually meant to be loaded as the
-% last package, except you are also using \pkg{cleveref}, which needs to be
-% loaded \emph{after} \pkg{hyperref}).
-%
-% \subsubsection{Quoting with \pkg{csquotes}}
-%
-% The \pkg{csquotes} package allows for intelligent quoting of text.
-% While verbose quotes are not that common on computer science, the package
-% still provides some useful macros to the user.
-%
-% \subsubsection{Number formatting with \pkg{siunitx}}
-%
-% While \pkg{siunitx}'s original purpose was to format physical quantities, it
-% provides a lot of useful features when typesetting theses~(and other
-% documents) in computer science.
-% When you skim through its documentation, especially look at the \cmd{\qty} and
-% \cmd{\num} macros, as well as the section on typesetting tabular material.
-% We also recommend reading an extensive discussion on number formatting,
-% precision of presented numbers, and many more related topics in Beyer et al.'s
-% journal paper on requirements and solutions for reliable
-% benchmarking~\cite{DBLP:journals/sttt/BeyerLW19}.
-%
-% When using the \pkg{siunitx} package, we recommend adding the following lines
-% to your document's preamble
-% \begin{LaTeXdemo}[code only]
-% \usepackage[
-%   group-minimum-digits=4,
-%   list-final-separator={, and },
-%   add-integer-zero=false,
-%   free-standing-units,
-%   round-mode=figures,
-%   round-precision=3,
-%   detect-weight=true,
-%   detect-inline-weight=math,
-%   separate-uncertainty=true,
-%   uncertainty-mode=separate,
-% ]{siunitx}
-% \end{LaTeXdemo}
-%
-% \subsubsection{Code listings with \pkg{minted}}
-%
-% We prefer using the \pkg{minted} package for code listings.
-% However, this package requires the installation of Python and the setting of
-% the |-shell-escape| option to your \TeX{} engine.
-% Please read the package's documentation to set it up.
-% If you do not want to install Python and the dependencies, we also provide
-% settings for the alternative \pkg{listings} package in the next subsection.
-%
-% When using \pkg{minted} we recommend the following settings:
-% \begin{LaTeXdemo}[code only]
-% \usepackage[newfloat=true]{minted}
-% \setminted{
-%   autogobble,
-%   breaklines=true,
-%   fontsize=\footnotesize,
-%   linenos=false,
-%   resetmargins=true,
-%   xleftmargin=1em,
-%   xrightmargin=1em,
-%   frame=single,
-% }
-% \end{LaTeXdemo}
-%
-% \subsubsection{Code listing with \pkg{listings}}
-%
-% In case you do not want to use the aforementioned \pkg{minted} package, please
-% consider using \pkg{listings} for typesetting your code listings.
-% \begin{LaTeXdemo}[code only]
-% \usepackage{listings}
-% \lstset{
-%   frame=single,
-%   extendedchars=true,
-%   basicstyle=\footnotesize\ttfamily,
-%   keywordstyle=\color{blue}\bfseries,
-%   showstringspaces=false,
-%   showspaces=false,
-%   tabsize=2,
-%   breaklines=true,
-%   showtabs=false,
-%   captionpos=t,
-% }
-% \end{LaTeXdemo}
-%
-% Please be aware to use \emph{either} \pkg{minted} \emph{or} \pkg{listings}!
-%
-% \subsubsection{Designing tables}
-%
-% A basically mandatory package to all users of tables is the \pkg{booktabs}
-% package.
-% Especially its documentation is a must read!
-% It provides a large variety of hints for designing tables,
-% most notably that one should never ever use vertical lines;
-% horizontal lines should be used sparsely; \pkg{booktabs} provides three macros
-% for lines that shall be used: \cmd{\toprule} for a rule on the top of a table,
-% above the column heads, \cmd{\midrule} to separate column heads and the
-% content but, and \cmd{\bottomrule} to mark the bottom of a table.
-%
-% Note that captions of tables shall be put \emph{above} the table whereas
-% captions of figures shall go \emph{below} the figure.
-% The rationale is that a figure should be more of less self explaining whereas
-% a table almost always needs some explanation.
-%
-% Unfortunately, the distances when using a \cmd{\caption} above a table are
-% wrong by default; when creating tables, consider loading the \pkg{hvfloats}
-% package and use its \cmd{\tabcaption} instead of \cmd{\caption} for tables.
-% The \pkg{hvfloats} package furthermore provides additional useful things to
-% typeset all kinds of floats.
-%
-% \subsubsection{Use \pkg{biblatex} for bibliographic references}
-%
-% The standard way of typesetting bibliographic references was using
-% \BibTeX.
-% The original \BibTeX, however, seems to be very outdated in
-% various ways: it originally supported only 7\,bit character sets and creating
-% citation styles requires the usage of an archaic language.
-% \BibLaTeX resolves many of the drawbacks of \BibTeX;
-% when combined with the |biber| engine, it supports full UTF-8 unicode,
-% therefore correct sorting of the references now works out of the box; also
-% creating citation styles can now be done using simple \LaTeX{} commands.
-%
-% For easier usage, we provide the load-time option |biblatex| that already sets
-% all settings~(see \cref{sec:doc-se2thesis-options}.
-% Set this options to \cls{se2thesis} and add your reference file using the
-% \cmd{\addbibresource} macro.  \cmd{\printbibliography} will print your
-% references.
-%
-% \subsubsection{Use \pkg{cleveref} for internal references}
-%
-% \LaTeX{} provides an easy-to-use reference mechanism using the \cmd{\label}
-% and \cmd{\ref} macros.
-% However, this requires some manual effort and the text needs to specify
-% whether a reference is to a figure, section, or table.
-% We often see things in drafts such as \enquote{we discuss our findings in 4};
-% but what is \enquote{4} here?
-% Is it a section, a table, a figure?
-% To avoid such confusion, use the \pkg{cleveref} package, which automatically
-% infers the type of the reference~(see its documentation on how this works).
-% The \pkg{cleveref} package furthermore avoids one additional mistake: between
-% the name of the element and its reference one needs to have a non-breaking
-% space that often is forgotten.
-%
-% Please note that, in contrast to most other packages, \pkg{cleveref} has to be
-% loaded \emph{after} the \pkg{hyperref} package!
-%
 % \subsection{Abstract for the thesis}\label{sec:doc-se2thesis-abstract}
 %
 % Each thesis shall come with an abstract that summarises its content.
@@ -688,12 +522,6 @@
 % question;
 % however, this can also be arbitrary text.
 %
-% \begin{thebibliography}{9}
-%   \bibitem{DBLP:journals/sttt/BeyerLW19} Dirk Beyer, Stefan Löwe, and Philipp
-%   Wendler: \emph{Reliable benchmarking: requirements and solutions}. STTT
-%   21(1): 1--29 (2019)
-% \end{thebibliography}
-%
 % \end{documentation}
 %
 % \clearpage
@@ -828,14 +656,6 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\l_@@_biblatex_bool}
-%   The user wants to load the \pkg{biblatex} package together with our
-%   settings.
-%    \begin{macrocode}
-\bool_new:N \l_@@_biblatex_bool
-%    \end{macrocode}
-% \end{macro}
-%
 % Define internal variables to hold the values of the fields of the title
 % page.
 % \begin{macro}
@@ -951,9 +771,6 @@
     },
     thesistype .initial:n = master,
 
-    biblatex .bool_gset:N = \l_@@_biblatex_bool,
-    biblatex .initial:n = false,
-
     colormode .choices:nn = {cmyk,rgb,bw}{
       \tl_gset_eq:NN \l_@@_colormode_tl \l_keys_choice_tl
     },
@@ -1024,86 +841,6 @@
 \RequirePackage{se2colors}
 
 \RequirePackage{se2fonts}
-%    \end{macrocode}
-%
-% Load the \pkg{microtype} package.
-% We also set some options to \pkg{microtype}, namely the penalties for widows
-% and orphans (which might also be corrected by \pkg{lua-widow-control} when
-% using \LuaTeX{}) and a thin space around the m-dash.
-% We are aware of the discussion whether to have a space around the m-dash in
-% English, however, we think it looks more beautiful.
-% We took this from \href{https://tex.stackexchange.com/a/109188/14622}{a
-% \TeX{}.StackExchange post}.
-%    \begin{macrocode}
-\RequirePackage{microtype}
-\clubpenalty=10000
-\widowpenalty=10000
-\displaywidowpenalty=10000
-\SetExtraKerning{
-  encoding = {OT1,T1,T2A,LY1,OT4,QX,T5,TS1,EU1,EU2}
-}{
-  \textemdash = {167,167},
-  — = {167,167}
-}
-%    \end{macrocode}
-%
-% When using \LuaTeX{} load the \pkg{lua-widow-control} package for a better
-% control of orphans and widows.
-%    \begin{macrocode}
-\ifengineT { \luatexengine }
-  {
-    \IfFileExists { lua-widow-control.sty }
-      { \RequirePackage{lua-widow-control} }
-      {
-        \msg:nnn { seiithesis }
-          { lua-widow-control-not-available }
-          {
-            Could~ not~ find~ lua-widow-control.sty.~ You~ might~ want~ to~
-            install~ it~ for~ better~ control~ over~ orphans~ and~ widows.
-          }
-        \msg_note:nn { seiithesis } { lua-widow-control-not-available }
-      }
-  }
-%    \end{macrocode}
-%
-% Similarly, load \pkg{ligtype} when using \LuaTeX.
-%    \begin{macrocode}
-\ifengineT { \luatexengine }
-  {
-    \IfFileExists { selnolig.sty }
-      { \RequirePackage{selnolig} }
-      {
-        \msg:nnn { seiithesis }
-          { selnolig-not-available }
-          {
-            Could~ not~ find~ selnolig.sty.~ You~ might~ want~ to~ install~ it~
-            for~ better~ ligatures~ control.
-          }
-        \msg_note:nn { seiithesis } { selnolig-not-available }
-      }
-  }
-%    \end{macrocode}
-%
-% When the user requests the |biblatex| option, also load \pkg{biblatex}
-%    \begin{macrocode}
-\bool_if:NT \l_@@_biblatex_bool
-  {
-    \PassOptionsToPackage
-      {
-        backend=biber,
-        hyperref=auto,
-        backref=true,
-        style=alphabetic,
-        maxnames=100,
-        minalphanames=3,
-        sorting=nyt,
-        giveninits=true,
-      }{biblatex}
-    \RequirePackage{biblatex}
-%    \end{macrocode}
-% End of the \BibLaTeX{} settings.
-%    \begin{macrocode}
-  }
 %    \end{macrocode}
 %
 % \subsection{User macros for the title page}
