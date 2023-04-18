@@ -14,10 +14,17 @@ and this project adheres to
 - Add a package `se2packages` that provides the ability to directly load
   recommended packages with recommended options.
 
+### Changed
+
+- The `paper=a4` and `paper=b5` options now produce the exact same text-block
+  sizes.
+- Make the logo height smaller for B5 paper.
+
 ### Removed
 
 - **Breaking:** Removed the `biblatex` class option from `se2thesis`, use the
   `se2packages` package with its `biblatex=true` option instead.
+- **Breaking:** Removed the `paper=a5` option.
 - Removed the automated loading of the `microtype`, `selnolig`, and
   `lua-widow-control` packages from `se2thesis`—use `se2packages` instead.
 

@@ -199,7 +199,7 @@
 %     |paper| = \meta{choice}
 %   \end{syntax}
 %   Set the paper format.
-%   Possible values are |a4|, |a5|, or |b5|.
+%   Possible values are |a4| or |b5|.
 %   Default is |a4|.
 % \end{function}
 %
@@ -748,7 +748,7 @@
     class / scrbook .code:n = \tl_gset:Nn \l_@@_base_class_tl {scrbook},
     class .initial:n = scrreprt,
 
-    paper .choices:nn = {a4,a5,b5}{
+    paper .choices:nn = {a4,b5}{
       \int_gset_eq:NN \l_@@_paper_int \l_keys_choice_int
     },
     paper .initial:n = a4,
@@ -951,7 +951,12 @@
 \dim_if_exist:NF \l_@@_logo_height_dim
   {
     \dim_new:N \l_@@_logo_height_dim
-    \dim_gset:Nn \l_@@_logo_height_dim { 67.5pt }
+    \int_compare:nTF { \l_@@_paper_int=1 }
+      {
+        \dim_gset:Nn \l_@@_logo_height_dim { 67.5pt }
+      } {
+        \dim_gset:Nn \l_@@_logo_height_dim { 56.8pt }
+      }
   }
 \box_if_exist:NF \l_@@_logo_box
   {
@@ -977,16 +982,9 @@
     \setlength{\marginparsep}{8.5cm}
     \setlength{\marginparsep}{1em}
   }{
-    \int_compare:nTF { \l_@@_paper_int=2 }
-      {
-        \areaset[current]{247pt}{400pt}
-        \setlength{\marginparsep}{6.0cm}
-        \setlength{\marginparsep}{0.71em}
-      }{
-        \areaset[current]{303pt}{491pt}
-        \setlength{\marginparsep}{7.4cm}
-        \setlength{\marginparsep}{0.87em}
-      }
+    \areaset[current]{350pt}{567pt}
+    \setlength{\marginparsep}{7.4cm}
+    \setlength{\marginparsep}{0.87em}
   }
 %    \end{macrocode}
 %
