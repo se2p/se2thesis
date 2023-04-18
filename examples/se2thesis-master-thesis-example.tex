@@ -2,37 +2,25 @@
   chapterprefix=true,%
   open=right,%
   twoside=true,%
+  paper=a4,%
   logofile={logo.png},%
   thesistype=master,%
-  biblatex=true,%
   UKenglish,%
 ]{se2thesis}
 \listfiles
 \usepackage[ngerman,main=UKenglish]{babel}
 \usepackage{blindtext}
 \usepackage[%
-  group-minimum-digits=4,%
-  list-final-separator={, and },%
-  add-integer-zero=false,%
-  free-standing-units,%
-  round-mode=figures,%
-  round-precision=3,%
-  detect-weight=true,%
-  separate-uncertainty=true,%
-  uncertainty-mode=separate,%
-]{siunitx}
-
-\usepackage[newfloat=true]{minted}
-\setminted{%
-  autogobble,%
-  breaklines=true,%
-  fontsize=\footnotesize,%
-  linenos=false,%
-  resetmargins=true,%
-  xleftmargin=1em,%
-  xrightmargin=1em,%
-  frame=single,%
-}
+  csquotes=true,%
+  booktabs=true,%
+  siunitx=true,%
+  minted=true,%
+  selnolig=true,%
+  widowcontrol=false,%
+  microtype=true,%
+  biblatex=true,%
+  cleveref=true,%
+]{se2packages}
 
 \begin{filecontents}{\jobname.bib}
   @book{Knu86,
@@ -43,18 +31,14 @@
 \end{filecontents}
 \addbibresource{\jobname.bib}
 
-\usepackage{booktabs}
-
-\usepackage{csquotes}
-
 \usepackage{hyperref}
-\usepackage{cleveref}
 
 \author{Stephan Lukasczyk}
 \title{A Master Thesis Example Document}
 \degreeprogramme{Computer Science}
 \matrnumber{0815}
 \supervisor{Prof.\,Dr.~Max Mustermann}
+\external{Prof.~John Doe,~PhD}
 \advisor{Marianne Musterfrau}
 \department{Faculty of Examples}
 \institute{Chair of Example}
