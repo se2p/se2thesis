@@ -7,6 +7,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v3.1.0] – 2023–07–04
+
 ### Changed
 
 - The `lua-widow-control` package causes build failures in different settings,
@@ -135,6 +137,7 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
+[v3.1.0]: https://github.com/se2p/se2thesis/compare/v3.1.0...v3.0.0
 [v3.0.0]: https://github.com/se2p/se2thesis/compare/v3.0.0...v2.1.0
 [v2.1.0]: https://github.com/se2p/se2thesis/compare/v2.1.0...v2.0.0
 [v2.0.0]: https://github.com/se2p/se2thesis/compare/v2.0.0...v1.3.1
