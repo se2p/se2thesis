@@ -7,6 +7,14 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
+- The `lua-widow-control` package causes build failures in different settings,
+  although the same TeX Live version is used.  Until this can be resolved, we
+  deactivate the loading of this package from `se2packages` by default.  It can
+  still be activated manually by adding the `widowcontrol=true` option to the
+  `se2packages` package.
+
 ## [v3.0.0] – 2023–04–18
 
 ### Added

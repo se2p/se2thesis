@@ -162,6 +162,11 @@
 % The former implements a better control over ligatures,
 % the latter provides better control over orphans and widows.
 %
+% For some reason we were not yet able to fix properly,
+% \pkg{lua-widow-control} works on some machine but fails on others,
+% although they are using the same version of \TeXLive.
+% We therefore deactivate \pkg{lua-widow-control} by default.
+%
 % \subsubsection{Use \pkg{microtype} for Microtypographic Optimisation}
 %
 % \pkg{microtype} is a game changer when writing documents.
@@ -299,8 +304,8 @@
 %     |nowidowcontrol|
 %   \end{syntax}
 %   The argument to |widowcontrol| can be one of |true| or |false|.
-%   The latter does not load \pkg{lua-widow-control},
-%   the former is the default value.
+%   The former loads \pkg{lua-widow-control},
+%   the latter is the default value.
 %   By using |nowidowcontrol| you can also avoid
 %   that \pkg{lua-widow-control} is loaded.
 % \end{function}
@@ -541,7 +546,7 @@
     noselnolig .meta:n = {selnolig=false},
 
     widowcontrol .bool_gset:N = \l_@@_luawidowcontrol_bool,
-    widowcontrol .initial:n = true,
+    widowcontrol .initial:n = false,
     nowidowcontrol .meta:n = {widowcontrol=false},
 
     microtype .bool_gset:N = \l_@@_microtype_bool,
