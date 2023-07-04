@@ -12,3 +12,12 @@ users.
 However, the package's documentation also provides recommendations regarding
 several aspects, for example, recommending
 [biblatex](https://ctan.org/pkg/biblatex) for bibliographies.
+
+## License
+
+The bundle is licensed under the terms of the
+[LaTeX Project Public License (LPPL)](https://www.latex-project.org/lppl.txt),
+version 1.3c.
+
+Its current maintenance status is “maintained”,
+the current maintainer is [Stephan Lukasczyk](https://github.com/stephanlukasczyk).
