@@ -14,6 +14,8 @@ and this project adheres to
   deactivate the loading of this package from `se2packages` by default.  It can
   still be activated manually by adding the `widowcontrol=true` option to the
   `se2packages` package.
+- Set penalties for widows and orphans only if `lua-widow-control` package is
+  not loaded.
 
 ## [v3.0.0] – 2023–04–18
 

@@ -732,14 +732,20 @@
 %    \end{macrocode}
 %
 % Conditionally load and configure \pkg{microtype}.
+% If a package option requires for the \pkg{lua-widow-control} package,
+% we do not set penalties for widows and orphans
+% but let that package control these penalties.
 %    \begin{macrocode}
 \bool_if:NT \l_@@_microtype_bool
   {
     \msg_info:nnn { seiipackages } { load-package } { microtype }
     \RequirePackage{microtype}
-    \clubpenalty=10000
-    \widowpenalty=10000
-    \displaywidowpenalty=10000
+    \bool_if:NF \l_@@_luawidowcontrol_bool
+      {
+        \clubpenalty=10000
+        \widowpenalty=10000
+        \displaywidowpenalty=10000
+      }
     \SetExtraKerning{
       encoding = {OT1,T1,T2A,LY1,OT4,QX,T5,TS1,EU1,EU2}
     }{
