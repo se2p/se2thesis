@@ -1349,11 +1349,16 @@
 \addtokomafont{section}{\large\mdseries}
 \addtokomafont{subsection}{\normalsize\mdseries}
 \renewcommand*{\chapterformat}{%
-  \mbox{%
-    \scalebox{1.3}{\chapappifchapterprefix{\nobreakspace}}%
-    \scalebox{3.5}{\color{UPSE2-Gray}\thechapter\autodot}\enskip%
+  \enskip\mbox{%
+    \scalebox{3}{\color{UPSE2-DarkGray}\thechapter\autodot}%
   }%
 }
+\renewcommand{\chapterlinesformat}[3]{%
+  \parbox[b]{\textwidth}{\hrulefill#2}\par%
+  #3\par\bigskip%
+  \hrule%
+}
+\RedeclareSectionCommand[afterskip=1.5\baselineskip]{chapter}
 \renewcommand*{\chapterlineswithprefixformat}[3]{%
   \Ifstr{#1}{chapter}
     {#2\textls*[75]{\MakeUppercase{#3}}}% change definition for chapter

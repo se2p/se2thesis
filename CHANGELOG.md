@@ -16,6 +16,7 @@ and this project adheres to
   `se2packages` package.
 - Set penalties for widows and orphans only if `lua-widow-control` package is
   not loaded.
+- Change the formatting of chapter headings.
 
 ## [v3.0.0] – 2023–04–18
 
