@@ -7,6 +7,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
+- Remove deprecated options from `siunitx` loading.
+
 ### Removed
 
 - Removed option `fontmode` of the `se2thesis` class, which was already
