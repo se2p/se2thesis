@@ -185,15 +185,6 @@
 % The \pkg{se2thesis} class defines several load-time options, all of them
 % optional, on top of the options provided by the \KOMAScript{} document
 % classes.
-% \begin{function}{class}
-%   \begin{syntax}
-%     |class| = \meta{choice}
-%   \end{syntax}
-%   Set the base document class.
-%   Values are \cls{scrreprt}, \cls{scrartcl}, or \cls{scrbook}.
-%   Default is |scrbook|.
-% \end{function}
-%
 % \begin{function}{paper}
 %   \begin{syntax}
 %     |paper| = \meta{choice}
@@ -228,16 +219,6 @@
 %   \end{syntax}
 %   Select the color scheme used by the automatically loaded \pkg{se2colors}
 %   package, see \cref{sec:doc-se2colors} for a description.
-% \end{function}
-%
-% \begin{function}[updated = 2023-01-10]{fontmode}
-%   \begin{syntax}
-%     |fontmode| = \meta{choice}
-%   \end{syntax}
-%   Select the font scheme used by the automatically loaded \pkg{se2fonts}
-%   package, see \cref{sec:doc-se2fonts} for a description.
-%
-%   \emph{This option is deprecated and will be removed in the future!}
 % \end{function}
 %
 %
@@ -643,14 +624,12 @@
 % thus shall be handled by the underlying base class.
 % \begin{macro}
 %   {
-%     \l_@@_base_class_tl,
 %     \l_@@_clsopts_prop,
 %     \l_@@_unknown_clsopts_prop
 %   }
-%   Store the base class, the known, and the unknown class options.
+%   Store the known and the unknown class options.
 %   The latter will be forwarded to the base class later.
 %    \begin{macrocode}
-\tl_new:N \l_@@_base_class_tl
 \prop_new:N \l_@@_clsopts_prop
 \prop_new:N \l_@@_unknown_clsopts_prop
 %    \end{macrocode}
@@ -726,7 +705,6 @@
 % We define the key-value interface for the class.
 % \begin{macro}
 %   {
-%     \l_@@_base_class_tl,
 %     \l_@@_unknown_clsopts_prop,
 %     \l_@@_paper_int,
 %     \l_@@_thesis_type_tl,
@@ -734,20 +712,10 @@
 %     \l_@@_licensemodifier_tl,
 %     \l_@@_licenseversion_tl,
 %     \l_@@_colormode_tl,
-%     \l_@@_fontmode_tl,
 %   }
 %    \begin{macrocode}
 \keys_define:nn { seiithesis }
   {
-    class .choice:,
-    class / report .meta:n = {class=scrreprt},
-    class / scrreprt .code:n = \tl_gset:Nn \l_@@_base_class_tl {scrreprt},
-    class / article .meta:n = {class=scrartcl},
-    class / scrartcl .code:n = \tl_gset:Nn \l_@@_base_class_tl {scrartcl},
-    class / book .meta:n = {class=scrbook},
-    class / scrbook .code:n = \tl_gset:Nn \l_@@_base_class_tl {scrbook},
-    class .initial:n = scrbook,
-
     paper .choices:nn = {a4,b5}{
       \int_gset_eq:NN \l_@@_paper_int \l_keys_choice_int
     },
@@ -776,11 +744,6 @@
     },
     colormode .initial:n = cmyk,
 
-    fontmode .choices:nn = {original,replacement,auto}{
-      \tl_gset_eq:NN \l_@@_fontmode_tl \l_keys_choice_tl
-    },
-    fontmode .initial:n = auto,
-
     unknown .code:n = {
       \prop_gput:NVn \l_@@_unknown_clsopts_prop \l_keys_key_tl {#1}
     },
@@ -803,24 +766,24 @@
 \prop_map_inline:Nn \l_@@_clsopts_prop
   {
     \tl_if_empty:nTF {#2}
-      { \PassOptionsToClass {#1} {\l_@@_base_class_tl} }
+      { \PassOptionsToClass {#1} {scrbook} }
       {
         \clist_map_inline:nn {#2}
-          { \PassOptionsToClass {#1=##1} {\l_@@_base_class_tl} }
+          { \PassOptionsToClass {#1=##1} {scrbook} }
       }
   }
 %    \end{macrocode}
 %
 % Load the base class
 %    \begin{macrocode}
-\LoadClass{\l_@@_base_class_tl}
+\LoadClass{scrbook}
 %    \end{macrocode}
 %
 % Attempt to handle the unknown options
 %    \begin{macrocode}
 \prop_map_inline:Nn \l_@@_unknown_clsopts_prop
   {
-    \cs_if_exist:cT {KV@KOMA.\l_@@_base_class_tl.cls@#1}
+    \cs_if_exist:cT {KV@KOMA.scrbook.cls@#1}
       {
         \tl_if_empty:nTF {#2}
           { \KOMAoptions{#1} }

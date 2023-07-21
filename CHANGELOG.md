@@ -7,6 +7,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Removed
+
+- Removed option `class` of the `se2thesis` class and set base class to
+  `scrbook`.
+- Removed option `fontmode` of the `se2thesis` class, which was already
+  deprecated.
+
 ## [v3.1.0] – 2023–07–04
 
 ### Changed
