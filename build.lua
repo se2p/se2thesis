@@ -42,23 +42,9 @@ checkengines = {"pdftex", "luatex"}
 
 -- Detail how to set the version automatically
 function update_tag(file, content, tagname, tagdate)
-  tagname = string.gsub(tagname, "^v", "")
+  local tagdate = string.gsub(tagdate, "%-", "/")
   dict_tagdate = string.gsub(tagdate, "-", "/")
 
-  if string.match(file, "CHANGELOG.md") then
-    -- CHANGELOG
-    local pattern = "v%d%.%d.%d%?"
-    local url = "https://github.com/se2p/se2thesis/compare/"
-    local previous = string.match(content, "compare/(" .. pattern .. ")%.%.%.HEAD")
-    if tagname == previous then return content end
-    content = string.gsub(content,
-      "## %[Unreleased%]",
-      "## [Unreleased]\n\n## [v" .. tagname .. "] - " .. tagdate)
-    return string.gsub(content,
-      pattern .. "%.%.%.HEAD",
-      "v" .. tagname .. "...HEAD\n[v" .. tagname .. "]: " .. url .. previous
-        .. "...v" .. tagname)
-  end
   if string.match(file, "%.dtx$") then
     content = string.gsub(content,
       "\n\\ProvidesExplClass %{se2thesis%} %{[^}]+%} %{[^}]+%}\n",
@@ -84,8 +70,23 @@ function update_tag(file, content, tagname, tagdate)
       "\n\\ProvideDictionaryFor%{German%}%{se2translations%}%[[^]]+%]\n",
       "\n\\ProvideDictionaryFor{German}{se2translations}["
         .. dict_tagdate .. "]\n")
+    return content
+  elseif string.match(file, "CHANGELOG.md") then
+    local url = "https://github.com/se2p/se2thesis/compare/"
+    local previous = string.match(content, "compare/(v%d%.%d%d)%.%.%.HEAD")
+    if tagname == previous then return content end
+    content = string.gsub(content,
+      "## %[Unreleased%]",
+      "## [Unreleased]\n\n## [" .. tagname .. "]")
+    return string.gsub(content,
+      "v%d.%d%d%.%.%.HEAD",
+      tagname .. "...HEAD\n[" .. tagname .. "]: " .. url .. previous
+      .. "..." .. tagname)
+  else
+    return string.gsub(content,
+      "%d%d%d%d/%d%d/%d%d v?%d%.%d+",
+      tagdate .. " " .. tagname)
   end
-  return content
 end
 
 uploadconfig = {
