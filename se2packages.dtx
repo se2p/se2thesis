@@ -621,6 +621,7 @@
 \bool_if:NT \l_@@_csquotes_bool
   {
     \msg_info:nnn { seiipackages } { load-package } { csquotes }
+    \RequirePackage{fvextra}
     \RequirePackage{csquotes}
   }
 %    \end{macrocode}
@@ -641,8 +642,6 @@
     \msg_info:nnn { seiipackages } { load-package } { siunitx }
     \RequirePackage[
       add-integer-zero=false,
-      detect-inline-weight=math,
-      detect-weight=true,
       free-standing-units,
       group-minimum-digits=4,
       list-final-separator={, and },

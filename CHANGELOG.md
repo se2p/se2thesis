@@ -9,8 +9,6 @@ and this project adheres to
 
 ### Removed
 
-- Removed option `class` of the `se2thesis` class and set base class to
-  `scrbook`.
 - Removed option `fontmode` of the `se2thesis` class, which was already
   deprecated.
 
