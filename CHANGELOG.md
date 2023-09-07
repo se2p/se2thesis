@@ -10,6 +10,7 @@ and this project adheres to
 ### Changed
 
 - Remove deprecated options from `siunitx` loading.
+- Use `inconsolata` as the default mono-spaced font.
 
 ### Removed
 

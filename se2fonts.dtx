@@ -75,8 +75,8 @@
 % we use the \emph{Libertinus} fonts\footnote{
 %   \href{https://github.com/alerque/libertinus}{https://github.com/alerque/libertinus}
 % } for serif, sans-serif, and math typesetting
-% and the \emph{Anonymous Pro} font\footnote{
-%   \href{https://www.marksimonson.com/fonts/view/anonymous-pro}{https://www.marksimonson.com/fonts/view/anonymous-pro}
+% and the \emph{Inconsolata} font\footnote{
+%   \href{http://levien.com/type/myfonts/inconsolata.html}{http://levien.com/type/myfonts/inconsolata.html}
 % } as a monospaced font.
 %
 % \emph{Please note:} this change might affect they way your documents look,
@@ -91,19 +91,11 @@
 % The following options are defined by the \pkg{se2fonts} package
 % to influence the selection of the fonts.
 %
-% \begin{function}[updated = 2022-11-03, deprecated = 2023-01-05]{fmode}
-%   \begin{syntax}
-%     |fmode| = \meta{choice}
-%   \end{syntax}
-%   The argument is deprecated and will raise a warning.
-%   It is to be removed by a future version of the \pkg{se2thesis} bundle.
-% \end{function}
-%
 % The following list provides examples for each of the fonts:
 % \begin{itemize}
 %   \item {\fontspec{LibertinusSerif}An example text in Libertinus Serif}
 %   \item {\fontspec{LibertinusSans}An example text in Libertinus Sans}
-%   \item {\fontspec{AnonymousPro}An example text in Anonymous Pro}
+%   \item {\fontspec{inconsolata}An example text in Inconsolata}
 % \end{itemize}
 %
 % The package provides additional helper functions
@@ -285,18 +277,16 @@
     \RequirePackage{libertinus-otf}
 %    \end{macrocode}
 %
-% Load the \emph{Anonymous Pro} monospaced font.
+% Load the \emph{Inconsolata} monospaced font.
 %    \begin{macrocode}
-    \setmonofont{AnonymousPro}[
+    \setmonofont{Inconsolatazi4}[
       RawFeature     = {+tnum, +lnum},
       Scale          = {MatchLowercase},
       FakeStretch    = {0.9},
       UprightFont    = *-Regular,
-      ItalicFont     = *-Italic,
-      SlantedFont    = *-Italic,
       BoldFont       = *-Bold,
-      BoldItalicFont = *-BoldItalic,
-      Extension      = .ttf,
+      Extension      = .otf,
+      StylisticSet   = {1,3},
     ]
 %    \end{macrocode}
 %
@@ -307,10 +297,10 @@
 % The user does not use \LuaTeX{}, thus fallback to T1 fonts.
 %    \begin{macrocode}
     \PassOptionsToPackage{T1}{fontenc}
-    \PassOptionsToPackage{scale=0.85}{AnonymousPro}
+    \PassOptionsToPackage{scaled=0.9,varl}{inconsolata}
     \PassOptionsToPackage{mono=false}{libertinus-type1}
     \RequirePackage{fontenc}
-    \RequirePackage{AnonymousPro}
+    \RequirePackage{inconsolata}
     \RequirePackage{libertinus-type1}
   }
 %    \end{macrocode}
