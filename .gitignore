@@ -198,3 +198,4 @@ hs_err_pid*
 build/
 examples/
 *.zip
+*.hd

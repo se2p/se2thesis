@@ -7,10 +7,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v3.2.0] – 2023–09–12
+
 ### Changed
 
 - Remove deprecated options from `siunitx` loading.
-- Use `inconsolata` as the default mono-spaced font.
+- Use `inconsolata-nerd-font` as the default mono-spaced font.
+- Updates on the documentation.
 
 ### Removed
 
@@ -147,6 +150,7 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
+[v3.2.0]: https://github.com/se2p/se2thesis/compare/v3.2.0...v3.1.0
 [v3.1.0]: https://github.com/se2p/se2thesis/compare/v3.1.0...v3.0.0
 [v3.0.0]: https://github.com/se2p/se2thesis/compare/v3.0.0...v2.1.0
 [v2.1.0]: https://github.com/se2p/se2thesis/compare/v2.1.0...v2.0.0

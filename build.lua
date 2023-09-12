@@ -4,9 +4,6 @@
 bundle = ""
 module = "se2thesis"
 
--- Release a TDS-style zip
-packtdszip = true
-
 -- Typeset only the .tex files
 typesetfiles = {"*.tex"}
 

@@ -30,7 +30,6 @@ selnolig
 adjustbox
 alphalph
 amsfonts
-anonymouspro
 babel
 babel-english
 babel-german
@@ -62,7 +61,7 @@ hvlogos
 hypdoc
 hyperref
 ifoddpage
-inconsolata
+inconsolata-nerd-font
 libertine
 libertinus
 libertinus-fonts

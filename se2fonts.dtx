@@ -44,14 +44,14 @@
 % \GetFileInfo{se2fonts.sty}
 %
 % \title{^^A
-%   \pkg{se2fonts} -- Font Definitions for the \pkg{se2thesis} Bundle^^A
+%   \pkg{se2fonts}---Font Definitions for the \pkg{se2thesis} Bundle^^A
 %   \thanks{This file describes \fileversion, last revised \filedate.}^^A
 % }
 %
 % \author{^^A
 %   Stephan Lukasczyk^^A
 %   \thanks{^^A
-%     E-mail: \href{mailto:tex@lukasczyk.me}{tex@lukasczyk.me}^^A
+%     E-mail: \href{mailto:stephan@dante.de}{stephan@dante.de}^^A
 %   }^^A
 % }
 %
@@ -151,7 +151,7 @@
 %
 % Identify the package and give the overall version information.
 %    \begin{macrocode}
-\ProvidesExplPackage {se2fonts} {2023-07-04} {3.1.0}
+\ProvidesExplPackage {se2fonts} {2023-09-12} {3.2.0}
   {A font-selection support package for the se2thesis bundle}
 %    \end{macrocode}
 %
@@ -277,17 +277,9 @@
     \RequirePackage{libertinus-otf}
 %    \end{macrocode}
 %
-% Load the \emph{Inconsolata} monospaced font.
+% Load the \emph{Inconsolata Nerd Font} monospaced font.
 %    \begin{macrocode}
-    \setmonofont{Inconsolatazi4}[
-      RawFeature     = {+tnum, +lnum},
-      Scale          = {MatchLowercase},
-      FakeStretch    = {0.9},
-      UprightFont    = *-Regular,
-      BoldFont       = *-Bold,
-      Extension      = .otf,
-      StylisticSet   = {1,3},
-    ]
+    \RequirePackage{inconsolata-nerd-font}
 %    \end{macrocode}
 %
 %    \begin{macrocode}

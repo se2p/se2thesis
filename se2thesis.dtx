@@ -38,14 +38,14 @@
 % \GetFileInfo{se2colors.sty}
 %
 % \title{^^A
-%   \pkg{se2thesis} -- Overall set up^^A
+%   \pkg{se2thesis}---Overall set up^^A
 %   \thanks{This file describes \fileversion, last revised \filedate.}^^A
 % }
 %
 % \author{^^A
 %   Stephan Lukasczyk^^A
 %   \thanks{^^A
-%     E-Mail: \href{mailto:tex@lukasczyk.me}{tex@lukasczyk.me}^^A
+%     E-Mail: \href{mailto:stephan@dante.de}{stephan@dante.de}^^A
 %   }^^A
 % }
 %
@@ -76,7 +76,10 @@
 % Its main class is the \pkg{se2thesis} document class,
 % an extension of the \KOMAScript{} |scrreprt| document class.
 % The packages \pkg{se2colors} and \pkg{se2fonts} provide necessary
-% colour and font settings for the \pkg{se2thesis} class.
+% colour and font settings for the \pkg{se2thesis} class;
+% the \pkg{se2packages} allows to load several recommended packages~(see
+% \cref{sec:doc-se2packages}) with our recommended,
+% predefined settings.
 % They are available as separate packages, however, to allow their reuse for
 % other classes, packages, and projects, as well.
 %
@@ -110,7 +113,9 @@
 % Please note that \texttt{l3build} also provides a |l3build install| target
 % to install the bundle files to your local texmf tree.
 %
-% The “Island of \TeX{}” project provides Docker images of \TeXLive.
+% The “Island of \TeX{}” project provides Docker images of \TeXLive\footnote{%
+%   \href{https://islandoftex.gitlab.io/community/projects/docker/}{islandoftex.gitlab.io/community/projects/docker/}
+% }.
 % If you do not want to install/update \TeXLive{} on your system
 % you might want to consider their \texttt{latest} image,
 % which contains a recent \TeXLive{} 2023 build.
@@ -580,7 +585,7 @@
 %
 % Identify the class and give the overall version number.
 %    \begin{macrocode}
-\ProvidesExplClass {se2thesis} {2023-07-04} {3.1.0}
+\ProvidesExplClass {se2thesis} {2023-09-12} {3.2.0}
   {A thesis class for the Chair of Software Engineering II}
 %    \end{macrocode}
 %
@@ -1598,7 +1603,7 @@
 % We provide the following English translations.
 %
 %    \begin{macrocode}
-\ProvideDictionaryFor{English}{se2translations}[2023/07/04]
+\ProvideDictionaryFor{English}{se2translations}[2023/09/12]
 \ProvideDictTranslation{abstract}{abstract}
 \ProvideDictTranslation{Abstract}{Abstract}
 \ProvideDictTranslation{acknowledgement}{acknowledgement}
@@ -1649,7 +1654,7 @@
 % We provide the following German translations.
 %
 %    \begin{macrocode}
-\ProvideDictionaryFor{German}{se2translations}[2023/07/04]
+\ProvideDictionaryFor{German}{se2translations}[2023/09/12]
 \ProvideDictTranslation{abstract}{Zusammenfassung}
 \ProvideDictTranslation{Abstract}{Zusammenfassung}
 \ProvideDictTranslation{acknowledgement}{Danksagung}
