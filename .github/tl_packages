@@ -33,6 +33,7 @@ amsfonts
 babel
 babel-english
 babel-german
+biblatex-software
 bookmark
 booktabs
 caption
