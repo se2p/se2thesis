@@ -763,6 +763,7 @@
       {
         backend=biber,
         backref=true,
+        datamodel=software,
         giveninits=true,
         hyperref=auto,
         maxnames=100,
@@ -771,6 +772,15 @@
         style=alphabetic,
       } { biblatex }
       \RequirePackage{biblatex}
+      \RequirePackage{software-biblatex}
+      \ExecuteBibliographyOptions{
+        halid=false,
+        swhid=true,
+        shortswhid=false,
+        swlabels=true,
+        vcs=true,
+        license=true,
+      }
   }
 %    \end{macrocode}
 %
