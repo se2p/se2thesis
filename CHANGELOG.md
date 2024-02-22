@@ -15,6 +15,7 @@ and this project adheres to
 - For the new numeric style, we support an enhanced `\autocite` macro, which
   typesets the citation in the margin column for the first appearance per
   chapter.
+- Add thesis-type option `phdeng` for a doctoral degree in engineering.
 
 ### Changed
 

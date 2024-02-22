@@ -225,7 +225,8 @@
 %   |bachelor| for a bachelor thesis, |bachelorproposal| for a proposal to
 %   a bachelor thesis, |master| for a master thesis, |masterproposal| for
 %   a proposal to a master thesis, |phdproposal| for a proposal to a PhD thesis,
-%   and |phd| for a PhD thesis.
+%   |phd| for a PhD thesis in the natural sciences and |phdeng| for a PhD thesis
+%   in engineering.
 % \end{function}
 %
 % \begin{function}{colormode}
@@ -759,6 +760,7 @@
       \tl_gset:Nn \l_@@_thesis_type_tl {masterproposal}
     },
     thesistype / phd .code:n = \tl_gset:Nn \l_@@_thesis_type_tl {phd},
+    thesistype / phdeng .code:n = \tl_gset:Nn \l_@@_thesis_type_tl {phdeng},
     thesistype / phdproposal .code:n = {
       \tl_gset:Nn \l_@@_thesis_type_tl {phdproposal}
     },
@@ -1243,23 +1245,37 @@
               in~ partial~ fulfillment~ of~ obtaining\\
               the~ degree~ of~ a~ Doctor~ of~ Natural~ Sciences
             } {
-              \tl_if_eq:NnT \l_@@_thesis_type_tl { bachelor }
-                { \GetTranslation{Bachelor-thesis} }
-              \tl_if_eq:NnT \l_@@_thesis_type_tl { bachelorproposal }
-                { \GetTranslation{Bachelor-thesis-proposal} }
-              \tl_if_eq:NnT \l_@@_thesis_type_tl { master }
-                { \GetTranslation{Master-thesis} }
-              \tl_if_eq:NnT \l_@@_thesis_type_tl { masterproposal }
-                { \GetTranslation{Master-thesis-proposal} }
-              \tl_if_eq:NnT \l_@@_thesis_type_tl { phdproposal }
-                { \GetTranslation{PhD-thesis-proposal} }
-              \tl_if_empty:NF \l_@@_degreeprogramme_tl
+              \tl_if_eq:NnTF \l_@@_thesis_type_tl { phdeng }
                 {
-                  \ in~\l_@@_degreeprogramme_tl
+                  Dissertation~ zur~ Erlangung~ des~ Doktorgrades\\
+                  der~ Ingenieurwissenschaften~ (Dr.-Ing.)\\
+                  eingereicht~ an~ der~ Fakultät~ für~ Informatik~ und~ Mathematik\\
+                  der~ Universität~ Passau\\
+                  \rule{\textwidth}{.1pt}\\
+                  Dissertation~ submitted~ to\\
+                  the~ Faculty~ of~ Computer~ Science~ and~ Mathematics\\
+                  of~ the~ University~ of~ Passau\\
+                  in~ partial~ fulfillment~ of~ obtaining\\
+                  the~ degree~ of~ a~ Doctor~ of~ Engineering
+                } {
+                  \tl_if_eq:NnT \l_@@_thesis_type_tl { bachelor }
+                    { \GetTranslation{Bachelor-thesis} }
+                  \tl_if_eq:NnT \l_@@_thesis_type_tl { bachelorproposal }
+                    { \GetTranslation{Bachelor-thesis-proposal} }
+                  \tl_if_eq:NnT \l_@@_thesis_type_tl { master }
+                    { \GetTranslation{Master-thesis} }
+                  \tl_if_eq:NnT \l_@@_thesis_type_tl { masterproposal }
+                    { \GetTranslation{Master-thesis-proposal} }
+                  \tl_if_eq:NnT \l_@@_thesis_type_tl { phdproposal }
+                    { \GetTranslation{PhD-thesis-proposal} }
+                  \tl_if_empty:NF \l_@@_degreeprogramme_tl
+                    {
+                      \ in~\l_@@_degreeprogramme_tl
+                    }
+                  \par
+                  \tl_if_empty:NF \l_@@_department_tl { \l_@@_department_tl \par }
+                  \tl_if_empty:NF \l_@@_institute_tl { \l_@@_institute_tl \par }
                 }
-              \par
-              \tl_if_empty:NF \l_@@_department_tl { \l_@@_department_tl \par }
-              \tl_if_empty:NF \l_@@_institute_tl { \l_@@_institute_tl \par }
             }
         \end{center}\par\bigskip
 %    \end{macrocode}
