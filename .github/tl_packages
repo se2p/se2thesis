@@ -16,6 +16,7 @@ metafont
 mfware
 #
 # Dependencies for tests that are not auto-resolved
+acmart
 bibtex
 biblatex
 biber
@@ -80,6 +81,7 @@ pgf
 picture
 psnfss
 ragged2e
+sidenotesplus
 siunitx
 sttools
 times
