@@ -19,8 +19,8 @@ sourcesfiles =
   }
 demofiles =
   {
-    "examples/*.tex",
-    "examples/*.pdf"
+    "examples/se2thesis-master-thesis-example.tex",
+    "examples/se2thesis-master-thesis-example.pdf"
   }
 
 installfiles = {"*.cls", "*.sty", "*.trsl"}
