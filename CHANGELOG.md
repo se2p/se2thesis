@@ -19,15 +19,13 @@ and this project adheres to
   chapter.
 - Add thesis-type option `phdeng` for a doctoral degree in engineering.
 
-### Changed
+### Changed
 
 - The default citation style, when setting `biblatex=true` while loading the
   `se2packages` package is now `numeric` based on the ACM numeric style instead
   of `alphabetic`.  The latter can now be chosen explicitly.
   See [issue #7](https://github.com/se2p/se2thesis/issues/7) for a discussion
   on the general decision.
-
-### Changed
 
 ## [v3.2.0] – 2023–09–12
 
