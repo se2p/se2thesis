@@ -324,11 +324,23 @@
 % We provide a load-time option to load and configure \pkg{biblatex}.
 % \begin{function}{biblatex}
 %   \begin{syntax}
-%     |biblatex| = \meta{true,false}
+%     |biblatex| = \meta{true,false,alphabetic,numeric}
 %   \end{syntax}
 %   Decides whether the package loads \pkg{biblatex}
 %   and sets the options for \pkg{biblatex} to the values we recommend.
 %   The default value is |false|, set it to |true| to load \pkg{biblatex}.
+%
+%   By setting the value to |alphabetic|, \pkg{se2packages} sets the citation
+%   style for \pkg{biblatex} to its alphabetic one; selecting |numeric| loads
+%   the numeric style as provided by the \pkg{acmart} bundle of the ACM.  The
+%   value |true| also loads the latter style as a default.
+%
+%   Note that for the |numeric| style, we provide an enhanced \cs{autocite}
+%   command, which does not only print the citation mark in the text but also
+%   a short entry listing of the bibliography entry in the margin column of the
+%   page.  This entry is only printed for the first occurence of a citation per
+%   chapter to not clutter the margin column too much.  The other citation
+%   commands from \pkg{biblatex} work as usual.
 % \end{function}
 %
 % Additionally,
@@ -475,10 +487,10 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\l_@@_biblatex_bool}
+% \begin{macro}{\l_@@_biblatex_tl}
 %   Whether or not to load and configure \pkg{biblatex}.
 %    \begin{macrocode}
-\bool_new:N \l_@@_biblatex_bool
+\tl_new:N \l_@@_biblatex_tl
 %    \end{macrocode}
 % \end{macro}
 %
@@ -538,7 +550,7 @@
     listings .bool_gset:N = \l_@@_listings_bool,
     listings .initial:n = false,
 
-    biblatex .bool_gset:N = \l_@@_biblatex_bool,
+    biblatex .tl_gset:N = \l_@@_biblatex_tl,
     biblatex .initial:n = false,
 
     selnolig .bool_gset:N = \l_@@_selnolig_bool,
@@ -609,7 +621,7 @@
     \bool_gset_true:N \l_@@_selnolig_bool
     \bool_gset_true:N \l_@@_luawidowcontrol_bool
     \bool_gset_true:N \l_@@_microtype_bool
-    \bool_gset_true:N \l_@@_biblatex_bool
+    \tl_gset:Nn \l_@@_biblatex_bool {true}
     \bool_gset_true:N \l_@@_cleveref_bool
   }
 %    \end{macrocode}
@@ -756,7 +768,7 @@
 %
 % Conditionally load and configure the \pkg{biblatex} package.
 %    \begin{macrocode}
-\bool_if:NT \l_@@_biblatex_bool
+\tl_if_eq:NnT \l_@@_biblatex_tl {alphabetic}
   {
     \msg_info:nnn { seiipackages } { load-package } { biblatex }
     \PassOptionsToPackage
@@ -781,6 +793,86 @@
         vcs=true,
         license=true,
       }
+  }
+
+\bool_new:N \l_@@_biblatex_numeric_variants_bool
+\tl_if_eq:NnT \l_@@_biblatex_tl {true}
+  {
+    \bool_gset_true:N \l_@@_biblatex_numeric_variants_bool
+  }
+\tl_if_eq:NnT \l_@@_biblatex_tl {numeric}
+  {
+    \bool_gset_true:N \l_@@_biblatex_numeric_variants_bool
+  }
+
+\bool_if:NT \l_@@_biblatex_numeric_variants_bool
+  {
+    \msg_info:nnn { seiipackages } { load-package } { biblatex }
+    \PassOptionsToPackage
+      {
+        backend=biber,
+        backref=true,
+        citereset=chapter+,
+        citetracker=context,
+        giveninits=true,
+        hyperref=auto,
+        sorting=nyt,
+        datamodel=acmdatamodel,
+        style=acmnumeric,
+      } { biblatex }
+      \RequirePackage{biblatex}
+      \RequirePackage{ragged2e}
+      \RequirePackage[mark=arabic,shape=up]{sidenotesplus}
+
+      \newbibmacro{cite:authoryear}{%
+        \printtext[labelnumberwidth]{%
+          \usebibmacro{cite}%
+        }%
+        \setunit{\addspace}%
+        \printnames{labelname}%
+        \setunit{\printdelim{nameyeardelim}}%
+        \begingroup
+        \DeclareFieldFormat{date}{\mkbibparens{##1}}%
+        \printdate
+        \endgroup
+        \setunit*{\addcomma\space}%%% NEW
+        \printfield[title]{labeltitle}%%% NEW
+      }
+      
+      \newrobustcmd*{\makebibmarginnote}[1]{%
+        \sidenote*{\blxmkbibnote{foot}{#1}}}
+      
+      \DeclareCiteCommand{\maycite}[\makebibmarginnote]
+        {\usebibmacro{prenote}}
+        {\usebibmacro{citeindex}%
+         \usebibmacro{cite:authoryear}}
+        {\multicitedelim}
+        {\usebibmacro{postnote}}
+      
+      \newcommand*{\cbx@savedcites}{}
+      
+      \newcommand*{\cbx@margcitewrap}[1]{%
+        \global\let\cbx@savedcites\empty
+        \mkbibbrackets{#1}%
+        \cbx@savedcites
+      }
+      
+      \DeclareCiteCommand{\margincite}[\cbx@margcitewrap]
+        {\usebibmacro{prenote}}
+        {\usebibmacro{citeindex}%
+         \usebibmacro{cite}%
+         \ifciteseen
+           {}
+           {\xappto\cbx@savedcites{\noexpand\maycite{\thefield{entrykey}}}}}
+        {\multicitedelim}
+        {\usebibmacro{postnote}}
+      
+      \DeclareMultiCiteCommand{\margincites}[\cbx@margcitewrap]{\margincite}{\multicitedelim}
+      
+      \DeclareAutoCiteCommand{margin}{\margincite}{\margincites}
+      \ExecuteBibliographyOptions{autocite=margin}
+      \newcommand{\bibliofont}{\footnotesize}
+      \DeclareFieldFormat{titlecase}{#1}% Preserve capitalisation of titles
   }
 %    \end{macrocode}
 %

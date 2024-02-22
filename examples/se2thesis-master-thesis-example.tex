@@ -3,7 +3,7 @@
   open=right,%
   twoside=true,%
   paper=a4,%
-  logofile={logo.png},%
+  logofile={logo.pdf},%
   thesistype=master,%
   UKenglish,%
 ]{se2thesis}
@@ -18,7 +18,7 @@
   selnolig=true,%
   widowcontrol=false,%
   microtype=true,%
-  biblatex=true,%
+  biblatex=numeric,%
   cleveref=true,%
 ]{se2packages}
 
@@ -72,7 +72,7 @@
 
 \section{Further Examples}
 
-We could reference the \TeX{} book~\cite{Knu86}.
+We could reference the \TeX{} book~\autocite{Knu86}.
 
 \begin{resq}
     What is \(41 + 1\)?
@@ -81,6 +81,8 @@ We could reference the \TeX{} book~\cite{Knu86}.
 \begin{summary}{Research Question 1}
    It's 42, obviously!
 \end{summary}
+
+And using the auto-cite functionality to cite Knuth~\autocite{Knu86}.
 
 \backmatter
 
