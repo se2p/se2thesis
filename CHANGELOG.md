@@ -7,6 +7,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v3.3.0] – 2024–02–22
+
 ### Added
 
 - Enhance the options for bibliography styles, one can now choose between
@@ -170,6 +172,7 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
+[v3.3.0]: https://github.com/se2p/se2thesis/compare/v3.3.0...v3.2.0
 [v3.2.0]: https://github.com/se2p/se2thesis/compare/v3.2.0...v3.1.0
 [v3.1.0]: https://github.com/se2p/se2thesis/compare/v3.1.0...v3.0.0
 [v3.0.0]: https://github.com/se2p/se2thesis/compare/v3.0.0...v2.1.0
