@@ -39,7 +39,7 @@ checkengines = {"pdftex", "luatex"}
 
 -- Detail how to set the version automatically
 function update_tag(file, content, tagname, tagdate)
-  local tagdate = string.gsub(tagdate, "%-", "/")
+  -- local tagdate = string.gsub(tagdate, "%-", "/")
   dict_tagdate = string.gsub(tagdate, "-", "/")
 
   if string.match(file, "%.dtx$") then
