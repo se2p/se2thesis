@@ -830,13 +830,10 @@
         }%
         \setunit{\addspace}%
         \printnames{labelname}%
-        \setunit{\printdelim{nameyeardelim}}%
-        \begingroup
-        \DeclareFieldFormat{date}{\mkbibparens{##1}}%
-        \printdate
-        \endgroup
-        \setunit*{\addcomma\space}%%% NEW
-        \printfield[title]{labeltitle}%%% NEW
+        \setunit{\labelnamepunct}\newblock%
+        \usebibmacro{year}%
+        \newunit%
+        \printfield[title]{labeltitle}
       }
       
       \newrobustcmd*{\makebibmarginnote}[1]{%
