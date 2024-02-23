@@ -9,6 +9,7 @@ and this project adheres to
 
 ### Changed
 - Make the citations in the margin appear in ACM style, too.
+- Make sidenotes appear right ragged.
 
 ## [v3.3.0] – 2024–02–22
 
