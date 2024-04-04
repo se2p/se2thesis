@@ -613,6 +613,8 @@
 % Load required packages early.
 %    \begin{macrocode}
 \RequirePackage{graphicx}
+\RequirePackage{titlecaps}
+\Addlcwords{a an the that to this is are and with on}
 \RequirePackage{translations}
 \LoadDictionary{se2translations}
 \DeclareTranslationFallback{version-of-date}{%
@@ -1211,10 +1213,10 @@
 \cs_new:Nn \__@@_print_title:
   {
     \group_begin:
-      \usekomafont{title}\centering\@title\par
+      \usekomafont{title}\centering\titlecap{\@title}\par
     \group_end:
     \ifx\@subtitle\@empty\else{%
-      \medskip\usekomafont{subtitle}\centering\@subtitle\par%
+      \medskip\usekomafont{subtitle}\centering\titlecap{\@subtitle}\par%
     }\fi
     \bigskip
     \group_begin:
@@ -1331,7 +1333,7 @@
 \renewcommand*{\@lowertitleback}{%
   \group_begin:
     \noindent\textbf{\@author}:\\
-    \emph{\@title}\\
+    \emph{\titlecap{\@title}}\\
     \tl_if_eq:NnT \l_@@_thesis_type_tl { bachelor }
       { \GetTranslation{Bachelor-thesis},~ }
     \tl_if_eq:NnT \l_@@_thesis_type_tl { master }
@@ -1359,8 +1361,12 @@
 }
 \renewcommand{\chapterlinesformat}[3]{%
   \parbox[b]{\textwidth}{\hrulefill#2}\par%
-  #3\par\bigskip%
+  \titlecap{#3}\par\bigskip%
   \hrule%
+}
+\let\orig@addtocentrydefault\addtocentrydefault
+\renewcommand*{\addtocentrydefault}[3]{%
+  \orig@addtocentrydefault{#1}{#2}{\titlecap{#3}}%
 }
 \RedeclareSectionCommand[afterskip=1.5\baselineskip]{chapter}
 \renewcommand*{\chapterlineswithprefixformat}[3]{%
@@ -1373,7 +1379,7 @@
 }
 %    \end{macrocode}
 %
-% Change the loop of a \cmd{\paragraph} to be italic and end with a full stop.
+% Change the look of a \cmd{\paragraph} to be italic and end with a full stop.
 %    \begin{macrocode}
 \setkomafont{paragraph}{\normalsize\normalfont\itshape}
 \AddtoDoHook{heading/endgroup/paragraph}{\headingdot}
