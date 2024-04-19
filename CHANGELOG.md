@@ -7,6 +7,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+- Fix the referencing with cleveref's `\cref` etc. for the `resq` (research
+  questions) and `hyp` (hypotheses) environments
+  (see [#8](https://github.com/se2p/se2thesis/issues/8))
+
 ## [v3.3.1] – 2024–02–23
 
 ### Changed

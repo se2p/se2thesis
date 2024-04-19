@@ -51,6 +51,7 @@ epstopdf-pkg
 etoolbox
 everysel
 fancyvrb
+fbox
 fetamont
 fira
 fontspec
@@ -92,3 +93,4 @@ upquote
 varwidth
 xcolor
 xits
+zref
