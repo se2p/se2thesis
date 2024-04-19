@@ -44,6 +44,10 @@
 \institute{Chair of Example}
 \location{Passau}
 
+\usepackage[capitalise]{cleveref}
+%\crefname{resq}{research question}{research questions}
+\Crefname{resq}{Research Question}{Research Questions}
+
 \begin{document}
 
 \frontmatter
@@ -72,13 +76,18 @@
 
 \section{Further Examples}
 
-We could reference the \TeX{} book~\autocite{Knu86}.
+We could reference the \TeX{} book~\autocite{Knu86}.  And we want to reference
+\cref{rq:1} and \cref{hyp:1} here.
 
-\begin{resq}
+\begin{resq}\label{rq:1}
     What is \(41 + 1\)?
 \end{resq}
 
-\begin{summary}{Research Question 1}
+\begin{hyp}\label{hyp:1}
+  We hypothesise that the answer to \cref{rq:1} is 42!
+\end{hyp}
+
+\begin{summary}{\Cref{rq:1}}
    It's 42, obviously!
 \end{summary}
 
