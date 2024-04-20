@@ -7,6 +7,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v3.4.0] – 2024–04–20
+
 ### Added
 - Fix the referencing with cleveref's `\cref` etc. for the `resq` (research
   questions) and `hyp` (hypotheses) environments
@@ -183,6 +185,8 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
+[Unreleased]: https://github.com/se2p/se2thesis/compare/v3.4.0...HEAD
+[v3.4.0]: https://github.com/se2p/se2thesis/compare/v3.4.0...v3.3.1
 [v3.3.1]: https://github.com/se2p/se2thesis/compare/v3.3.1...v3.3.0
 [v3.3.0]: https://github.com/se2p/se2thesis/compare/v3.3.0...v3.2.0
 [v3.2.0]: https://github.com/se2p/se2thesis/compare/v3.2.0...v3.1.0
