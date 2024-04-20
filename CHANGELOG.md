@@ -12,6 +12,7 @@ and this project adheres to
   questions) and `hyp` (hypotheses) environments
   (see [#8](https://github.com/se2p/se2thesis/issues/8))
 - Add the thesis type `phdphil` for a PhD thesis in philosophy.
+- Add section to documentation that the template is also available from Overleaf.
 
 ## [v3.3.1] – 2024–02–23
 
