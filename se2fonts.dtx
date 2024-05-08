@@ -157,58 +157,19 @@
 %
 % \subsection{Load-time options}
 %
-% \begin{macro}{\l_@@_fontmode_tl}
-%   Holds the font-selection mode specified by the user as a package
-%   load-time option.
-%   \emph{Please note:} this option is deprecated!
-%    \begin{macrocode}
-\tl_new:N \l_@@_fontmode_tl
-\keys_define:nn { seiifonts }
-  {
-    fmode .choice:,
-    fmode / original .code:n = {
-      \tl_gset:Nn \l_@@_fontmode_tl {original}
-    },
-    fmode / replacement .code:n = {
-      \tl_gset:Nn \l_@@_fontmode_tl {replacement}
-    },
-    fmode / auto .code:n = {
-      \tl_gset:Nn \l_@@_fontmode_tl {auto}
-    },
-    original .meta:n = {fmode=original},
-    replacement .meta:n = {fmode=replacement},
-    auto .meta:n = {fmode=auto},
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-% \subsection{Option handling}
-%
-%    \begin{macrocode}
-\IfFormatAtLeastTF { 2022-06-01 }
-  { \ProcessKeyOptions [ seiifonts ] }
-  {
-    \RequirePackage{ l3keys2e }
-    \ProcessKeysOptions { seiifonts }
-  }
-%    \end{macrocode}
-%
-% Define a warning message
-%    \begin{macrocode}
-\msg_set:nnnn { seiifonts } { deprecated-option }
-  { The~ option~ fmode~ to~ the~ se2fonts~ package~ is~ deprecated. }
-  { Remove~ it~ from~ your~ code.}
-%    \end{macrocode}
-%
-% Raise the warning if the option was used
-%    \begin{macrocode}
-\tl_if_empty:NF \l_@@_fontmode_tl
-  {
-    \msg_warning:nn { seiifonts } { deprecated-option }
-  }
-%    \end{macrocode}
+% The package does not have any load-time options; the formerly defined option
+% to set the font mode was removed with \pkg{se2thesis} version 4.0.0.
 %
 % \subsection{Helper macros}
+%
+% Define a warning message of users of \pdfLaTeX{} that not all features of the
+% fonts are available and that they should consider using \LuaTeX{} instead.
+\msg_set:nnnn { seiifonts } { pdflatex-used }
+  { You~ are~ using~ pdfLaTeX~ with~ the~ se2fonts~ packages.}
+  {
+    While~ this~ works~ some~ font~ features~ are~ not~ available,~ consider~ 
+    using~ lualatex~ instead.
+  }
 %
 % \begin{macro}{\pdftexengine, \xetexengine, \luatexengine}
 %   We define several alias macros to identify which engine the user is running.
@@ -288,6 +249,7 @@
 %
 % The user does not use \LuaTeX{}, thus fallback to T1 fonts.
 %    \begin{macrocode}
+    \msg_warning:nn { seiifonts } { pdflatex-used }
     \PassOptionsToPackage{T1}{fontenc}
     \PassOptionsToPackage{scaled=0.9,varl}{inconsolata}
     \PassOptionsToPackage{mono=false}{libertinus-type1}
