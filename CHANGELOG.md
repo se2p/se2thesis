@@ -7,6 +7,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v4.0.0] – 2024–05–08
+
 ### Changed
 
 - Set the maths style and bold-maths style to ISO for the maths fonts.
@@ -194,7 +196,8 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
-[Unreleased]: https://github.com/se2p/se2thesis/compare/v3.4.0...HEAD
+[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.0.0...HEAD
+[v4.0.0]: https://github.com/se2p/se2thesis/compare/v4.0.0...v3.4.0
 [v3.4.0]: https://github.com/se2p/se2thesis/compare/v3.4.0...v3.3.1
 [v3.3.1]: https://github.com/se2p/se2thesis/compare/v3.3.1...v3.3.0
 [v3.3.0]: https://github.com/se2p/se2thesis/compare/v3.3.0...v3.2.0
