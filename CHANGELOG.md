@@ -7,6 +7,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Removed
+
+- The option `fmode` was removed from `se2fonts`; it was already deprecated
+  since `se2thesis` version 2.0.0.
+
 ## [v3.4.0] – 2024–04–20
 
 ### Added
