@@ -7,6 +7,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
+- Set the maths style and bold-maths style to ISO for the maths fonts.
+
 ### Removed
 
 - The option `fmode` was removed from `se2fonts`; it was already deprecated

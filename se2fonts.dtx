@@ -164,12 +164,14 @@
 %
 % Define a warning message of users of \pdfLaTeX{} that not all features of the
 % fonts are available and that they should consider using \LuaTeX{} instead.
-\msg_set:nnnn { seiifonts } { pdflatex-used }
+%    \begin{macrocode}
+\msg_new:nnnn { seiifonts } { pdflatex-used }
   { You~ are~ using~ pdfLaTeX~ with~ the~ se2fonts~ packages.}
   {
     While~ this~ works~ some~ font~ features~ are~ not~ available,~ consider~ 
     using~ lualatex~ instead.
   }
+%    \end{macrocode}
 %
 % \begin{macro}{\pdftexengine, \xetexengine, \luatexengine}
 %   We define several alias macros to identify which engine the user is running.
@@ -203,7 +205,7 @@
 %    \begin{macrocode}
 \ifengineT { \xetexengine }
   {
-    \msg_set:nnnn { seiifonts } { xetex-not-supported }
+    \msg_new:nnnn { seiifonts } { xetex-not-supported }
       { XeTeX~ is~ not~ supported~ by~ the~ se2fonts~ package. }
       { Switch~ to~ pdfTeX~ or~ (preferably)~ LuaTeX. }
     \msg_error:nn { seiifonts } { xetex-not-supported }
@@ -222,6 +224,7 @@
 % If the user uses \LuaTeX{}, load \pkg{fontspec} and \pkg{unicode-math}.
 %    \begin{macrocode}
     \RequirePackage{fontspec}
+    \PassOptionsToPackage{math-style=ISO,bold-style=ISO}{unicode-math}
     \RequirePackage{unicode-math}
 %    \end{macrocode}
 %
