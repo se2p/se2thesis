@@ -7,6 +7,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v4.0.1] – 2024–05–17
+
+### Fixed
+
+- Updated copyright years.
+- Add the missing `colormode` option `bw` to `se2colors`.
+
 ## [v4.0.0] – 2024–05–08
 
 ### Changed
@@ -196,7 +203,8 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
-[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.0.0...HEAD
+[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.0.1...HEAD
+[v4.0.1]: https://github.com/se2p/se2thesis/compare/v4.0.1...v4.0.0
 [v4.0.0]: https://github.com/se2p/se2thesis/compare/v4.0.0...v3.4.0
 [v3.4.0]: https://github.com/se2p/se2thesis/compare/v3.4.0...v3.3.1
 [v3.3.1]: https://github.com/se2p/se2thesis/compare/v3.3.1...v3.3.0

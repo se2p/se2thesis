@@ -231,7 +231,7 @@
 %
 % Identify the package and give the overall version information.
 %    \begin{macrocode}
-\ProvidesExplPackage {se2colors} {2024-05-08} {4.0.0}
+\ProvidesExplPackage {se2colors} {2024-05-17} {4.0.1}
   {A colour support package for the se2thesis bundle}
 %    \end{macrocode}
 %
@@ -259,10 +259,13 @@
     cmode / cmyk .meta:n = {cmode=4C},
     cmode / rgb .meta:n = {cmode=RGB},
     cmode / gray .meta:n = {cmode=BW},
+    cmode / bw .meta:n = {cmode=BW},
     RGB .meta:n = {cmode=RGB},
     rgb .meta:n = {cmode=RGB},
     CMYK .meta:n = {cmode=4C},
     cmyk .meta:n = {cmode=4C},
+    BW .meta:n = {cmode=BW},
+    bw .meta:n = {cmode=BW},
     gray .meta:n = {cmode=BW},
   }
 \keys_set:nn { seiicolors } { cmode = 4C }
