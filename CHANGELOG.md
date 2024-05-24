@@ -7,6 +7,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v4.0.2] – 2024–05–24
+
+### Added
+
+- Enhance documentation of `se2packages` regarding the usage of `minted` and the
+  grey-scale mode of `se2colors`.
+
 ## [v4.0.1] – 2024–05–17
 
 ### Fixed

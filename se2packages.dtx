@@ -125,6 +125,33 @@
 %
 % Please be aware to use \emph{either} \pkg{minted} \emph{or} \pkg{listings}!
 %
+% \emph{Attention:} The way how \pkg{minted} is implemented causes the resulting
+% code to be typeset in gray scale, if you use the \pkg{se2colors} package with
+% option |cmode=bw| or the \cls{se2thesis} class with |colormode=bw| (or their
+% respective aliases).  Students were requesting that they want to use the
+% black-and-white mode of \pkg{se2color} because it saves lots of money when
+% printing their thesis, while they want the colours in the syntax highlighting
+% of \pkg{minted}.  One can achieve this by adding hooks to the preamble of the
+% document, after loading the \pkg{minted} package (which is recommend by
+% setting |minted=true| as an option to \pkg{se2packages}):
+% \begin{LaTeXdemo}[code only]
+% \AddToHook{env/minted/begin}{\selectcolormodel{cmyk}}
+% \AddToHook{cmd/mintinline/before}{\selectcolormodel{cmyk}}
+% \end{LaTeXdemo}
+% Thanks to Ulrike Fischer for pointing out this hook mechanism.\footnote{%
+%   \href{https://tex.stackexchange.com/a/718719/14622}{tex.stackexchange.com/a/718719/14622}
+% }
+%
+% Another option, if you do not want colours in the \pkg{minted} output when you
+% use the gray-scale mode of \pkg{se2colors} is the change the highlighting
+% style, \pkg{minted} uses.  The package for this provides the macro
+% \cs{usemintedstyle}, which accepts a style available in your local
+% \texttt{pygments} installation, see the \texttt{pygments}
+% documentation\footnote{%
+%   \href{https://pygments.org/styles/}{pygments.org/styles/}
+% } for an overview over the available styles; the |bw| style is explicitly
+% designed for this kind of scenario.
+%
 % \subsubsection{Designing Tables}
 %
 % A basically mandatory package to all users of tables
@@ -443,7 +470,7 @@
 %
 % Identify the package and give the overall version information.
 %    \begin{macrocode}
-\ProvidesExplPackage {se2packages} {2024-05-17} {4.0.1}
+\ProvidesExplPackage {se2packages} {2024-05-24} {4.0.2}
   {Supporting packages for the se2thesis bundle}
 %    \end{macrocode}
 %
