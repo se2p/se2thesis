@@ -7,6 +7,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v4.0.3] – 2024–05–27
+
+### Fixed
+
+- Add all missing option values for `se2thesis`' `colormode` parameter that are
+  available from the `se2colors` package.
+
 ## [v4.0.2] – 2024–05–24
 
 ### Added
@@ -210,7 +217,9 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
-[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.0.1...HEAD
+[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.0.3...HEAD
+[v4.0.3]: https://github.com/se2p/se2thesis/compare/v4.0.3...v4.0.2
+[v4.0.2]: https://github.com/se2p/se2thesis/compare/v4.0.2...v4.0.1
 [v4.0.1]: https://github.com/se2p/se2thesis/compare/v4.0.1...v4.0.0
 [v4.0.0]: https://github.com/se2p/se2thesis/compare/v4.0.0...v3.4.0
 [v3.4.0]: https://github.com/se2p/se2thesis/compare/v3.4.0...v3.3.1

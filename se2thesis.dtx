@@ -607,7 +607,7 @@
 %
 % Identify the class and give the overall version number.
 %    \begin{macrocode}
-\ProvidesExplClass {se2thesis} {2024-05-24} {4.0.2}
+\ProvidesExplClass {se2thesis} {2024-05-27} {4.0.3}
   {A thesis class for the Chair of Software Engineering II}
 %    \end{macrocode}
 %
@@ -788,7 +788,7 @@
     },
     thesistype .initial:n = master,
 
-    colormode .choices:nn = {cmyk,rgb,bw}{
+    colormode .choices:nn = {4C,CMYK,cmyk,RGB,rgb,BW,bw,gray}{
       \tl_gset_eq:NN \l_@@_colormode_tl \l_keys_choice_tl
     },
     colormode .initial:n = cmyk,
@@ -1655,7 +1655,7 @@
 % We provide the following English translations.
 %
 %    \begin{macrocode}
-\ProvideDictionaryFor{English}{se2translations}[2024/05/24]
+\ProvideDictionaryFor{English}{se2translations}[2024/05/27]
 \ProvideDictTranslation{abstract}{abstract}
 \ProvideDictTranslation{Abstract}{Abstract}
 \ProvideDictTranslation{acknowledgement}{acknowledgement}
@@ -1706,7 +1706,7 @@
 % We provide the following German translations.
 %
 %    \begin{macrocode}
-\ProvideDictionaryFor{German}{se2translations}[2024/05/24]
+\ProvideDictionaryFor{German}{se2translations}[2024/05/27]
 \ProvideDictTranslation{abstract}{Zusammenfassung}
 \ProvideDictTranslation{Abstract}{Zusammenfassung}
 \ProvideDictTranslation{acknowledgement}{Danksagung}
