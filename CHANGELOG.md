@@ -7,6 +7,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Add a `\summarybox` macro that simplifies the usage of the `summary`
+  environment
+
 ### Changed
 
 - Update the used actions for GitHub to their latest versions.

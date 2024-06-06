@@ -1641,6 +1641,16 @@
 \ExplSyntaxOn
 %    \end{macrocode}
 % \end{environment}
+% \begin{macro}{\summarybox}
+%   The \cmd{summarybox} macro simplifies the usage of the \env{summary}
+%   environment.
+%    \begin{macrocode}
+\NewDocumentCommand { \summarybox } { m m }
+  {
+    \begin{summary}{#1} #2 \end{summary}
+  }
+%    \end{macrocode}
+% \end{macro}
 %
 %
 %
