@@ -1622,12 +1622,25 @@
 %   The \env{summary} environment expects a label and has the summary text in
 %   its content.
 %    \begin{macrocode}
-\NewDocumentEnvironment { summary } { m }
-  { \begin{tcolorbox}[title={Summary~ (#1)}] }
-  { \end{tcolorbox} }
+\ExplSyntaxOff
+\NewDocumentEnvironment { summary } { m +b }
+  {%
+    \begin{tcolorbox}[%
+      size=fbox,%
+      rounded corners=all,%
+      attach title to upper,%
+      coltitle=black,%
+      fonttitle=\bfseries,%
+      title={Summary #1},
+      after title={:\ },
+    ]
+      #2
+  } {%
+    \end{tcolorbox}%
+  }
+\ExplSyntaxOn
 %    \end{macrocode}
 % \end{environment}
-%
 %
 %
 %

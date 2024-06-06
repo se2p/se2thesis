@@ -10,6 +10,7 @@ and this project adheres to
 ### Changed
 
 - Update the used actions for GitHub to their latest versions.
+- Change the styling of the `summary` environment boxes
 
 ## [v4.0.3] – 2024–05–27
 
