@@ -7,6 +7,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
+- Update the used actions for GitHub to their latest versions.
+
 ## [v4.0.3] – 2024–05–27
 
 ### Fixed
