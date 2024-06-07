@@ -681,13 +681,14 @@
     \msg_info:nnn { seiipackages } { load-package } { siunitx }
     \RequirePackage[
       add-integer-zero=false,
-      free-standing-units,
+      free-standing-units=true,
       group-minimum-digits=4,
-      list-final-separator={, and },
+      list-final-separator={,~ and~ },
       round-mode=figures,
       round-precision=3,
       separate-uncertainty=true,
       uncertainty-mode=separate,
+      mode=match,
     ]{siunitx}
   }
 %    \end{macrocode}

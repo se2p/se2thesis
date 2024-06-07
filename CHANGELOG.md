@@ -16,6 +16,7 @@ and this project adheres to
 
 - Update the used actions for GitHub to their latest versions.
 - Change the styling of the `summary` environment boxes
+- Adjusted options for `siunitx`
 
 ## [v4.0.3] – 2024–05–27
 
