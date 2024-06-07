@@ -7,6 +7,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v4.1.0] – 2024–06–07
+
 ### Added
 
 - Add a `\summarybox` macro that simplifies the usage of the `summary`
@@ -228,7 +230,8 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
-[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.0.3...HEAD
+[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.1.0...HEAD
+[v4.1.0]: https://github.com/se2p/se2thesis/compare/v4.1.0...v4.0.3
 [v4.0.3]: https://github.com/se2p/se2thesis/compare/v4.0.3...v4.0.2
 [v4.0.2]: https://github.com/se2p/se2thesis/compare/v4.0.2...v4.0.1
 [v4.0.1]: https://github.com/se2p/se2thesis/compare/v4.0.1...v4.0.0
