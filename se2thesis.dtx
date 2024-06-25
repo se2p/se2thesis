@@ -247,7 +247,7 @@
 %   a bachelor thesis, |master| for a master thesis, |masterproposal| for
 %   a proposal to a master thesis, |phdproposal| for a proposal to a PhD thesis,
 %   |phd| for a PhD thesis in the natural sciences, |phdeng| for a PhD thesis
-%   in engineering, and |phdphil| for a PhD thesis in philosophy.
+%   in engineering, and |phdphil| for a PhD thesis in natural philosophy.
 % \end{function}
 %
 % \begin{function}{colormode}
@@ -607,7 +607,7 @@
 %
 % Identify the class and give the overall version number.
 %    \begin{macrocode}
-\ProvidesExplClass {se2thesis} {2024-06-07} {4.1.0}
+\ProvidesExplClass {se2thesis} {2024-06-25} {4.2.0}
   {A thesis class for the Chair of Software Engineering II}
 %    \end{macrocode}
 %
@@ -1283,7 +1283,7 @@
                   \tl_if_eq:NnTF \l_@@_thesis_type_tl { phdphil }
                     {
                       Dissertation~ zur~ Erlangung~ des~ Doktorgrades\\
-                      der~ Philosophie~ (Dr.\,phil.)\\
+                      der~ Naturphilosophie~ (Dr.\,phil.\,nat.)\\
                       eingereicht~ an~ der~ Fakultät~ für~ Informatik~ und~ Mathematik\\
                       der~ Universität~ Passau\\
                       \rule{\textwidth}{.1pt}\\
@@ -1291,7 +1291,7 @@
                       the~ Faculty~ of~ Computer~ Science~ and~ Mathematics\\
                       of~ the~ University~ of~ Passau\\
                       in~ partial~ fulfillment~ of~ obtaining\\
-                      the~ degree~ of~ a~ Doctor~ of~ Philosophy 
+                      the~ degree~ of~ a~ Doctor~ of~ Natural~ Philosophy 
                     } {
                       \tl_if_eq:NnT \l_@@_thesis_type_tl { bachelor }
                         { \GetTranslation{Bachelor-thesis} }
@@ -1678,7 +1678,7 @@
 % We provide the following English translations.
 %
 %    \begin{macrocode}
-\ProvideDictionaryFor{English}{se2translations}[2024/06/07]
+\ProvideDictionaryFor{English}{se2translations}[2024/06/25]
 \ProvideDictTranslation{abstract}{abstract}
 \ProvideDictTranslation{Abstract}{Abstract}
 \ProvideDictTranslation{acknowledgement}{acknowledgement}
@@ -1729,7 +1729,7 @@
 % We provide the following German translations.
 %
 %    \begin{macrocode}
-\ProvideDictionaryFor{German}{se2translations}[2024/06/07]
+\ProvideDictionaryFor{German}{se2translations}[2024/06/25]
 \ProvideDictTranslation{abstract}{Zusammenfassung}
 \ProvideDictTranslation{Abstract}{Zusammenfassung}
 \ProvideDictTranslation{acknowledgement}{Danksagung}

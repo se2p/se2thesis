@@ -7,6 +7,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v4.2.0] – 2024–06–25
+
+### Fixed
+
+- The `phdphil` should not be a Doctor of Philosophy but, according to the
+  regulations of the University, be a Doctor of *Natural* Philosophy.
+
 ## [v4.1.0] – 2024–06–07
 
 ### Added
@@ -230,7 +237,8 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
-[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.1.0...HEAD
+[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.2.0...HEAD
+[v4.2.0]: https://github.com/se2p/se2thesis/compare/v4.2.0...v4.1.0
 [v4.1.0]: https://github.com/se2p/se2thesis/compare/v4.1.0...v4.0.3
 [v4.0.3]: https://github.com/se2p/se2thesis/compare/v4.0.3...v4.0.2
 [v4.0.2]: https://github.com/se2p/se2thesis/compare/v4.0.2...v4.0.1
