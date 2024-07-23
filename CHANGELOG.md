@@ -7,6 +7,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Fixed
+
+- The spelling bachelor thesis and master thesis are widely used but seem to be
+  wrong.  According to the Oxford English Dictionary, the spelling shall be
+  bachelor's thesis and master's thesis.
+
 ## [v4.2.0] – 2024–06–25
 
 ### Fixed
