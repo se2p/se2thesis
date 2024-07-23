@@ -7,6 +7,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v4.3.0] – 2024–07–23
+
 ### Fixed
 
 - The spelling bachelor thesis and master thesis are widely used but seem to be
@@ -243,7 +245,8 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
-[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.2.0...HEAD
+[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.3.0...HEAD
+[v4.3.0]: https://github.com/se2p/se2thesis/compare/v4.3.0...v4.2.0
 [v4.2.0]: https://github.com/se2p/se2thesis/compare/v4.2.0...v4.1.0
 [v4.1.0]: https://github.com/se2p/se2thesis/compare/v4.1.0...v4.0.3
 [v4.0.3]: https://github.com/se2p/se2thesis/compare/v4.0.3...v4.0.2
