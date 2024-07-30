@@ -74,7 +74,7 @@
 % The bundle itself consists of several \LaTeX{} classes and packages
 % that also allow reuse of various parts of it.
 % Its main class is the \pkg{se2thesis} document class,
-% an extension of the \KOMAScript{} |scrreprt| document class.
+% an extension of the \KOMAScript{} |scrbook| document class.
 % The packages \pkg{se2colors} and \pkg{se2fonts} provide necessary
 % colour and font settings for the \pkg{se2thesis} class;
 % the \pkg{se2packages} allows to load several recommended packages~(see
@@ -220,6 +220,11 @@
 %   \emph{Note:} you cannot use \cls{scrartcl} because it does not provide
 %   the required |chapter| sectioning.
 %   Default is |scrbook|.
+%
+%   Please note that if you want to have the bibliography numbered or use an
+%   appendix with alpha-numbering (A, B, \dots), you want to explicitly use
+%   |scrreprt| as the base class; for some (currently unknown) reason this does
+%   not work with the default |scrbook|.
 % \end{function}
 % \begin{function}{paper}
 %   \begin{syntax}

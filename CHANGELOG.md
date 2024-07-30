@@ -7,6 +7,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Add a hint on the usage of `scrreprt` as the base class if one wants to have
+  numbered bibliography or appendices.
+
 ## [v4.3.0] – 2024–07–23
 
 ### Fixed
