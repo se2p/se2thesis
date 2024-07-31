@@ -11,6 +11,9 @@ and this project adheres to
 
 - Add a hint on the usage of `scrreprt` as the base class if one wants to have
   numbered bibliography or appendices.
+- Add section in the documentation on the usage of babel, its shorthands for 
+  German and English to re-enable hyphenation of compound words, and the
+  conflicting package `hyphenat`.
 
 ### Fixed
 

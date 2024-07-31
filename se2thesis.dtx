@@ -545,6 +545,48 @@
 % question;
 % however, this can also be arbitrary text.
 %
+% \subsection{Language Support and Hyphenation}\label{sec:doct-se2thesis-lang}
+%
+% The study regulations of the University of Passau require students to write
+% their thesis in either German or English.  For both cases it is recommended
+% to load a package for the correct hyphenation patters.  Usually, one can
+% either choose between the \pkg{babel} and \pkg{polyglossia} package.  For a
+% detailed discussion in the differences and which to choose, please use the
+% search engine of your choice.
+%
+% For this documentation we stick with the \pkg{babel} package, which is often
+% considered to be the standard package.
+%
+% If you write your thesis in German, load \pkg{babel} in your preamble like
+% follows
+% \begin{verbatim}
+% \usepackage[ngerman]{babel}  
+% \end{verbatim}
+% For a thesis in English, you have to also load the German variant plus the
+% English one as the default (see \cref{sec:doc-se2thesis-authorship} for an
+% explanation)
+% \begin{verbatim}
+% \usepackage[ngerman,main=UKenglish]{babel} 
+% \end{verbatim}
+%
+% Note that by default, \LaTeX{} does not provide hyphenation for compound
+% words, which is explained in the \TeX{} Book~\cite[p.~454]{TODO} and a
+% StackExchange post\footnote{\href{https://tex.stackexchange.com/a/63234/14622}{https://tex.stackexchange.com/a/63234/14622}}.  The \pkg{babel} package
+% provides a way (called shorthands) for German, which allows to reenable
+% hyphenation for compound words (as they are common on German).  These
+% shorthands are by default not available for English, but they can easily be
+% added by adding
+% \begin{verbatim}
+% \useshorthands{"}
+% \addto\extrasUKenglish{\languageshorthands{ngerman}}
+% \end{verbatim}
+% after loading \pkg{babel} with the aforementioned \cmd{\usepackage}
+% macro\footnote{see https://tex.stackexchange.com/a/298844/14622}.
+%
+% \emph{Please note:} loading the \pkg{hyphenat} package is strongly discouraged
+% by the \pkg{se2thesis} maintainer because it conflicts with the \env{hyp}
+% environment provided by \pkg{se2thesis} (see \cref{sec:doc-se2thesis-summaries}).
+% 
 % \end{documentation}
 %
 % \clearpage
