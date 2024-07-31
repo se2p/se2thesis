@@ -7,6 +7,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v4.3.1] – 2024–07–31
+
 ### Added
 
 - Add a hint on the usage of `scrreprt` as the base class if one wants to have
@@ -257,7 +259,8 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
-[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.3.0...HEAD
+[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.3.1...HEAD
+[v4.3.1]: https://github.com/se2p/se2thesis/compare/v4.3.1...v4.3.0
 [v4.3.0]: https://github.com/se2p/se2thesis/compare/v4.3.0...v4.2.0
 [v4.2.0]: https://github.com/se2p/se2thesis/compare/v4.2.0...v4.1.0
 [v4.1.0]: https://github.com/se2p/se2thesis/compare/v4.1.0...v4.0.3
