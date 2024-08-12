@@ -7,6 +7,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v4.3.2] – 2024–08–12
+
 ### Fixed
 
 - Prevent line break in the lower back title if one added a manual line break
@@ -265,7 +267,8 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
-[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.3.1...HEAD
+[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.3.2...HEAD
+[v4.3.2]: https://github.com/se2p/se2thesis/compare/v4.3.2...v4.3.1
 [v4.3.1]: https://github.com/se2p/se2thesis/compare/v4.3.1...v4.3.0
 [v4.3.0]: https://github.com/se2p/se2thesis/compare/v4.3.0...v4.2.0
 [v4.2.0]: https://github.com/se2p/se2thesis/compare/v4.2.0...v4.1.0
