@@ -1409,12 +1409,18 @@
 %    \end{macrocode}
 %
 % \begin{macro}{\@lowertitleback}
-%   Afterwards, override the definition of \cs{@lowertitleback}.
+%   Afterwards, override the definition of \cs{@lowertitleback}.  To prevent
+%   line breaks in the title (that might be necessary to layout it properly on
+%   the front title page), we place a group around \cs{@title} and temporarily
+%   redefine \cmd{\\} to do nothing.
 %    \begin{macrocode}
 \renewcommand*{\@lowertitleback}{%
   \group_begin:
     \noindent\textbf{\@author}:\\
-    \emph{\@title}\\
+    \group_begin:
+      \let\\\relax
+      \emph{\@title}
+    \group_end:\\
     \tl_if_eq:NnT \l_@@_thesis_type_tl { bachelor }
       { \GetTranslation{Bachelor-thesis},~ }
     \tl_if_eq:NnT \l_@@_thesis_type_tl { master }

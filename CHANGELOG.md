@@ -7,6 +7,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Fixed
+
+- Prevent line break in the lower back title if one added a manual line break
+  using `\\` to the title in order to layout it properly for the front title
+  page.
+
 ## [v4.3.1] – 2024–07–31
 
 ### Added
