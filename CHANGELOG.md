@@ -7,6 +7,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Load the `mismath` package before the `unicode-math` package, which is
+  recommended according to `mismath`'s documentation.
+
 ## [v4.3.2] – 2024–08–12
 
 ### Fixed
