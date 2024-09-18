@@ -31,6 +31,7 @@ selnolig
 adjustbox
 alphalph
 amsfonts
+amsmath
 babel
 babel-english
 babel-german
@@ -75,7 +76,9 @@ listings
 makeindex
 marginnote
 mathpazo
+mathtools
 metalogo
+mismath
 multido
 oberdiek
 pgf
