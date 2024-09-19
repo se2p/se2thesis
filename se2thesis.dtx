@@ -1171,10 +1171,9 @@
 \DeclareNewLayer[
   mode=picture,
   foreground,
-  align=tr,
-  hoffset=\oddsidemargin+1.5in+\textwidth,
+  hoffset=\paperwidth-\coverpagerightmargin-\box_wd:N \l_@@_logo_box,
   voffset=\coverpagetopmargin+1.5in+\ht\strutbox,
-  width=\textwidth - \box_wd:N \l_@@_logo_box,
+  width=\box_wd:N \l_@@_logo_box,
   height=\box_ht:N \l_@@_logo_box,
   contents={\putUL{\box_use:N \l_@@_logo_box}},
 ]{title.seii.logo}
