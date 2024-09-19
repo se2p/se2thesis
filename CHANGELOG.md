@@ -7,6 +7,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v4.3.4] – 2024–09–19
+
+### Fixed
+
+- Align logo on the right side regardless of the logo size (#22), thanks to
+  @wolfoo2931
+
 ## [v4.3.3] – 2024–09–18
 
 ### Added
@@ -274,7 +281,8 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
-[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.3.3...HEAD
+[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.3.4...HEAD
+[v4.3.4]: https://github.com/se2p/se2thesis/compare/v4.3.4...v4.3.3
 [v4.3.3]: https://github.com/se2p/se2thesis/compare/v4.3.3...v4.3.2
 [v4.3.2]: https://github.com/se2p/se2thesis/compare/v4.3.2...v4.3.1
 [v4.3.1]: https://github.com/se2p/se2thesis/compare/v4.3.1...v4.3.0
