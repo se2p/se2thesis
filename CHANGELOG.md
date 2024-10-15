@@ -7,6 +7,14 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- `se2thesis` is now also available from
+  [`MonsterWriter`](https://www.monsterwriter.com),
+  a tool that aims for easy writing of academic works.  We mention this in the
+  documentation and also link their website and a YouTube video that
+  demonstrates the usage of `se2thesis` within `MonsterWriter`.
+
 ## [v4.3.4] – 2024–09–19
 
 ### Fixed
