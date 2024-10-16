@@ -26,6 +26,7 @@ luatexbase
 lua-widow-control
 microtype
 selnolig
+stix2-otf
 #
 # For the doc target
 adjustbox
