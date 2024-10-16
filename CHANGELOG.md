@@ -15,6 +15,11 @@ and this project adheres to
   documentation and also link their website and a YouTube video that
   demonstrates the usage of `se2thesis` within `MonsterWriter`.
 
+### Fixed
+
+- Increase the `marginparsep` slightly to avoid that two-digit counter values
+  run into the text block.
+
 ## [v4.3.4] – 2024–09–19
 
 ### Fixed
