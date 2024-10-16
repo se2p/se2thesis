@@ -7,6 +7,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v4.4.0] – 2024–10–18
+
 ### Added
 
 - `se2thesis` is now also available from
@@ -294,7 +296,8 @@ These changes might be breaking changes!
 ### Added
 - First official release
 
-[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.3.4...HEAD
+[Unreleased]: https://github.com/se2p/se2thesis/compare/v4.4.0...HEAD
+[v4.4.0]: https://github.com/se2p/se2thesis/compare/v4.4.0...v4.3.4
 [v4.3.4]: https://github.com/se2p/se2thesis/compare/v4.3.4...v4.3.3
 [v4.3.3]: https://github.com/se2p/se2thesis/compare/v4.3.3...v4.3.2
 [v4.3.2]: https://github.com/se2p/se2thesis/compare/v4.3.2...v4.3.1
