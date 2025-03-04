@@ -217,7 +217,7 @@
 % Load the \pkg{mismath} package, which itself loads \pkg{mathtools} and
 % transitively \pkg{amsmath} \emph{before} \pkg{unicode-math}.
 %    \begin{macrocode}
-\RequirePackage{mismath}
+\RequirePackage { mismath }
 %    \end{macrocode}
 %
 % Depending on the engine used by the user,
@@ -229,27 +229,27 @@
 %
 % If the user uses \LuaTeX{}, load \pkg{fontspec} and \pkg{unicode-math}.
 %    \begin{macrocode}
-    \RequirePackage{fontspec}
-    \PassOptionsToPackage{math-style=ISO,bold-style=ISO}{unicode-math}
-    \RequirePackage{unicode-math}
+    \RequirePackage { fontspec }
+    \PassOptionsToPackage { math-style=ISO, bold-style=ISO } { unicode-math }
+    \RequirePackage { unicode-math }
 %    \end{macrocode}
 %
 % To make sure the scaling of the fonts matches, we let \pkg{fontspec} do this
 % matching based on the lower-case characters.
 %    \begin{macrocode}
-    \defaultfontfeatures{ Scale = MatchLowercase }
-    \defaultfontfeatures[\rmfamily]{ Scale = 1 }
+    \defaultfontfeatures { Scale = MatchLowercase }
+    \defaultfontfeatures [ \rmfamily ] { Scale = 1 }
 %    \end{macrocode}
 %
 % Load the respective \pkg{libertinus-otf} package and omit the monospaced font.
 %    \begin{macrocode}
-    \PassOptionsToPackage{mono=false}{libertinus-otf}
-    \RequirePackage{libertinus-otf}
+    \PassOptionsToPackage { mono=false } { libertinus-otf }
+    \RequirePackage { libertinus-otf }
 %    \end{macrocode}
 %
 % Load the \emph{Inconsolata Nerd Font} monospaced font.
 %    \begin{macrocode}
-    \RequirePackage{inconsolata-nerd-font}
+    \RequirePackage { inconsolata-nerd-font }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -259,12 +259,12 @@
 % The user does not use \LuaTeX{}, thus fallback to T1 fonts.
 %    \begin{macrocode}
     \msg_warning:nn { seiifonts } { pdflatex-used }
-    \PassOptionsToPackage{T1}{fontenc}
-    \PassOptionsToPackage{scaled=0.9,varl}{inconsolata}
-    \PassOptionsToPackage{mono=false}{libertinus-type1}
-    \RequirePackage{fontenc}
-    \RequirePackage{inconsolata}
-    \RequirePackage{libertinus-type1}
+    \PassOptionsToPackage { T1 } { fontenc }
+    \PassOptionsToPackage { scaled=0.9, varl } { inconsolata }
+    \PassOptionsToPackage { mono=false } { libertinus-type1 }
+    \RequirePackage { fontenc }
+    \RequirePackage { inconsolata }
+    \RequirePackage { libertinus-type1 }
   }
 %    \end{macrocode}
 %

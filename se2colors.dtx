@@ -244,29 +244,29 @@
   {
     cmode .choice:,
     cmode / 4C .code:n = {
-      \PassOptionsToPackage{cmyk}{xcolor}
-      \tl_gset:Nn \l_@@_colormode_tl {4C}
+      \PassOptionsToPackage{ cmyk }{ xcolor }
+      \tl_gset:Nn \l_@@_colormode_tl { 4C }
     },
     cmode / RGB .code:n = {
-      \PassOptionsToPackage{rgb}{xcolor}
-      \tl_gset:Nn \l_@@_colormode_tl {RGB}
+      \PassOptionsToPackage{ rgb }{ xcolor }
+      \tl_gset:Nn \l_@@_colormode_tl { RGB }
     },
     cmode / BW .code:n = {
-      \PassOptionsToPackage{gray}{xcolor}
-      \tl_gset:Nn \l_@@_colormode_tl {BW}
+      \PassOptionsToPackage{ gray }{ xcolor }
+      \tl_gset:Nn \l_@@_colormode_tl { BW }
     },
-    cmode / CMYK .meta:n = {cmode=4C},
-    cmode / cmyk .meta:n = {cmode=4C},
-    cmode / rgb .meta:n = {cmode=RGB},
-    cmode / gray .meta:n = {cmode=BW},
-    cmode / bw .meta:n = {cmode=BW},
-    RGB .meta:n = {cmode=RGB},
-    rgb .meta:n = {cmode=RGB},
-    CMYK .meta:n = {cmode=4C},
-    cmyk .meta:n = {cmode=4C},
-    BW .meta:n = {cmode=BW},
-    bw .meta:n = {cmode=BW},
-    gray .meta:n = {cmode=BW},
+    cmode / CMYK .meta:n = { cmode=4C },
+    cmode / cmyk .meta:n = { cmode=4C },
+    cmode / rgb .meta:n = { cmode=RGB },
+    cmode / gray .meta:n = { cmode=BW },
+    cmode / bw .meta:n = { cmode=BW },
+    RGB .meta:n = { cmode=RGB },
+    rgb .meta:n = { cmode=RGB },
+    CMYK .meta:n = { cmode=4C },
+    cmyk .meta:n = { cmode=4C },
+    BW .meta:n = { cmode=BW },
+    bw .meta:n = { cmode=BW },
+    gray .meta:n = { cmode=BW },
   }
 \keys_set:nn { seiicolors } { cmode = 4C }
 %    \end{macrocode}
@@ -287,14 +287,14 @@
 %
 % Load the \pkg{xcolor} package for colour definitions.
 %    \begin{macrocode}
-\RequirePackage{xcolor}
+\RequirePackage{ xcolor }
 %    \end{macrocode}
 %
 %
 % Define the primary colours gray and orange as given by the University of
 % Passau's style guides.
 %    \begin{macrocode}
-\definecolorset[named]{RGB/cmyk}{UPSE2-}{}{%
+\definecolorset[named]{ RGB/cmyk } { UPSE2- } {} {%
   Orange,242,148,0/0.00,0.44,0.95,0.01;%
   Gray,153,159,158/0.40,0.28,0.28,0.00;%
   JUR,229,49,56/0.01,0.90,0.81,0.01;%
@@ -315,56 +315,56 @@
 %
 % Define the derived colours.
 %    \begin{macrocode}
-\colorlet{UPSE2-DarkGray1}{UPSE2-DarkGray!20!white}
-\colorlet{UPSE2-DarkGray2}{UPSE2-DarkGray!40!white}
-\colorlet{UPSE2-DarkGray3}{UPSE2-DarkGray!60!white}
-\colorlet{UPSE2-DarkGray4}{UPSE2-DarkGray!75!black}
-\colorlet{UPSE2-DarkGray5}{UPSE2-DarkGray!50!black}
-\colorlet{UPSE2-White1}{UPSE2-White!95!black}
-\colorlet{UPSE2-White2}{UPSE2-White!85!black}
-\colorlet{UPSE2-White3}{UPSE2-White!75!black}
-\colorlet{UPSE2-White4}{UPSE2-White!65!black}
-\colorlet{UPSE2-White5}{UPSE2-White!50!black}
-\colorlet{UPSE2-MediumGray1}{UPSE2-MediumGray!20!white}
-\colorlet{UPSE2-MediumGray2}{UPSE2-MediumGray!40!white}
-\colorlet{UPSE2-MediumGray3}{UPSE2-MediumGray!60!white}
-\colorlet{UPSE2-MediumGray4}{UPSE2-MediumGray!75!black}
-\colorlet{UPSE2-MediumGray5}{UPSE2-MediumGray!50!black}
-\colorlet{UPSE2-LightGray1}{UPSE2-LightGray!90!black}
-\colorlet{UPSE2-LightGray2}{UPSE2-LightGray!75!black}
-\colorlet{UPSE2-LightGray3}{UPSE2-LightGray!55!black}
-\colorlet{UPSE2-LightGray4}{UPSE2-LightGray!25!black}
-\colorlet{UPSE2-LightGray5}{UPSE2-LightGray!10!black}
-\colorlet{UPSE2-Orange1}{UPSE2-Orange!20!white}
-\colorlet{UPSE2-Orange2}{UPSE2-Orange!40!white}
-\colorlet{UPSE2-Orange3}{UPSE2-Orange!60!white}
-\colorlet{UPSE2-Orange4}{UPSE2-Orange!75!black}
-\colorlet{UPSE2-Orange5}{UPSE2-Orange!50!black}
-\colorlet{UPSE2-LightRed1}{UPSE2-LightRed!20!white}
-\colorlet{UPSE2-LightRed2}{UPSE2-LightRed!40!white}
-\colorlet{UPSE2-LightRed3}{UPSE2-LightRed!60!white}
-\colorlet{UPSE2-LightRed4}{UPSE2-LightRed!75!black}
-\colorlet{UPSE2-LightRed5}{UPSE2-LightRed!50!black}
-\colorlet{UPSE2-DarkRed1}{UPSE2-DarkRed!20!white}
-\colorlet{UPSE2-DarkRed2}{UPSE2-DarkRed!40!white}
-\colorlet{UPSE2-DarkRed3}{UPSE2-DarkRed!60!white}
-\colorlet{UPSE2-DarkRed4}{UPSE2-DarkRed!75!black}
-\colorlet{UPSE2-DarkRed5}{UPSE2-DarkRed!50!black}
-\colorlet{UPSE2-Green1}{UPSE2-Green!10!white}
-\colorlet{UPSE2-Green2}{UPSE2-Green!25!white}
-\colorlet{UPSE2-Green3}{UPSE2-Green!50!white}
-\colorlet{UPSE2-Green4}{UPSE2-Green!75!white}
-\colorlet{UPSE2-Green5}{UPSE2-Green!90!white}
-\colorlet{UPSE2-Blue1}{UPSE2-Blue!20!white}
-\colorlet{UPSE2-Blue2}{UPSE2-Blue!40!white}
-\colorlet{UPSE2-Blue3}{UPSE2-Blue!60!white}
-\colorlet{UPSE2-Blue4}{UPSE2-Blue!75!black}
-\colorlet{UPSE2-Blue5}{UPSE2-Blue!50!black}
-\colorlet{UPSE2-AccentGray1}{UPSE2-AccentGray!20!white}
-\colorlet{UPSE2-AccentGray2}{UPSE2-AccentGray!40!white}
-\colorlet{UPSE2-AccentGray3}{UPSE2-AccentGray!60!white}
-\colorlet{UPSE2-AccentGray4}{UPSE2-AccentGray!75!black}
-\colorlet{UPSE2-AccentGray5}{UPSE2-AccentGray!50!black}
+\colorlet{ UPSE2-DarkGray1 } { UPSE2-DarkGray!20!white }
+\colorlet{ UPSE2-DarkGray2 } { UPSE2-DarkGray!40!white }
+\colorlet{ UPSE2-DarkGray3 } { UPSE2-DarkGray!60!white }
+\colorlet{ UPSE2-DarkGray4 } { UPSE2-DarkGray!75!black }
+\colorlet{ UPSE2-DarkGray5 } { UPSE2-DarkGray!50!black }
+\colorlet{ UPSE2-White1 } { UPSE2-White!95!black }
+\colorlet{ UPSE2-White2 } { UPSE2-White!85!black }
+\colorlet{ UPSE2-White3 } { UPSE2-White!75!black }
+\colorlet{ UPSE2-White4 } { UPSE2-White!65!black }
+\colorlet{ UPSE2-White5 } { UPSE2-White!50!black }
+\colorlet{ UPSE2-MediumGray1 } { UPSE2-MediumGray!20!white }
+\colorlet{ UPSE2-MediumGray2 } { UPSE2-MediumGray!40!white }
+\colorlet{ UPSE2-MediumGray3 } { UPSE2-MediumGray!60!white }
+\colorlet{ UPSE2-MediumGray4 } { UPSE2-MediumGray!75!black }
+\colorlet{ UPSE2-MediumGray5 } { UPSE2-MediumGray!50!black }
+\colorlet{ UPSE2-LightGray1 } { UPSE2-LightGray!90!black }
+\colorlet{ UPSE2-LightGray2 } { UPSE2-LightGray!75!black }
+\colorlet{ UPSE2-LightGray3 } { UPSE2-LightGray!55!black }
+\colorlet{ UPSE2-LightGray4 } { UPSE2-LightGray!25!black }
+\colorlet{ UPSE2-LightGray5 } { UPSE2-LightGray!10!black }
+\colorlet{ UPSE2-Orange1 } { UPSE2-Orange!20!white }
+\colorlet{ UPSE2-Orange2 } { UPSE2-Orange!40!white }
+\colorlet{ UPSE2-Orange3 } { UPSE2-Orange!60!white }
+\colorlet{ UPSE2-Orange4 } { UPSE2-Orange!75!black }
+\colorlet{ UPSE2-Orange5 } { UPSE2-Orange!50!black }
+\colorlet{ UPSE2-LightRed1 } { UPSE2-LightRed!20!white }
+\colorlet{ UPSE2-LightRed2 } { UPSE2-LightRed!40!white }
+\colorlet{ UPSE2-LightRed3 } { UPSE2-LightRed!60!white }
+\colorlet{ UPSE2-LightRed4 } { UPSE2-LightRed!75!black }
+\colorlet{ UPSE2-LightRed5 } { UPSE2-LightRed!50!black }
+\colorlet{ UPSE2-DarkRed1 } { UPSE2-DarkRed!20!white }
+\colorlet{ UPSE2-DarkRed2 } { UPSE2-DarkRed!40!white }
+\colorlet{ UPSE2-DarkRed3 } { UPSE2-DarkRed!60!white }
+\colorlet{ UPSE2-DarkRed4 } { UPSE2-DarkRed!75!black }
+\colorlet{ UPSE2-DarkRed5 } { UPSE2-DarkRed!50!black }
+\colorlet{ UPSE2-Green1 } { UPSE2-Green!10!white }
+\colorlet{ UPSE2-Green2 } { UPSE2-Green!25!white }
+\colorlet{ UPSE2-Green3 } { UPSE2-Green!50!white }
+\colorlet{ UPSE2-Green4 } { UPSE2-Green!75!white }
+\colorlet{ UPSE2-Green5 } { UPSE2-Green!90!white }
+\colorlet{ UPSE2-Blue1 } { UPSE2-Blue!20!white }
+\colorlet{ UPSE2-Blue2 } { UPSE2-Blue!40!white }
+\colorlet{ UPSE2-Blue3 } { UPSE2-Blue!60!white }
+\colorlet{ UPSE2-Blue4 } { UPSE2-Blue!75!black }
+\colorlet{ UPSE2-Blue5 } { UPSE2-Blue!50!black }
+\colorlet{ UPSE2-AccentGray1 } { UPSE2-AccentGray!20!white }
+\colorlet{ UPSE2-AccentGray2 } { UPSE2-AccentGray!40!white }
+\colorlet{ UPSE2-AccentGray3 } { UPSE2-AccentGray!60!white }
+\colorlet{ UPSE2-AccentGray4 } { UPSE2-AccentGray!75!black }
+\colorlet{ UPSE2-AccentGray5 } { UPSE2-AccentGray!50!black }
 %    \end{macrocode}
 %
 %    \begin{macrocode}

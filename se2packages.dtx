@@ -564,11 +564,11 @@
   {
     csquotes .bool_gset:N = \l_@@_csquotes_bool,
     csquotes .initial:n = true,
-    nocsquotes .meta:n = {csquotes=false},
+    nocsquotes .meta:n = { csquotes=false },
 
     booktabs .bool_gset:N = \l_@@_booktabs_bool,
     booktabs .initial:n = true,
-    nobooktabs .meta:n = {booktabs=false},
+    nobooktabs .meta:n = { booktabs=false },
 
     siunitx .bool_gset:N = \l_@@_siunitx_bool,
     siunitx .initial:n = false,
@@ -584,15 +584,15 @@
 
     selnolig .bool_gset:N = \l_@@_selnolig_bool,
     selnolig .initial:n = true,
-    noselnolig .meta:n = {selnolig=false},
+    noselnolig .meta:n = { selnolig=false },
 
     widowcontrol .bool_gset:N = \l_@@_luawidowcontrol_bool,
     widowcontrol .initial:n = false,
-    nowidowcontrol .meta:n = {widowcontrol=false},
+    nowidowcontrol .meta:n = { widowcontrol=false },
 
     microtype .bool_gset:N = \l_@@_microtype_bool,
     microtype .initial:n = true,
-    nomicrotype .meta:n = {microtype=false},
+    nomicrotype .meta:n = { microtype=false },
 
     cleveref .bool_gset:N = \l_@@_cleveref_bool,
     cleveref .initial:n = false,
@@ -631,7 +631,8 @@
 % And, in case both values are set to |true|,
 % raise the error message.
 %    \begin{macrocode}
-\bool_lazy_and:nnT { \l_@@_minted_bool } { \l_@@_listings_bool }
+\bool_lazy_and:nnT { \l_@@_minted_bool }
+  { \l_@@_listings_bool }
   {
     \msg_error:nn { seiipackages } { conflicting-packages }
   }
@@ -650,7 +651,7 @@
     \bool_gset_true:N \l_@@_selnolig_bool
     \bool_gset_true:N \l_@@_luawidowcontrol_bool
     \bool_gset_true:N \l_@@_microtype_bool
-    \tl_gset:Nn \l_@@_biblatex_bool {true}
+    \tl_gset:Nn \l_@@_biblatex_bool { true }
     \bool_gset_true:N \l_@@_cleveref_bool
   }
 %    \end{macrocode}
@@ -662,8 +663,8 @@
 \bool_if:NT \l_@@_csquotes_bool
   {
     \msg_info:nnn { seiipackages } { load-package } { csquotes }
-    \RequirePackage{fvextra}
-    \RequirePackage{csquotes}
+    \RequirePackage { fvextra }
+    \RequirePackage { csquotes }
   }
 %    \end{macrocode}
 %
@@ -672,7 +673,7 @@
 \bool_if:NT \l_@@_booktabs_bool
   {
     \msg_info:nnn { seiipackages } { load-package } { booktabs }
-    \RequirePackage{booktabs}
+    \RequirePackage { booktabs }
   }
 %    \end{macrocode}
 %
@@ -681,17 +682,17 @@
 \bool_if:NT \l_@@_siunitx_bool
   {
     \msg_info:nnn { seiipackages } { load-package } { siunitx }
-    \RequirePackage[
+    \RequirePackage [
       add-integer-zero=false,
       free-standing-units=true,
       group-minimum-digits=4,
-      list-final-separator={,~ and~ },
+      list-final-separator={ ,~ and~ },
       round-mode=figures,
       round-precision=3,
       separate-uncertainty=true,
       uncertainty-mode=separate,
       mode=match,
-    ]{siunitx}
+    ] { siunitx }
   }
 %    \end{macrocode}
 %
@@ -700,8 +701,8 @@
 \bool_if:NT \l_@@_minted_bool
   {
     \msg_info:nnn { seiipackages } { load-package } { minted }
-    \RequirePackage[newfloat=true]{minted}
-    \setminted{
+    \RequirePackage [ newfloat=true ] { minted }
+    \setminted {
       autogobble,
       breaklines=true,
       fontsize=\footnotesize,
@@ -719,14 +720,14 @@
 \bool_if:NT \l_@@_listings_bool
   {
     \msg_info:nnn { seiipackages } { load-package } { listings }
-    \RequirePackage{listings}
+    \RequirePackage { listings }
     \lstset{
       basicstyle=\footnotesize\ttfamily,
       breaklines=true,
       captionpos=t,
       extendedchars=true,
       frame=single,
-      keywordstyle=\color{blue}\bfseries,
+      keywordstyle=\color { blue }\bfseries,
       showspaces=false,
       showtabs=false,
       showstringspaces=false,
@@ -737,11 +738,12 @@
 %
 % Conditionally load \pkg{selnolig} if present and we run \LuaTeX.
 %    \begin{macrocode}
-\bool_lazy_and:nnT { \l_@@_selnolig_bool } { \sys_if_engine_luatex_p: }
+\bool_lazy_and:nnT { \l_@@_selnolig_bool }
+  { \sys_if_engine_luatex_p: }
   {
     \IfFileExists { selnolig.sty }
       {
-        \RequirePackage{selnolig}
+        \RequirePackage { selnolig }
       } {
         \msg:nnnn { seiipackages }
           { selnolig-not-available }
@@ -754,11 +756,12 @@
 %
 % Conditionally load \pkg{luawidowcontrol} if present and we run \LuaTeX.
 %    \begin{macrocode}
-\bool_lazy_and:nnT { \l_@@_luawidowcontrol_bool } { \sys_if_engine_luatex_p: }
+\bool_lazy_and:nnT { \l_@@_luawidowcontrol_bool }
+  { \sys_if_engine_luatex_p: }
   {
     \IfFileExists { lua-widow-control.sty }
       {
-        \RequirePackage{lua-widow-control}
+        \RequirePackage { lua-widow-control }
       } {
         \msg:nnnn { seiipackages }
           { lua-widow-control-not-available }
@@ -780,7 +783,7 @@
 \bool_if:NT \l_@@_microtype_bool
   {
     \msg_info:nnn { seiipackages } { load-package } { microtype }
-    \RequirePackage{microtype}
+    \RequirePackage { microtype }
     \bool_if:NF \l_@@_luawidowcontrol_bool
       {
         \clubpenalty=10000
@@ -788,10 +791,10 @@
         \displaywidowpenalty=10000
       }
     \SetExtraKerning{
-      encoding = {OT1,T1,T2A,LY1,OT4,QX,T5,TS1,EU1,EU2}
-    }{
-      \textemdash = {167,167},
-      — = {167,167}
+      encoding = { OT1,T1,T2A,LY1,OT4,QX,T5,TS1,EU1,EU2 }
+    } {
+      \textemdash = { 167,167 },
+      — = { 167,167 }
     }
   }
 %    \end{macrocode}
@@ -813,9 +816,9 @@
         sorting=nyt,
         style=alphabetic,
       } { biblatex }
-      \RequirePackage{biblatex}
-      \RequirePackage{software-biblatex}
-      \ExecuteBibliographyOptions{
+      \RequirePackage { biblatex }
+      \RequirePackage { software-biblatex }
+      \ExecuteBibliographyOptions {
         halid=false,
         swhid=true,
         shortswhid=false,
@@ -826,11 +829,11 @@
   }
 
 \bool_new:N \l_@@_biblatex_numeric_variants_bool
-\tl_if_eq:NnT \l_@@_biblatex_tl {true}
+\tl_if_eq:NnT \l_@@_biblatex_tl { true }
   {
     \bool_gset_true:N \l_@@_biblatex_numeric_variants_bool
   }
-\tl_if_eq:NnT \l_@@_biblatex_tl {numeric}
+\tl_if_eq:NnT \l_@@_biblatex_tl { numeric }
   {
     \bool_gset_true:N \l_@@_biblatex_numeric_variants_bool
   }
@@ -850,56 +853,71 @@
         datamodel=acmdatamodel,
         style=acmnumeric,
       } { biblatex }
-      \RequirePackage{biblatex}
-      \RequirePackage{ragged2e}
-      \RequirePackage[mark=arabic,shape=up,Ragged]{sidenotesplus}
+      \RequirePackage { biblatex }
+      \RequirePackage { ragged2e }
+      \RequirePackage [ mark=arabic,shape=up,Ragged ] { sidenotesplus }
 
-      \newbibmacro{cite:authoryear}{%
-        \printtext[labelnumberwidth]{%
-          \usebibmacro{cite}%
-        }%
-        \setunit{\addspace}%
-        \printnames{labelname}%
-        \setunit{\labelnamepunct}\newblock%
-        \usebibmacro{year}%
-        \newunit%
-        \printfield[title]{labeltitle}
-      }
+      \newbibmacro { cite:authoryear }
+        {
+          \printtext [ labelnumberwidth ] {
+            \usebibmacro { cite }
+          }
+          \setunit { \addspace }
+          \printnames { labelname }
+          \setunit { \labelnamepunct }\newblock%
+          \usebibmacro { year }%
+          \newunit%
+          \printfield [ title ] { labeltitle }
+        }
       
-      \newrobustcmd*{\makebibmarginnote}[1]{%
-        \sidenote*{\blxmkbibnote{foot}{#1}}}
+      \newrobustcmd* { \makebibmarginnote } [ 1 ]
+        {
+          \sidenote* { \blxmkbibnote { foot } { #1 } }
+        }
       
-      \DeclareCiteCommand{\maycite}[\makebibmarginnote]
-        {\usebibmacro{prenote}}
-        {\usebibmacro{citeindex}%
-         \usebibmacro{cite:authoryear}}
-        {\multicitedelim}
-        {\usebibmacro{postnote}}
+      \DeclareCiteCommand { \maycite } [ \makebibmarginnote ]
+        { \usebibmacro { prenote } }
+        {
+          \usebibmacro { citeindex }%
+          \usebibmacro { cite:authoryear }
+        }
+        { \multicitedelim }
+        { \usebibmacro { postnote } }
       
-      \newcommand*{\cbx@savedcites}{}
+      \newcommand* { \cbx@savedcites } {}
       
-      \newcommand*{\cbx@margcitewrap}[1]{%
-        \global\let\cbx@savedcites\empty
-        \mkbibbrackets{#1}%
-        \cbx@savedcites
-      }
+      \newcommand* { \cbx@margcitewrap } [ 1 ]
+        {%
+          \global\let\cbx@savedcites\empty
+          \mkbibbrackets { #1 }%
+          \cbx@savedcites
+        }
       
-      \DeclareCiteCommand{\margincite}[\cbx@margcitewrap]
-        {\usebibmacro{prenote}}
-        {\usebibmacro{citeindex}%
-         \usebibmacro{cite}%
-         \ifciteseen
-           {}
-           {\xappto\cbx@savedcites{\noexpand\maycite{\thefield{entrykey}}}}}
-        {\multicitedelim}
-        {\usebibmacro{postnote}}
+      \DeclareCiteCommand { \margincite } [ \cbx@margcitewrap ]
+        { \usebibmacro { prenote } }
+        {
+          \usebibmacro { citeindex }%
+          \usebibmacro { cite }%
+          \ifciteseen
+            {}
+            {
+              \xappto\cbx@savedcites { 
+                \noexpand\maycite {
+                  \thefield { entrykey }
+                }
+              }
+            }
+        }
+        { \multicitedelim }
+        { \usebibmacro { postnote } }
       
-      \DeclareMultiCiteCommand{\margincites}[\cbx@margcitewrap]{\margincite}{\multicitedelim}
+      \DeclareMultiCiteCommand { \margincites } [ \cbx@margcitewrap ]
+        { \margincite } { \multicitedelim }
       
-      \DeclareAutoCiteCommand{margin}{\margincite}{\margincites}
-      \ExecuteBibliographyOptions{autocite=margin}
-      \newcommand{\bibliofont}{\footnotesize}
-      \DeclareFieldFormat{titlecase}{#1}% Preserve capitalisation of titles
+      \DeclareAutoCiteCommand { margin } { \margincite } { \margincites }
+      \ExecuteBibliographyOptions { autocite=margin }
+      \newcommand { \bibliofont } { \footnotesize }
+      \DeclareFieldFormat { titlecase } { #1 }% Preserve title capitalisation
   }
 %    \end{macrocode}
 %
@@ -910,9 +928,9 @@
     \msg_info:nnn { seiipackages } { load-package } { cleveref }
     \AddToHook { begindocument/before }
       {
-        \RequirePackage[capitalise]{cleveref}
-        \Crefname{resq}{Research Question}{Research Questions}
-        \Crefname{hyp}{Hypothesis}{Hypotheses}
+        \RequirePackage [ capitalise ] { cleveref }
+        \Crefname { resq } { Research Question } { Research Questions }
+        \Crefname { hyp } { Hypothesis } { Hypotheses } 
       }
   }
 %    \end{macrocode}
