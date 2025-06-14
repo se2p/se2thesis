@@ -1289,6 +1289,7 @@
 % Prints the title formatted appropriately.
 % We start with printing the title, optional subtitle, and the author names.
 %    \begin{macrocode}
+\tl_new:N \g_@@_title_tl
 \cs_new:Nn \__@@_print_title:
   {
     \group_begin:
@@ -1310,7 +1311,8 @@
 %   values of the \cmd{\degreeprogramme}, \cmd{\department}, and
 %   \cmd{\institute} variables.
 %    \begin{macrocode}
-    \exp_args:NV
+    \tl_set:Nn
+      \g_@@_title_tl
       {
         \begin{center}
           \tl_if_eq:NnTF \l_@@_thesis_type_tl { phd }
@@ -1417,6 +1419,9 @@
           \par\smallskip
         \group_end:
       }
+    \exp_args:NNV
+      \tl_use:N
+        \g_@@_title_tl
   }
 %    \end{macrocode}
 %
