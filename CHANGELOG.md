@@ -7,6 +7,16 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [v4.4.1] – 2026–04–03
+
+### Fixed
+
+- Fix argument consistency for LaTeX3 code
+- Fix an issue with `hyperref` populating a strange number into the author field
+  of the resulting PDF.  See this
+  [comment](https://github.com/se2p/se2thesis/issues/17#issuecomment-4082511888)
+  on issue #17.
+
 ## [v4.4.0] – 2024–10–18
 
 ### Added
